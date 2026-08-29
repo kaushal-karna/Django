@@ -1,0 +1,23 @@
+ <!DOCTYPE html>
+  <html>
+  <head>
+      <title>{{ page_title }}</title>
+  </head>
+  <body>
+      <h1>{{ page_title }}</h1>
+      <p>Total Students: {{ total_students }}</p>
+      <p>Current Date: {{ current_date|date:"Y-m-d" }}</p>
+      
+      <h2>Student List</h2>
+      <ul>
+          {% for student in students %}
+              <li>
+                  {{ student.name }} - Age: {{ student.age }}
+                  - Course: {{ student.course }}
+              </li>
+          {% empty %}
+              <li>No students found.</li>
+          {% endfor %}
+      </ul>
+  </body>
+  </html>
