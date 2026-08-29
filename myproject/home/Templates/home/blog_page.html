@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Blog | MySite{% endblock %}
+
+{% block extra_css %} 
+<link rel="stylesheet" href="{% static 'home/css/blog_page.css' %}"> 
+{% endblock %}
+
+{% block content %}
+
+<section class="blog">
+
+
+<h1>My Blog</h1>
+
+<p>
+    Welcome to my blog! Here I share my learning journey,
+    programming knowledge, project experiences, and useful
+    tips about software development.
+</p>
+
+
+<div class="blog-container">
+
+    <!-- Blog Post 1 -->
+    <article class="blog-card">
+
+        <h2>Getting Started with Django</h2>
+
+        <p>
+            Django is a powerful Python web framework used to
+            build secure and scalable web applications. In this
+            post, I explore the basics of Django and how to
+            create your first project.
+        </p>
+
+        <p>
+            <strong>Category:</strong> Django
+        </p>
+
+        <a href="#">Read More →</a>
+
+    </article>
+
+
+    <!-- Blog Post 2 -->
+    <article class="blog-card">
+
+        <h2>My Journey into Python Programming</h2>
+
+        <p>
+            Python is one of the programming languages I enjoy
+            learning and using. This post discusses my journey
+            from learning Python basics to building real-world
+            projects.
+        </p>
+
+        <p>
+            <strong>Category:</strong> Python
+        </p>
+
+        <a href="#">Read More →</a>
+
+    </article>
+
+
+    <!-- Blog Post 3 -->
+    <article class="blog-card">
+
+        <h2>Learning Git and GitHub</h2>
+
+        <p>
+            Git and GitHub are essential tools for modern software
+            development. In this post, I share some important Git
+            commands and concepts that every beginner should learn.
+        </p>
+
+        <p>
+            <strong>Category:</strong> Git & GitHub
+        </p>
+
+        <a href="#">Read More →</a>
+
+    </article>
+
+
+    <!-- Blog Post 4 -->
+    <article class="blog-card">
+
+        <h2>My Experience Building Django Projects</h2>
+
+        <p>
+            Building projects is one of the best ways to improve
+            programming skills. Here I share my experience working
+            with Django applications and solving development problems.
+        </p>
+
+        <p>
+            <strong>Category:</strong> Web Development
+        </p>
+
+        <a href="#">Read More →</a>
+
+    </article>
+
+</div>
+
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'home/js/blog_page.js' %}"></script>
+{% endblock %}

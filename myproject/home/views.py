@@ -10,11 +10,24 @@ def home(request):
 def homepage(request):
     # return HttpResponse("Welcome to the homepage!")
     content = {
-        'title': 'My Website -Kaushal Karn',
-        'message': 'Welcome to the homepage! -Kaushal Karn',
+        'title': 'My Website - Kaushal Karn',
+        'message': 'Welcome to the Landing Page!',
     }
-    return render(request, 'home/home.html', content)
+    return render(request, 'home/landing_page.html', content)
 
 def about(request):
-    return render(request, 'home/about.html')
+    return render(request, 'home/about_page.html')
+
+def contact(request):
+    return render(request, 'home/contact_page.html')
+
+def blog(request):
+    return render(request, 'home/blog_page.html')
+
+def experience(request):
+    return render(request, 'home/experience.html')
+
+def certification(request):
+    return render(request, 'home/certification.html')
+
 

@@ -1,0 +1,213 @@
+/* ================================
+General Styles
+================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: Arial, sans-serif;
+line-height: 1.6;
+background-color: #f5f5f5;
+color: #333;
+}
+
+/* ================================
+Navigation Bar
+================================ */
+
+.navbar {
+background-color: #222;
+padding: 15px 0;
+}
+
+.nav-container {
+width: 90%;
+max-width: 1100px;
+margin: auto;
+
+
+display: flex;
+justify-content: space-between;
+align-items: center;
+
+
+}
+
+.logo {
+color: white;
+text-decoration: none;
+font-size: 24px;
+font-weight: bold;
+}
+
+.nav-menu {
+list-style: none;
+display: flex;
+gap: 20px;
+}
+
+.nav-menu a {
+color: white;
+text-decoration: none;
+font-size: 15px;
+}
+
+.nav-menu a:hover {
+color: #ddd;
+}
+
+/* ================================
+Main Content
+================================ */
+
+.main-content {
+width: 90%;
+max-width: 1100px;
+min-height: 70vh;
+margin: 30px auto;
+}
+
+/* ================================
+Common Sections
+================================ */
+
+section {
+margin-bottom: 40px;
+}
+
+h1 {
+margin-bottom: 20px;
+}
+
+h2 {
+margin-bottom: 15px;
+}
+
+p {
+margin-bottom: 15px;
+}
+
+/* ================================
+Cards
+================================ */
+
+.feature-container,
+.blog-container {
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+justify-content: center;
+}
+
+.feature-card,
+.blog-card,
+.experience-card,
+.certification-card {
+background-color: white;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 20px;
+}
+
+/* ================================
+Buttons & Links
+================================ */
+
+.btn,
+button {
+display: inline-block;
+background-color: #222;
+color: white;
+border: none;
+padding: 10px 18px;
+border-radius: 5px;
+text-decoration: none;
+cursor: pointer;
+}
+
+.btn:hover,
+button:hover {
+background-color: #444;
+}
+
+/* ================================
+Forms
+================================ */
+
+form {
+max-width: 600px;
+}
+
+label {
+font-weight: bold;
+}
+
+input,
+textarea {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+textarea {
+resize: vertical;
+}
+
+/* ================================
+Lists
+================================ */
+
+ul {
+margin-left: 20px;
+}
+
+.skills ul,
+.about ul {
+line-height: 1.8;
+}
+
+/* ================================
+Footer
+================================ */
+
+.footer {
+background-color: #222;
+color: white;
+text-align: center;
+padding: 20px;
+}
+
+.footer p {
+margin: 0;
+}
+
+/* ================================
+Mobile Responsive
+================================ */
+
+@media (max-width: 768px) {
+
+
+.nav-container {
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.main-content {
+    width: 95%;
+}
+
+
+}

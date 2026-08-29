@@ -1,0 +1,44 @@
+.blog {
+max-width: 1000px;
+margin: 40px auto;
+padding: 20px;
+text-align: center;
+}
+
+.blog h1 {
+margin-bottom: 15px;
+}
+
+.blog > p {
+max-width: 700px;
+margin: 0 auto 40px;
+line-height: 1.6;
+}
+
+.blog-container {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+gap: 25px;
+}
+
+.blog-card {
+width: 280px;
+padding: 25px;
+border: 1px solid #ddd;
+border-radius: 8px;
+text-align: left;
+}
+
+.blog-card h2 {
+margin-top: 0;
+}
+
+.blog-card p {
+line-height: 1.6;
+}
+
+.blog-card a {
+text-decoration: none;
+font-weight: bold;
+}

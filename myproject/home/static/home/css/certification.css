@@ -1,0 +1,43 @@
+.certifications {
+max-width: 900px;
+margin: 40px auto;
+padding: 20px;
+}
+
+.certifications > h1,
+.certifications > p {
+text-align: center;
+}
+
+.certifications > p {
+max-width: 700px;
+margin: 15px auto 40px;
+line-height: 1.6;
+}
+
+.certification-card {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 25px;
+margin-bottom: 25px;
+}
+
+.certification-card h2 {
+margin-top: 0;
+}
+
+.certification-card h3 {
+font-weight: normal;
+}
+
+.certification-card p {
+line-height: 1.6;
+}
+
+.certification-note {
+text-align: center;
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 25px;
+margin-top: 40px;
+}

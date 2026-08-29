@@ -1,0 +1,42 @@
+.experience {
+max-width: 900px;
+margin: 40px auto;
+padding: 20px;
+}
+
+.experience > h1,
+.experience > p {
+text-align: center;
+}
+
+.experience > p {
+line-height: 1.6;
+margin-bottom: 40px;
+}
+
+.experience-card {
+border: 1px solid #ddd;
+border-radius: 8px;
+padding: 25px;
+margin-bottom: 25px;
+}
+
+.experience-card h2 {
+margin-top: 0;
+}
+
+.experience-card h3 {
+font-weight: normal;
+}
+
+.experience-card p {
+line-height: 1.6;
+}
+
+.experience-goal {
+text-align: center;
+margin-top: 40px;
+padding: 25px;
+border: 1px solid #ddd;
+border-radius: 8px;
+}

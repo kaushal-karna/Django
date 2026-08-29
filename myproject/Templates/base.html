@@ -1,31 +1,49 @@
-  {% load static %}
-  <!DOCTYPE html>
-  <html>
+{% load static %}
+<!doctype html>
+<html>
   <head>
-      <title>{% block title %}My Site{% endblock %}</title>
-      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}My Site{% endblock %}</title>
+   <!-- Global CSS --> 
+   <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+   {% block extra_css %} 
+   
+   {% endblock %}
   </head>
   <body>
-      <!-- Navigation Bar -->
-      <nav class="navbar">
-          <div class="nav-container">
-              <a href="/" class="logo">MySite</a>
-              <ul class="nav-menu">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="/students/">Students</a></li>
-                  <li><a href="/about/">About</a></li>
-              </ul>
-          </div>
-      </nav>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="logo">MySite</a>
+        <ul class="nav-menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="/students/">Students</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/experience/">Experience</a></li>
+          <li><a href="/certifications/">Certifications</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">{% block content %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+    &copy; 2026 <strong>MySite</strong> · Built with ❤️ by <strong>Kaushal Karn</strong>
+</p>
+
+    </footer>
+
+    <!-- Project-level JavaScript --> 
+    <script src="{% static 'js/main.js' %}"></script>
   
-      <!-- Main Content -->
-      <main class="main-content">
-          {% block content %}{% endblock %}
-      </main>
-  
-      <!-- Footer -->
-      <footer class="footer">
-          <p>&copy; 2024 MySite. All rights reserved.</p>
-      </footer>
+    {% block extra_js %}
+
+    {% endblock %}
+
+
   </body>
-  </html>
+</html>
