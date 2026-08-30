@@ -1,60 +1,198 @@
-<!DOCTYPE html>
 {% load static %}
+
+<!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %} Mahendra  Morang Aadarsha Multiple Campus {% endblock %}</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            Mahendra Morang Aadarsha Multiple Campus
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body data-page="home">
+
+<body>
+
+    <!-- ===== Common header ===== -->
+
+    <header class="site-header">
+
+        <div class="header-top">
+
+            <a class="brand" href="{% url 'homepage' %}">
+
+                <span class="brand-mark">
+                    MMAMC
+                </span>
+
+                <span>
+
+                    <div class="brand-name">
+                        Mahendra Morang Aadarsha Multiple Campus
+                    </div>
+
+                    <div class="brand-sub">
+                        Management System
+                    </div>
+
+                </span>
+
+            </a>
 
 
+            <div class="header-meta">
 
-<!-- ===== Common header ===== -->
-  <header class="site-header">
-    <div class="header-top">
-      <a class="brand" href="{% url 'homepage' %}">
-        <span class="brand-mark">MMAMC</span>
-        <span>
-          <div class="brand-name">Mahendra  Morang Aadarsha Multiple Campus</div>
-          <div class="brand-sub">Management System</div>
-        </span>
-      </a>
-      <div class="header-meta">
-        Registrar's Office<br>
-        Signed in as <strong style="color:#F2F0E8">A. Reyes</strong>
-      </div>
-    </div>
-    <nav class="catalog-tabs">
-      <a href="{% url 'homepage' %}" data-tab="home">Home</a>
-      <a href="{% url 'index' %}" data-tab="dashboard">Dashboard</a>
-      <a href="{% url 'courses' %}" data-tab="courses">Course List</a>
-      <a href="{% url 'add_course' %}" data-tab="add-course">Add Course</a>
-    </nav>
-  </header>
+                Registrar's Office
+                <br>
 
-  {% block content %}
+                Signed in as
 
-  {% endblock %}
+                <strong style="color:#F2F0E8">
+                    A. Reyes
+                </strong>
+
+            </div>
+
+        </div>
 
 
-   <!-- ===== Common footer ===== -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <span>&copy; <span id="footer-year"></span> Mahendra Morang Campus · Registrar's Office</span>
-      <span class="footer-links">
-        <a href="home.html">Home</a>
-        <a href="index.html">Dashboard</a>
-        <a href="courses.html">Courses</a>
-        <a href="{% url 'add_course' %}">Add Course</a>
-      </span>
-      <span class="footer-stamp">STATIC DEMO DATA</span>
-    </div>
-  </footer>
+        <!-- ===== Navigation ===== -->
+
+        <nav class="catalog-tabs">
+
+            <!-- Always visible -->
+
+            <a href="{% url 'homepage' %}">
+                Home
+            </a>
 
 
-  
-<script src="{% static 'js/script.js' %}"></script>
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
+
+
+            <!-- ================================================= -->
+            <!-- TEACHERS NAVIGATION -->
+            <!-- ================================================= -->
+
+            {% if request.resolver_match.app_name == "teachers" %}
+
+                <a href="{% url 'teachers:teachers' %}">
+                    Teacher List
+                </a>
+
+                <a href="{% url 'teachers:add_teachers' %}">
+                    Add Teacher
+                </a>
+
+
+            <!-- ================================================= -->
+            <!-- COURSE NAVIGATION -->
+            <!-- ================================================= -->
+
+            {% else %}
+
+                <a href="{% url 'courses:courses' %}">
+                    Course List
+                </a>
+
+                <a href="{% url 'courses:add_course' %}">
+                    Add Course
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+    </header>
+
+
+    <!-- ===== Page Content ===== -->
+
+    {% block content %}
+    {% endblock %}
+
+
+    <!-- ===== Common footer ===== -->
+
+    <footer class="site-footer">
+
+        <div class="footer-inner">
+
+            <span>
+
+                &copy;
+
+                <span id="footer-year"></span>
+
+                Mahendra Morang Campus · Registrar's Office
+
+            </span>
+
+
+            <span class="footer-links">
+
+                <a href="{% url 'homepage' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+
+                <!-- ================================================= -->
+                <!-- TEACHER FOOTER LINKS -->
+                <!-- ================================================= -->
+
+                {% if request.resolver_match.app_name == "teachers" %}
+
+                    <a href="{% url 'teachers:teachers' %}">
+                        Teachers
+                    </a>
+
+                    <a href="{% url 'teachers:add_teachers' %}">
+                        Add Teacher
+                    </a>
+
+
+                <!-- ================================================= -->
+                <!-- COURSE FOOTER LINKS -->
+                <!-- ================================================= -->
+
+                {% else %}
+
+                    <a href="{% url 'courses:courses' %}">
+                        Courses
+                    </a>
+
+                    <a href="{% url 'courses:add_course' %}">
+                        Add Course
+                    </a>
+
+                {% endif %}
+
+            </span>
+
+
+            <span class="footer-stamp">
+                STATIC DEMO DATA
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
 </body>
+
 </html>

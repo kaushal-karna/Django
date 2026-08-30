@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard · Mahendra Morang Aadarsha Multiple Campus{% endblock %}
+
+{% block content %}
+
+<!-- ===== Dashboard Selection ===== -->
+
+<main>
+
+
+<div class="page-head">
+
+    <div>
+
+        <p class="eyebrow">
+            Management system
+        </p>
+
+        <h1>
+            Choose a Dashboard
+        </h1>
+
+        <p class="lede">
+            Select the area you want to manage. More dashboards can be
+            added as the system grows.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ===== Dashboard Cards ===== -->
+
+<div class="modules-grid">
+
+    <!-- Course Dashboard -->
+    <a
+        href="{% url 'courses:index' %}"
+        class="module-card is-active"
+    >
+
+        <span class="module-icon">
+            01
+        </span>
+
+        <h3>
+            Course Dashboard
+        </h3>
+
+        <p>
+            Manage courses, departments, instructors, enrollment,
+            credits and course status.
+        </p>
+
+        <span class="module-status">
+            Open →
+        </span>
+
+    </a>
+
+
+    <!-- Teacher Dashboard -->
+    <a
+        href="{% url 'teachers:index' %}"
+        class="module-card is-active"
+    >
+
+        <span class="module-icon">
+            02
+        </span>
+
+        <h3>
+            Teacher Dashboard
+        </h3>
+
+        <p>
+            Manage teacher profiles, departments, specializations,
+            experience and teacher status.
+        </p>
+
+        <span class="module-status">
+            Open →
+        </span>
+
+    </a>
+
+
+    <!-- Student Dashboard -->
+    <div class="module-card is-disabled">
+
+        <span class="module-icon">
+            03
+        </span>
+
+        <h3>
+            Student Dashboard
+        </h3>
+
+        <p>
+            Manage student profiles, enrollment records and academic
+            information.
+        </p>
+
+        <span class="module-status">
+            Coming soon
+        </span>
+
+    </div>
+
+
+    <!-- Attendance Dashboard -->
+    <div class="module-card is-disabled">
+
+        <span class="module-icon">
+            04
+        </span>
+
+        <h3>
+            Attendance Dashboard
+        </h3>
+
+        <p>
+            Track daily attendance and view class-wise attendance
+            reports.
+        </p>
+
+        <span class="module-status">
+            Coming soon
+        </span>
+
+    </div>
+
+
+    <!-- Exams & Grades Dashboard -->
+    <div class="module-card is-disabled">
+
+        <span class="module-icon">
+            05
+        </span>
+
+        <h3>
+            Exams &amp; Grades
+        </h3>
+
+        <p>
+            Schedule examinations, manage marks and publish
+            academic results.
+        </p>
+
+        <span class="module-status">
+            Coming soon
+        </span>
+
+    </div>
+
+
+    <!-- Staff Dashboard -->
+    <div class="module-card is-disabled">
+
+        <span class="module-icon">
+            06
+        </span>
+
+        <h3>
+            Staff &amp; Faculty
+        </h3>
+
+        <p>
+            Manage staff profiles, assignments and department
+            responsibilities.
+        </p>
+
+        <span class="module-status">
+            Coming soon
+        </span>
+
+    </div>
+
+
+    <!-- Fees Dashboard -->
+    <div class="module-card is-disabled">
+
+        <span class="module-icon">
+            07
+        </span>
+
+        <h3>
+            Fees &amp; Payments
+        </h3>
+
+        <p>
+            Manage tuition invoices, payment history and outstanding
+            balances.
+        </p>
+
+        <span class="module-status">
+            Coming soon
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ===== Information ===== -->
+
+<div
+    class="card card-pad"
+    style="margin-top:24px;"
+>
+
+    <p class="eyebrow">
+        System overview
+    </p>
+
+    <h2>
+        One system, multiple dashboards.
+    </h2>
+
+    <p>
+        The management system is designed to keep each area of the
+        campus organized independently while allowing everything to
+        grow together under one system.
+    </p>
+
+</div>
+
+
+</main>
+
+{% endblock %}

@@ -10,11 +10,14 @@ def courses(request):
     return render(request, 'courses/courses.html')
 
 def course_details(request):
-    
     return render(request, 'courses/course-details.html')
 
 def index(request):
-    return render(request, 'courses/index.html')
+    return render(request, 'courses/index.html', 
+    #               {
+    #     "dashboard_type": "courses"
+    # }
+    )
 
 def add_course(request):
     return render(request, 'courses/add-course.html')

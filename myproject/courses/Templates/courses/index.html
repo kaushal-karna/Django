@@ -11,7 +11,7 @@
         <h1>Course Management</h1>
         <p class="lede">A quick look at what's on offer this term, and where to go next.</p>
       </div>
-      <a href="{% url 'add_course' %}" class="btn btn-primary">+ Add New Course</a>
+      <a href="{% url 'courses:add_course' %}" class="btn btn-primary">+ Add New Course</a>
     </div>
 
     <!-- Static stats -->
@@ -50,35 +50,35 @@
           <tbody>
             <!-- Static rows -->
             <tr>
-              <td data-label="Code"><a href="course-details.html"><span class="stamp">ART-120</span></a></td>
+              <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">ART-120</span></a></td>
               <td data-label="Course" class="course-name">Foundations of Design</td>
               <td data-label="Department" class="course-dept">Fine Arts</td>
               <td data-label="Instructor">Ms. Julia Torres</td>
               <td data-label="Status"><span class="pill inactive">Inactive</span></td>
             </tr>
             <tr>
-              <td data-label="Code"><a href="course-details.html"><span class="stamp">HIS-115</span></a></td>
+              <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">HIS-115</span></a></td>
               <td data-label="Course" class="course-name">World History Since 1500</td>
               <td data-label="Department" class="course-dept">History</td>
               <td data-label="Instructor">Prof. Elena Marsh</td>
               <td data-label="Status"><span class="pill active">Active</span></td>
             </tr>
             <tr>
-              <td data-label="Code"><a href="course-details.html"><span class="stamp">PHY-201</span></a></td>
+              <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">PHY-201</span></a></td>
               <td data-label="Course" class="course-name">Classical Mechanics</td>
               <td data-label="Department" class="course-dept">Physics</td>
               <td data-label="Instructor">Dr. Samuel Okoro</td>
               <td data-label="Status"><span class="pill inactive">Inactive</span></td>
             </tr>
             <tr>
-              <td data-label="Code"><a href="course-details.html"><span class="stamp">ENG-150</span></a></td>
+              <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">ENG-150</span></a></td>
               <td data-label="Course" class="course-name">Academic Writing</td>
               <td data-label="Department" class="course-dept">English</td>
               <td data-label="Instructor">Ms. Priya Nadar</td>
               <td data-label="Status"><span class="pill active">Active</span></td>
             </tr>
             <tr>
-              <td data-label="Code"><a href="course-details.html"><span class="stamp">CS-101</span></a></td>
+              <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">CS-101</span></a></td>
               <td data-label="Course" class="course-name">Introduction to Programming</td>
               <td data-label="Department" class="course-dept">Computer Science</td>
               <td data-label="Instructor">Dr. Alan Whitfield</td>

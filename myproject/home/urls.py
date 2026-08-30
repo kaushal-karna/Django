@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [      
             path('', views.homepage, name="homepage"),  # Landing page
-            
-        
-            
+            path('dashboard/', views.dashboard, name="dashboard" )
+                    
 ]

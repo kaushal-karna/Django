@@ -1,0 +1,349 @@
+{% extends 'base.html' %}
+
+{% block title %} Dashboard · Teacher Management · Greenfield School {% endblock %}
+
+{% block content %}
+
+<!-- ===== Page content ===== -->
+
+<main>
+
+```
+<div class="page-head">
+
+    <div>
+
+        <p class="eyebrow">Registrar overview</p>
+
+        <h1>Teacher Management</h1>
+
+        <p class="lede">
+            A quick look at the teachers in the school, and where to go next.
+        </p>
+
+    </div>
+
+    <a href="{% url 'teachers:add_teachers' %}" class="btn btn-primary">
+        + Add New Teacher
+    </a>
+
+</div>
+
+
+<!-- Static stats -->
+
+<div class="stat-row">
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Total Teachers
+        </div>
+
+        <div class="stat-value">
+            6
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Active
+        </div>
+
+        <div class="stat-value">
+            5
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Inactive
+        </div>
+
+        <div class="stat-value">
+            1
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Departments
+        </div>
+
+        <div class="stat-value">
+            5
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="card card-pad">
+
+    <p class="eyebrow" style="margin-bottom:14px;">
+        Recently added
+    </p>
+
+    <div class="table-wrap">
+
+        <table class="catalog">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Teacher</th>
+
+                    <th>Department</th>
+
+                    <th>Email</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                <!-- Static rows -->
+
+                <tr>
+
+                    <td data-label="ID">
+
+                        <a href="{% url 'teachers:teachers_details' %}">
+
+                            <span class="stamp">
+                                TCH-001
+                            </span>
+
+                        </a>
+
+                    </td>
+
+                    <td
+                        data-label="Teacher"
+                        class="course-name"
+                    >
+                        Dr. Alan Whitfield
+                    </td>
+
+                    <td
+                        data-label="Department"
+                        class="course-dept"
+                    >
+                        Computer Science
+                    </td>
+
+                    <td data-label="Email">
+                        alan.whitfield@example.com
+                    </td>
+
+                    <td data-label="Status">
+
+                        <span class="pill active">
+                            Active
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td data-label="ID">
+
+                        <a href="{% url 'teachers:teachers_details' %}">
+
+                            <span class="stamp">
+                                TCH-002
+                            </span>
+
+                        </a>
+
+                    </td>
+
+                    <td
+                        data-label="Teacher"
+                        class="course-name"
+                    >
+                        Ms. Julia Torres
+                    </td>
+
+                    <td
+                        data-label="Department"
+                        class="course-dept"
+                    >
+                        Fine Arts
+                    </td>
+
+                    <td data-label="Email">
+                        julia.torres@example.com
+                    </td>
+
+                    <td data-label="Status">
+
+                        <span class="pill active">
+                            Active
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td data-label="ID">
+
+                        <a href="{% url 'teachers:teachers_details' %}">
+
+                            <span class="stamp">
+                                TCH-003
+                            </span>
+
+                        </a>
+
+                    </td>
+
+                    <td
+                        data-label="Teacher"
+                        class="course-name"
+                    >
+                        Prof. Elena Marsh
+                    </td>
+
+                    <td
+                        data-label="Department"
+                        class="course-dept"
+                    >
+                        History
+                    </td>
+
+                    <td data-label="Email">
+                        elena.marsh@example.com
+                    </td>
+
+                    <td data-label="Status">
+
+                        <span class="pill active">
+                            Active
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td data-label="ID">
+
+                        <a href="{% url 'teachers:teachers_details' %}">
+
+                            <span class="stamp">
+                                TCH-004
+                            </span>
+
+                        </a>
+
+                    </td>
+
+                    <td
+                        data-label="Teacher"
+                        class="course-name"
+                    >
+                        Dr. Samuel Okoro
+                    </td>
+
+                    <td
+                        data-label="Department"
+                        class="course-dept"
+                    >
+                        Physics
+                    </td>
+
+                    <td data-label="Email">
+                        samuel.okoro@example.com
+                    </td>
+
+                    <td data-label="Status">
+
+                        <span class="pill inactive">
+                            Inactive
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td data-label="ID">
+
+                        <a href="{% url 'teachers:teachers_details' %}">
+
+                            <span class="stamp">
+                                TCH-005
+                            </span>
+
+                        </a>
+
+                    </td>
+
+                    <td
+                        data-label="Teacher"
+                        class="course-name"
+                    >
+                        Ms. Priya Nadar
+                    </td>
+
+                    <td
+                        data-label="Department"
+                        class="course-dept"
+                    >
+                        English
+                    </td>
+
+                    <td data-label="Email">
+                        priya.nadar@example.com
+                    </td>
+
+                    <td data-label="Status">
+
+                        <span class="pill active">
+                            Active
+                        </span>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+```
+
+</main>
+
+{% endblock %}

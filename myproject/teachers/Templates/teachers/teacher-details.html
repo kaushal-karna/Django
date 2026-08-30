@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Teacher Details · Teacher Management · Greenfield School{% endblock %}
+
+{% block content %}
+
+<!-- ===== Page content ===== -->
+
+<main>
+
+
+<p>
+    <a href="{% url 'teachers:teachers' %}">
+        &larr; Back to all teachers
+    </a>
+</p>
+
+<div class="card card-pad" style="margin-top:16px;">
+
+    <!-- ===== Teacher Header ===== -->
+    <div class="details-head">
+
+        <div>
+
+            <span class="stamp teal">
+                TCH-001
+            </span>
+
+            <h1
+                style="font-family:var(--font-display); font-size:28px; margin:12px 0 4px;"
+            >
+                Dr. Alan Whitfield
+            </h1>
+
+            <p style="color:var(--ink-soft); margin:0;">
+                Computer Science &middot; Artificial Intelligence
+            </p>
+
+        </div>
+
+        <span class="pill active">
+            Active
+        </span>
+
+    </div>
+
+    <!-- ===== Teacher Details ===== -->
+    <div class="details-grid">
+
+        <div class="item">
+            <div class="k">Email</div>
+            <div class="v">alan.whitfield@example.com</div>
+        </div>
+
+        <div class="item">
+            <div class="k">Phone</div>
+            <div class="v">+977-9800000000</div>
+        </div>
+
+        <div class="item">
+            <div class="k">Department</div>
+            <div class="v">Computer Science</div>
+        </div>
+
+        <div class="item">
+            <div class="k">Specialization</div>
+            <div class="v">Artificial Intelligence</div>
+        </div>
+
+        <div class="item">
+            <div class="k">Experience</div>
+            <div class="v">8 years</div>
+        </div>
+
+        <div class="item">
+            <div class="k">Joining Date</div>
+            <div class="v">August 15, 2018</div>
+        </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <!-- ===== Teacher Bio ===== -->
+    <div class="item">
+
+        <div class="k">
+            Biography
+        </div>
+
+        <p style="margin-top:8px; max-width:70ch;">
+            Dr. Alan Whitfield is a Computer Science educator specializing
+            in Artificial Intelligence and programming. He has extensive
+            experience teaching programming fundamentals, machine learning,
+            and software development.
+        </p>
+
+    </div>
+
+    <!-- ===== Actions ===== -->
+    <div class="form-actions">
+
+        <a
+            href="{% url 'teachers:add_teachers' %}"
+            class="btn btn-primary"
+        >
+            Edit Teacher
+        </a>
+
+        <button
+            class="btn btn-danger"
+            data-delete="Dr. Alan Whitfield"
+        >
+            Delete Teacher
+        </button>
+
+        <a
+            href="{% url 'teachers:teachers' %}"
+            class="btn btn-ghost"
+        >
+            Back to List
+        </a>
+
+    </div>
+
+</div>
+
+
+</main>
+
+{% endblock %}

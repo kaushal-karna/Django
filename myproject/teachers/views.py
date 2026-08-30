@@ -11,3 +11,19 @@ def teachers_about(request):
 
 def teachers_home(request):
     return render(request, 'teachers/home.html')
+
+def teachers_index(request):
+    return render(request, 'teachers/index.html',
+    #             {
+    #     "dashboard_type": "teachers"
+    # }
+    )
+
+def add_teachers(request):
+    return render(request, 'teachers/add-teachers.html')
+
+def teachers(request):
+    return render(request, 'teachers/teachers.html')
+
+def teacher_details(request):
+    return render(request, 'teachers/teacher-details.html')

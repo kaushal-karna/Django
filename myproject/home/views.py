@@ -10,3 +10,5 @@ def homepage(request):
     }
     return render(request, 'home/home.html', content)
 
+def dashboard(request):
+    return render(request, 'home/dashboard.html')
