@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %} Course Details · Course Catalog · Greenfield School {% endblock %}
+
+{% block content %}
+  <!-- ===== Page content ===== -->
+  <main>
+    <p><a href="courses.html">&larr; Back to all courses</a></p>
+
+    <div class="card card-pad" style="margin-top:16px;">
+      <div class="details-head">
+        <div>
+          <span class="stamp teal">CS-101</span>
+          <h1 style="font-family:var(--font-display); font-size:28px; margin:12px 0 4px;">Introduction to Programming</h1>
+          <p style="color:var(--ink-soft); margin:0;">Computer Science &middot; Fall 2026</p>
+        </div>
+        <span class="pill active">Active</span>
+      </div>
+
+      <div class="details-grid">
+        <div class="item"><div class="k">Instructor</div><div class="v">Dr. Alan Whitfield</div></div>
+        <div class="item"><div class="k">Credits</div><div class="v">4</div></div>
+        <div class="item"><div class="k">Duration</div><div class="v">15 weeks</div></div>
+        <div class="item"><div class="k">Capacity</div><div class="v">40</div></div>
+        <div class="item"><div class="k">Enrolled</div><div class="v">34</div></div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="item">
+        <div class="k">Description</div>
+        <p style="margin-top:8px; max-width:70ch;">Foundational course covering variables, control flow, functions and basic data structures using Python.</p>
+      </div>
+
+      <div class="form-actions">
+        <a href="{% url 'add_course' %}" class="btn btn-primary">Edit Course</a>
+        <button class="btn btn-danger" data-delete="Introduction to Programming">Delete Course</button>
+        <a href="courses.html" class="btn btn-ghost">Back to List</a>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

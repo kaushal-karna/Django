@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Course · Course Catalog · Greenfield School</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="add-course">
+
+  <!-- ===== Common header ===== -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">GFS</span>
+        <span>
+          <div class="brand-name">Greenfield School</div>
+          <div class="brand-sub">Course Catalog &amp; Records</div>
+        </span>
+      </a>
+      <div class="header-meta">
+        Registrar's Office<br>
+        Signed in as <strong style="color:#F2F0E8">A. Reyes</strong>
+      </div>
+    </div>
+    <nav class="catalog-tabs">
+      <a href="home.html" data-tab="home">Home</a>
+      <a href="index.html" data-tab="dashboard">Dashboard</a>
+      <a href="courses.html" data-tab="courses">Course List</a>
+      <a href="add-course.html" data-tab="add-course">Add Course</a>
+    </nav>
+  </header>
+
+  <!-- ===== Page content ===== -->
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">New entry</p>
+        <h1>Add a Course</h1>
+        <p class="lede">Fill in the details below to add a new course to the catalog. This is a demo form — submitting does not save the data.</p>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <form id="course-form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="code">Course code</label>
+            <input type="text" id="code" placeholder="e.g. CS-101" required>
+          </div>
+          <div class="field">
+            <label for="name">Course name</label>
+            <input type="text" id="name" placeholder="e.g. Introduction to Programming" required>
+          </div>
+          <div class="field">
+            <label for="department">Department</label>
+            <input type="text" id="department" placeholder="e.g. Computer Science" required>
+          </div>
+          <div class="field">
+            <label for="instructor">Instructor</label>
+            <input type="text" id="instructor" placeholder="e.g. Dr. Alan Whitfield" required>
+          </div>
+          <div class="field">
+            <label for="credits">Credits</label>
+            <input type="number" id="credits" min="1" max="10" placeholder="e.g. 3" required>
+          </div>
+          <div class="field">
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" placeholder="e.g. 15 weeks" required>
+          </div>
+          <div class="field">
+            <label for="semester">Semester</label>
+            <select id="semester" required>
+              <option value="">Select semester</option>
+              <option>Spring 2026</option>
+              <option>Fall 2026</option>
+              <option>Spring 2027</option>
+              <option>Fall 2027</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="capacity">Capacity</label>
+            <input type="number" id="capacity" min="1" placeholder="e.g. 40" required>
+          </div>
+          <div class="field">
+            <label for="status">Status</label>
+            <select id="status" required>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="description">Description</label>
+            <textarea id="description" placeholder="Short summary of what the course covers…"></textarea>
+            <span class="field-hint">A sentence or two is enough — this shows on the course detail page.</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Save Course</button>
+          <a href="courses.html" class="btn btn-ghost">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ===== Common footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="footer-year"></span> Greenfield School · Registrar's Office</span>
+      <span class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="index.html">Dashboard</a>
+        <a href="courses.html">Courses</a>
+        <a href="add-course.html">Add Course</a>
+      </span>
+      <span class="footer-stamp">STATIC DEMO DATA</span>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

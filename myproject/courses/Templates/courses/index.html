@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard · Course Catalog · Greenfield School {% endblock %}
+
+
+{% block content %}
+  <!-- ===== Page content ===== -->
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Registrar overview</p>
+        <h1>Course Management</h1>
+        <p class="lede">A quick look at what's on offer this term, and where to go next.</p>
+      </div>
+      <a href="{% url 'add_course' %}" class="btn btn-primary">+ Add New Course</a>
+    </div>
+
+    <!-- Static stats -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Courses</div>
+        <div class="stat-value">6</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active</div>
+        <div class="stat-value">4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Inactive</div>
+        <div class="stat-value">2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Departments</div>
+        <div class="stat-value">5</div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <p class="eyebrow" style="margin-bottom:14px;">Recently added</p>
+      <div class="table-wrap">
+        <table class="catalog">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Course</th>
+              <th>Department</th>
+              <th>Instructor</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Static rows -->
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">ART-120</span></a></td>
+              <td data-label="Course" class="course-name">Foundations of Design</td>
+              <td data-label="Department" class="course-dept">Fine Arts</td>
+              <td data-label="Instructor">Ms. Julia Torres</td>
+              <td data-label="Status"><span class="pill inactive">Inactive</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">HIS-115</span></a></td>
+              <td data-label="Course" class="course-name">World History Since 1500</td>
+              <td data-label="Department" class="course-dept">History</td>
+              <td data-label="Instructor">Prof. Elena Marsh</td>
+              <td data-label="Status"><span class="pill active">Active</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">PHY-201</span></a></td>
+              <td data-label="Course" class="course-name">Classical Mechanics</td>
+              <td data-label="Department" class="course-dept">Physics</td>
+              <td data-label="Instructor">Dr. Samuel Okoro</td>
+              <td data-label="Status"><span class="pill inactive">Inactive</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">ENG-150</span></a></td>
+              <td data-label="Course" class="course-name">Academic Writing</td>
+              <td data-label="Department" class="course-dept">English</td>
+              <td data-label="Instructor">Ms. Priya Nadar</td>
+              <td data-label="Status"><span class="pill active">Active</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">CS-101</span></a></td>
+              <td data-label="Course" class="course-name">Introduction to Programming</td>
+              <td data-label="Department" class="course-dept">Computer Science</td>
+              <td data-label="Instructor">Dr. Alan Whitfield</td>
+              <td data-label="Status"><span class="pill active">Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  {% endblock %}

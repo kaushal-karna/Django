@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · Course Catalog · Greenfield School</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="dashboard">
+
+  <!-- ===== Common header ===== -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">GFS</span>
+        <span>
+          <div class="brand-name">Greenfield School</div>
+          <div class="brand-sub">Course Catalog &amp; Records</div>
+        </span>
+      </a>
+      <div class="header-meta">
+        Registrar's Office<br>
+        Signed in as <strong style="color:#F2F0E8">A. Reyes</strong>
+      </div>
+    </div>
+    <nav class="catalog-tabs">
+      <a href="home.html" data-tab="home">Home</a>
+      <a href="index.html" data-tab="dashboard">Dashboard</a>
+      <a href="courses.html" data-tab="courses">Course List</a>
+      <a href="add-course.html" data-tab="add-course">Add Course</a>
+    </nav>
+  </header>
+
+  <!-- ===== Page content ===== -->
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Registrar overview</p>
+        <h1>Course Management</h1>
+        <p class="lede">A quick look at what's on offer this term, and where to go next.</p>
+      </div>
+      <a href="add-course.html" class="btn btn-primary">+ Add New Course</a>
+    </div>
+
+    <!-- Static stats -->
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-label">Total Courses</div>
+        <div class="stat-value">6</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Active</div>
+        <div class="stat-value">4</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Inactive</div>
+        <div class="stat-value">2</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Departments</div>
+        <div class="stat-value">5</div>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <p class="eyebrow" style="margin-bottom:14px;">Recently added</p>
+      <div class="table-wrap">
+        <table class="catalog">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Course</th>
+              <th>Department</th>
+              <th>Instructor</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Static rows -->
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">ART-120</span></a></td>
+              <td data-label="Course" class="course-name">Foundations of Design</td>
+              <td data-label="Department" class="course-dept">Fine Arts</td>
+              <td data-label="Instructor">Ms. Julia Torres</td>
+              <td data-label="Status"><span class="pill inactive">Inactive</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">HIS-115</span></a></td>
+              <td data-label="Course" class="course-name">World History Since 1500</td>
+              <td data-label="Department" class="course-dept">History</td>
+              <td data-label="Instructor">Prof. Elena Marsh</td>
+              <td data-label="Status"><span class="pill active">Active</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">PHY-201</span></a></td>
+              <td data-label="Course" class="course-name">Classical Mechanics</td>
+              <td data-label="Department" class="course-dept">Physics</td>
+              <td data-label="Instructor">Dr. Samuel Okoro</td>
+              <td data-label="Status"><span class="pill inactive">Inactive</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">ENG-150</span></a></td>
+              <td data-label="Course" class="course-name">Academic Writing</td>
+              <td data-label="Department" class="course-dept">English</td>
+              <td data-label="Instructor">Ms. Priya Nadar</td>
+              <td data-label="Status"><span class="pill active">Active</span></td>
+            </tr>
+            <tr>
+              <td data-label="Code"><a href="course-details.html"><span class="stamp">CS-101</span></a></td>
+              <td data-label="Course" class="course-name">Introduction to Programming</td>
+              <td data-label="Department" class="course-dept">Computer Science</td>
+              <td data-label="Instructor">Dr. Alan Whitfield</td>
+              <td data-label="Status"><span class="pill active">Active</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== Common footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="footer-year"></span> Greenfield School · Registrar's Office</span>
+      <span class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="index.html">Dashboard</a>
+        <a href="courses.html">Courses</a>
+        <a href="add-course.html">Add Course</a>
+      </span>
+      <span class="footer-stamp">STATIC DEMO DATA</span>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

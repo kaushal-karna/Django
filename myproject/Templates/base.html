@@ -1,49 +1,60 @@
+<!DOCTYPE html>
 {% load static %}
-<!doctype html>
-<html>
-  <head>
-    <title>{% block title %}My Site{% endblock %}</title>
-   <!-- Global CSS --> 
-   <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
-   {% block extra_css %} 
-   
-   {% endblock %}
-  </head>
-  <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="/" class="logo">MySite</a>
-        <ul class="nav-menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/students/">Students</a></li>
-          <li><a href="/about/">About</a></li>
-          <li><a href="/experience/">Experience</a></li>
-          <li><a href="/certifications/">Certifications</a></li>
-          <li><a href="/blog/">Blog</a></li>
-          <li><a href="/contact/">Contact</a></li>
-        </ul>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %} Mahendra  Morang Aadarsha Multiple Campus {% endblock %}</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body data-page="home">
+
+
+
+<!-- ===== Common header ===== -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="brand" href="{% url 'homepage' %}">
+        <span class="brand-mark">MMAMC</span>
+        <span>
+          <div class="brand-name">Mahendra  Morang Aadarsha Multiple Campus</div>
+          <div class="brand-sub">Management System</div>
+        </span>
+      </a>
+      <div class="header-meta">
+        Registrar's Office<br>
+        Signed in as <strong style="color:#F2F0E8">A. Reyes</strong>
       </div>
+    </div>
+    <nav class="catalog-tabs">
+      <a href="{% url 'homepage' %}" data-tab="home">Home</a>
+      <a href="{% url 'index' %}" data-tab="dashboard">Dashboard</a>
+      <a href="{% url 'courses' %}" data-tab="courses">Course List</a>
+      <a href="{% url 'add_course' %}" data-tab="add-course">Add Course</a>
     </nav>
+  </header>
 
-    <!-- Main Content -->
-    <main class="main-content">{% block content %}{% endblock %}</main>
+  {% block content %}
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>
-    &copy; 2026 <strong>MySite</strong> · Built with ❤️ by <strong>Kaushal Karn</strong>
-</p>
+  {% endblock %}
 
-    </footer>
 
-    <!-- Project-level JavaScript --> 
-    <script src="{% static 'js/main.js' %}"></script>
+   <!-- ===== Common footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="footer-year"></span> Mahendra Morang Campus · Registrar's Office</span>
+      <span class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="index.html">Dashboard</a>
+        <a href="courses.html">Courses</a>
+        <a href="{% url 'add_course' %}">Add Course</a>
+      </span>
+      <span class="footer-stamp">STATIC DEMO DATA</span>
+    </div>
+  </footer>
+
+
   
-    {% block extra_js %}
-
-    {% endblock %}
-
-
-  </body>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
 </html>

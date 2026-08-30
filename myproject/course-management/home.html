@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greenfield School Management System</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+
+  <!-- ===== Common header ===== -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="brand" href="home.html">
+        <span class="brand-mark">GFS</span>
+        <span>
+          <div class="brand-name">Greenfield School</div>
+          <div class="brand-sub">Management System</div>
+        </span>
+      </a>
+      <div class="header-meta">
+        Registrar's Office<br>
+        Signed in as <strong style="color:#F2F0E8">A. Reyes</strong>
+      </div>
+    </div>
+    <nav class="catalog-tabs">
+      <a href="home.html" data-tab="home">Home</a>
+      <a href="index.html" data-tab="dashboard">Dashboard</a>
+      <a href="courses.html" data-tab="courses">Course List</a>
+      <a href="add-course.html" data-tab="add-course">Add Course</a>
+    </nav>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">Greenfield School &middot; Est. 1962</p>
+        <h1>The registrar's desk, digitized.</h1>
+        <p class="lede">One system for courses, students and staff — built to feel as clear and dependable as a well-kept ledger, without the filing cabinets.</p>
+        <div class="hero-actions">
+          <a href="courses.html" class="btn btn-primary">Browse Courses</a>
+          <a href="add-course.html" class="btn btn-ghost">+ Add a Course</a>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="ledger-title">Term at a glance — Fall 2026</div>
+        <div class="ledger-row"><span>Active courses</span><span class="v">4</span></div>
+        <div class="ledger-row"><span>Departments offering courses</span><span class="v">5</span></div>
+        <div class="ledger-row"><span>Total seats filled</span><span class="v">157 / 206</span></div>
+        <div class="ledger-row"><span>Full sections</span><span class="v">1</span></div>
+        <div class="ledger-row"><span>System status</span><span class="v">Demo data</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Modules ===== -->
+  <section class="section" id="modules">
+    <div class="section-head">
+      <p class="eyebrow">Where to go</p>
+      <h2>One system, several desks</h2>
+      <p>Courses is open for this demo. The rest of the registrar's desks are sketched in below for how they'd fit alongside it.</p>
+    </div>
+
+    <div class="modules-grid">
+      <a href="courses.html" class="module-card is-active">
+        <span class="module-icon">01</span>
+        <h3>Courses</h3>
+        <p>Browse the catalog, add new courses and manage enrollment status.</p>
+        <span class="module-status">Open →</span>
+      </a>
+
+      <div class="module-card is-disabled">
+        <span class="module-icon">02</span>
+        <h3>Students</h3>
+        <p>Enrollment records, contact details and academic history.</p>
+        <span class="module-status">Coming soon</span>
+      </div>
+
+      <div class="module-card is-disabled">
+        <span class="module-icon">03</span>
+        <h3>Attendance</h3>
+        <p>Daily attendance capture and per-class absence reporting.</p>
+        <span class="module-status">Coming soon</span>
+      </div>
+
+      <div class="module-card is-disabled">
+        <span class="module-icon">04</span>
+        <h3>Exams &amp; Grades</h3>
+        <p>Schedule exams, record marks and publish report cards.</p>
+        <span class="module-status">Coming soon</span>
+      </div>
+
+      <div class="module-card is-disabled">
+        <span class="module-icon">05</span>
+        <h3>Staff &amp; Faculty</h3>
+        <p>Instructor profiles, teaching loads and department assignments.</p>
+        <span class="module-status">Coming soon</span>
+      </div>
+
+      <div class="module-card is-disabled">
+        <span class="module-icon">06</span>
+        <h3>Fees</h3>
+        <p>Tuition invoices, payment history and outstanding balances.</p>
+        <span class="module-status">Coming soon</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Why this system ===== -->
+  <section class="section" id="features" style="padding-top:0;">
+    <div class="section-head">
+      <p class="eyebrow">Built for the registrar</p>
+      <h2>Made for how the office actually works</h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-num">Clarity</span>
+        <h3>Everything has one home</h3>
+        <p>Each course has a single record — code, instructor, capacity and status — so nothing gets tracked twice in two spreadsheets.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">Speed</span>
+        <h3>Find a course in seconds</h3>
+        <p>Search by code, name or instructor, or filter by department and status, without digging through folders.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">Confidence</span>
+        <h3>Nothing changes by accident</h3>
+        <p>Removing a course always asks first, so an entire term's record can't disappear with a stray click.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-banner">
+    <div class="cta-inner">
+      <div>
+        <h2>Ready to see the catalog?</h2>
+        <p>Six courses are already on file for Fall 2026.</p>
+      </div>
+      <a href="courses.html" class="btn btn-primary">Open Course List</a>
+    </div>
+  </section>
+
+  <!-- ===== Common footer ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="footer-year"></span> Greenfield School · Registrar's Office</span>
+      <span class="footer-links">
+        <a href="home.html">Home</a>
+        <a href="index.html">Dashboard</a>
+        <a href="courses.html">Courses</a>
+        <a href="add-course.html">Add Course</a>
+      </span>
+      <span class="footer-stamp">STATIC DEMO DATA</span>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
