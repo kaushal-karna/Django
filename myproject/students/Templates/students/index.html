@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}Teachers · Greenfield School{% endblock %}
+{% block title %}Students · MMAMC{% endblock %}
 
 {% block page %}dashboard{% endblock %}
+
 {% block content %}
 
 <!-- ===== Page content ===== -->
@@ -10,9 +11,9 @@
   <div class="page-head">
     <div>
       <p class="eyebrow">Registrar overview</p>
-      <h1>Teacher Management</h1>
+      <h1>Student Management</h1>
       <p class="lede">
-        Manage teacher profiles, departments, subjects and teaching assignments.
+        Manage student profiles, enrollment records, departments and academic information.
       </p>
     </div>
 
@@ -24,13 +25,13 @@
         📚 Courses
       </a>
 
-      <!-- Students -->
-      <a href="{% url 'students:index' %}" class="btn btn-ghost">
+      <!-- Students - Active -->
+      <a href="{% url 'students:index' %}" class="btn btn-primary">
         🎓 Students
       </a>
 
-      <!-- Teachers - Active -->
-      <a href="{% url 'teachers:index' %}" class="btn btn-primary">
+      <!-- Teachers -->
+      <a href="{% url 'teachers:index' %}" class="btn btn-ghost">
         👨‍🏫 Teachers
       </a>
 
@@ -38,22 +39,22 @@
   </div>
 
 
-  <!-- ===== Teacher Statistics ===== -->
+  <!-- ===== Student Statistics ===== -->
   <div class="stat-row">
 
     <div class="stat-card">
-      <div class="stat-label">Total Teachers</div>
-      <div class="stat-value">12</div>
+      <div class="stat-label">Total Students</div>
+      <div class="stat-value">120</div>
     </div>
 
     <div class="stat-card">
-      <div class="stat-label">Active Teachers</div>
-      <div class="stat-value">10</div>
+      <div class="stat-label">Active Students</div>
+      <div class="stat-value">108</div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Inactive</div>
-      <div class="stat-value">2</div>
+      <div class="stat-value">12</div>
     </div>
 
     <div class="stat-card">
@@ -64,11 +65,11 @@
   </div>
 
 
-  <!-- ===== Teacher List ===== -->
+  <!-- ===== Student List ===== -->
   <div class="card card-pad">
 
     <p class="eyebrow" style="margin-bottom:14px;">
-      Recently added teachers
+      Recently added students
     </p>
 
     <div class="table-wrap">
@@ -77,10 +78,10 @@
 
         <thead>
           <tr>
-            <th>Teacher ID</th>
-            <th>Teacher Name</th>
+            <th>Student ID</th>
+            <th>Student Name</th>
             <th>Department</th>
-            <th>Subject</th>
+            <th>Semester</th>
             <th>Email</th>
             <th>Status</th>
           </tr>
@@ -88,28 +89,28 @@
 
         <tbody>
 
-          <!-- Teacher 1 -->
+          <!-- Student 1 -->
           <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-001</span>
+            <td data-label="Student ID">
+              <a href="{% url 'students:student_details' %}">
+                <span class="stamp">STU-001</span>
               </a>
             </td>
 
-            <td data-label="Teacher Name" class="course-name">
-              Dr. Alan Whitfield
+            <td data-label="Student Name" class="course-name">
+              John Anderson
             </td>
 
             <td data-label="Department" class="course-dept">
               Computer Science
             </td>
 
-            <td data-label="Subject">
-              Programming
+            <td data-label="Semester">
+              1st Semester
             </td>
 
             <td data-label="Email">
-              alan.whitfield@greenfield.edu
+              john.anderson@greenfield.edu
             </td>
 
             <td data-label="Status">
@@ -118,28 +119,28 @@
           </tr>
 
 
-          <!-- Teacher 2 -->
+          <!-- Student 2 -->
           <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-002</span>
+            <td data-label="Student ID">
+              <a href="{% url 'students:student_details' %}">
+                <span class="stamp">STU-002</span>
               </a>
             </td>
 
-            <td data-label="Teacher Name" class="course-name">
-              Ms. Julia Torres
+            <td data-label="Student Name" class="course-name">
+              Sarah Williams
             </td>
 
             <td data-label="Department" class="course-dept">
               Fine Arts
             </td>
 
-            <td data-label="Subject">
-              Design
+            <td data-label="Semester">
+              3rd Semester
             </td>
 
             <td data-label="Email">
-              julia.torres@greenfield.edu
+              sarah.williams@greenfield.edu
             </td>
 
             <td data-label="Status">
@@ -148,58 +149,28 @@
           </tr>
 
 
-          <!-- Teacher 3 -->
+          <!-- Student 3 -->
           <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-003</span>
+            <td data-label="Student ID">
+              <a href="{% url 'students:student_details' %}">
+                <span class="stamp">STU-003</span>
               </a>
             </td>
 
-            <td data-label="Teacher Name" class="course-name">
-              Prof. Elena Marsh
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              History
-            </td>
-
-            <td data-label="Subject">
-              World History
-            </td>
-
-            <td data-label="Email">
-              elena.marsh@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Teacher 4 -->
-          <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-004</span>
-              </a>
-            </td>
-
-            <td data-label="Teacher Name" class="course-name">
-              Dr. Samuel Okoro
+            <td data-label="Student Name" class="course-name">
+              Michael Brown
             </td>
 
             <td data-label="Department" class="course-dept">
               Physics
             </td>
 
-            <td data-label="Subject">
-              Classical Mechanics
+            <td data-label="Semester">
+              5th Semester
             </td>
 
             <td data-label="Email">
-              samuel.okoro@greenfield.edu
+              michael.brown@greenfield.edu
             </td>
 
             <td data-label="Status">
@@ -208,28 +179,28 @@
           </tr>
 
 
-          <!-- Teacher 5 -->
+          <!-- Student 4 -->
           <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-005</span>
+            <td data-label="Student ID">
+              <a href="{% url 'students:student_details' %}">
+                <span class="stamp">STU-004</span>
               </a>
             </td>
 
-            <td data-label="Teacher Name" class="course-name">
-              Ms. Priya Nadar
+            <td data-label="Student Name" class="course-name">
+              Emily Carter
             </td>
 
             <td data-label="Department" class="course-dept">
               English
             </td>
 
-            <td data-label="Subject">
-              Academic Writing
+            <td data-label="Semester">
+              2nd Semester
             </td>
 
             <td data-label="Email">
-              priya.nadar@greenfield.edu
+              emily.carter@greenfield.edu
             </td>
 
             <td data-label="Status">
@@ -238,28 +209,58 @@
           </tr>
 
 
-          <!-- Teacher 6 -->
+          <!-- Student 5 -->
           <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-006</span>
+            <td data-label="Student ID">
+              <a href="{% url 'students:student_details' %}">
+                <span class="stamp">STU-005</span>
               </a>
             </td>
 
-            <td data-label="Teacher Name" class="course-name">
-              Mr. David Anderson
+            <td data-label="Student Name" class="course-name">
+              Daniel Wilson
             </td>
 
             <td data-label="Department" class="course-dept">
               Mathematics
             </td>
 
-            <td data-label="Subject">
-              Calculus
+            <td data-label="Semester">
+              4th Semester
             </td>
 
             <td data-label="Email">
-              david.anderson@greenfield.edu
+              daniel.wilson@greenfield.edu
+            </td>
+
+            <td data-label="Status">
+              <span class="pill active">Active</span>
+            </td>
+          </tr>
+
+
+          <!-- Student 6 -->
+          <tr>
+            <td data-label="Student ID">
+              <a href="{% url 'students:student_details' %}">
+                <span class="stamp">STU-006</span>
+              </a>
+            </td>
+
+            <td data-label="Student Name" class="course-name">
+              Olivia Martinez
+            </td>
+
+            <td data-label="Department" class="course-dept">
+              Computer Science
+            </td>
+
+            <td data-label="Semester">
+              6th Semester
+            </td>
+
+            <td data-label="Email">
+              olivia.martinez@greenfield.edu
             </td>
 
             <td data-label="Status">

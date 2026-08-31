@@ -9,7 +9,7 @@ urlpatterns = [
             # started rendering teachers page
             
             path('teachers/', views.teachers, name='teachers'),
-            path('teacher-details/', views.teacher_details, name='teachers_details'),
+            path('teacher-details/', views.teacher_details, name='teacher_details'),
             path('index/', views.teachers_index, name='index'),  
             path('add-teachers/', views.add_teachers, name='add_teachers'),
 ]

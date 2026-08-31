@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Teacher Details · Greenfield School{% endblock %}
+{% block title %}Student Details · Greenfield School{% endblock %}
 
 {% block content %}
 
@@ -7,21 +7,21 @@
 <main>
 
   <p>
-    <a href="{% url 'teachers' %}">&larr; Back to all teachers</a>
+    <a href="{% url 'students' %}">&larr; Back to all students</a>
   </p>
 
   <div class="card card-pad" style="margin-top:16px;">
 
     <div class="details-head">
       <div>
-        <span class="stamp teal">TCH-001</span>
+        <span class="stamp teal">STU-001</span>
 
         <h1 style="font-family:var(--font-display); font-size:28px; margin:12px 0 4px;">
-          Dr. Alan Whitfield
+          John Anderson
         </h1>
 
         <p style="color:var(--ink-soft); margin:0;">
-          Computer Science &middot; Faculty
+          Computer Science &middot; 1st Semester
         </p>
       </div>
 
@@ -29,12 +29,12 @@
     </div>
 
 
-    <!-- ===== Teacher Details ===== -->
+    <!-- ===== Student Details ===== -->
     <div class="details-grid">
 
       <div class="item">
-        <div class="k">Teacher ID</div>
-        <div class="v">TCH-001</div>
+        <div class="k">Student ID</div>
+        <div class="v">STU-001</div>
       </div>
 
       <div class="item">
@@ -43,23 +43,23 @@
       </div>
 
       <div class="item">
-        <div class="k">Subject</div>
-        <div class="v">Programming</div>
+        <div class="k">Semester</div>
+        <div class="v">1st Semester</div>
       </div>
 
       <div class="item">
         <div class="k">Email</div>
-        <div class="v">alan.whitfield@greenfield.edu</div>
+        <div class="v">john.anderson@greenfield.edu</div>
       </div>
 
       <div class="item">
         <div class="k">Phone</div>
-        <div class="v">+1 555 010 2001</div>
+        <div class="v">+1 555 010 1001</div>
       </div>
 
       <div class="item">
-        <div class="k">Experience</div>
-        <div class="v">8 Years</div>
+        <div class="k">Enrollment Year</div>
+        <div class="v">2026</div>
       </div>
 
     </div>
@@ -68,15 +68,14 @@
     <hr class="divider">
 
 
-    <!-- ===== Teacher Description ===== -->
+    <!-- ===== Personal Information ===== -->
     <div class="item">
 
-      <div class="k">About Teacher</div>
+      <div class="k">Student Information</div>
 
       <p style="margin-top:8px; max-width:70ch;">
-        Dr. Alan Whitfield is a Computer Science instructor specializing
-        in programming, software development and introductory computer
-        science education.
+        John Anderson is a Computer Science student currently enrolled
+        in the first semester of the Fall 2026 academic term.
       </p>
 
     </div>
@@ -85,10 +84,10 @@
     <hr class="divider">
 
 
-    <!-- ===== Courses Taught ===== -->
+    <!-- ===== Enrolled Courses ===== -->
     <div class="item">
 
-      <div class="k">Courses Taught</div>
+      <div class="k">Enrolled Courses</div>
 
       <div class="table-wrap" style="margin-top:12px;">
 
@@ -99,7 +98,8 @@
               <th>Code</th>
               <th>Course</th>
               <th>Department</th>
-              <th>Semester</th>
+              <th>Instructor</th>
+              <th>Status</th>
             </tr>
           </thead>
 
@@ -118,26 +118,56 @@
                 Computer Science
               </td>
 
-              <td data-label="Semester">
-                Fall 2026
+              <td data-label="Instructor">
+                Dr. Alan Whitfield
+              </td>
+
+              <td data-label="Status">
+                <span class="pill active">Enrolled</span>
               </td>
             </tr>
 
             <tr>
               <td data-label="Code">
-                <span class="stamp">CS-201</span>
+                <span class="stamp">MAT-101</span>
               </td>
 
               <td data-label="Course" class="course-name">
-                Data Structures
+                Calculus I
               </td>
 
               <td data-label="Department" class="course-dept">
-                Computer Science
+                Mathematics
               </td>
 
-              <td data-label="Semester">
-                Fall 2026
+              <td data-label="Instructor">
+                Mr. David Anderson
+              </td>
+
+              <td data-label="Status">
+                <span class="pill active">Enrolled</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td data-label="Code">
+                <span class="stamp">ENG-101</span>
+              </td>
+
+              <td data-label="Course" class="course-name">
+                Academic Writing
+              </td>
+
+              <td data-label="Department" class="course-dept">
+                English
+              </td>
+
+              <td data-label="Instructor">
+                Ms. Priya Nadar
+              </td>
+
+              <td data-label="Status">
+                <span class="pill active">Enrolled</span>
               </td>
             </tr>
 
@@ -153,17 +183,17 @@
     <!-- ===== Actions ===== -->
     <div class="form-actions">
 
-      <a href="{% url 'teachers:add_teachers' %}" class="btn btn-primary">
-        Edit Teacher
+      <a href="add-student.html" class="btn btn-primary">
+        Edit Student
       </a>
 
       <button
         class="btn btn-danger"
-        data-delete="Dr. Alan Whitfield">
-        Delete Teacher
+        data-delete="John Anderson">
+        Delete Student
       </button>
 
-      <a href="{% url 'teachers' %}" class="btn btn-ghost">
+      <a href="{% url 'students' %}" class="btn btn-ghost">
         Back to List
       </a>
 

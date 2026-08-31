@@ -523,6 +523,12 @@ table.catalog tbody tr:hover{ background: #FAFAF7; }
   color: #8992A0;
 }
 
+.catalog-tabs a.active {
+    color: #F2F0E8;
+    background: #2f5d50;
+    border-bottom: 3px solid #F2F0E8;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 720px){

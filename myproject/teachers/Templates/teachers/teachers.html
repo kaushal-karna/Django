@@ -1,494 +1,551 @@
 {% extends 'base.html' %}
 
-{% block title %}Teacher List · Teacher Management · Greenfield School{% endblock %}
+{% block title %}Teacher List · Greenfield School{% endblock %}
+
+{% block page %}teachers{% endblock %}
 
 {% block content %}
 
 <!-- ===== Page content ===== -->
-
 <main>
 
-<div class="page-head">
-
+  <div class="page-head">
     <div>
-        <p class="eyebrow">Faculty directory</p>
-
-        <h1>All Teachers</h1>
-
-        <p class="lede">
-            Browse, search and manage every teacher on record.
-        </p>
+      <p class="eyebrow">Faculty records</p>
+      <h1>All Teachers</h1>
+      <p class="lede">
+        Browse, search and manage every teacher on record.
+      </p>
     </div>
 
-    <a href="{% url 'teachers:add_teachers' %}" class="btn btn-primary">
-        + Add New Teacher
+    <a href="add-teacher.html" class="btn btn-primary">
+      + Add New Teacher
     </a>
+  </div>
 
-</div>
 
-<!-- ===== Search & Filters ===== -->
-<div class="toolbar">
+  <!-- ===== Search & Filters ===== -->
+  <div class="toolbar">
 
     <input
-        type="search"
-        id="search-input"
-        class="search-input"
-        placeholder="Search by ID, name, department or email…"
+      type="search"
+      id="teacher-search-input"
+      class="search-input"
+      placeholder="Search by ID, name, subject or email…"
     >
 
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
 
-        <select id="dept-filter" class="filter-select">
+      <select id="teacher-dept-filter" class="filter-select">
 
-            <option value="">All departments</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="English">English</option>
-            <option value="Physics">Physics</option>
-            <option value="History">History</option>
-            <option value="Fine Arts">Fine Arts</option>
+        <option value="">
+          All departments
+        </option>
 
-        </select>
+        <option value="Computer Science">
+          Computer Science
+        </option>
 
-        <select id="status-filter" class="filter-select">
+        <option value="Mathematics">
+          Mathematics
+        </option>
 
-            <option value="">All statuses</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+        <option value="English">
+          English
+        </option>
 
-        </select>
+        <option value="Physics">
+          Physics
+        </option>
+
+        <option value="History">
+          History
+        </option>
+
+        <option value="Fine Arts">
+          Fine Arts
+        </option>
+
+      </select>
+
+
+      <select id="teacher-status-filter" class="filter-select">
+
+        <option value="">
+          All statuses
+        </option>
+
+        <option value="active">
+          Active
+        </option>
+
+        <option value="inactive">
+          Inactive
+        </option>
+
+      </select>
 
     </div>
 
-</div>
+  </div>
 
-<!-- ===== Teacher Table ===== -->
-<div class="table-wrap">
+
+  <!-- ===== Teacher Table ===== -->
+  <div class="table-wrap">
 
     <table class="catalog">
 
-        <thead>
+      <thead>
+        <tr>
+          <th>Teacher ID</th>
+          <th>Teacher Name</th>
+          <th>Department</th>
+          <th>Subject</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
 
-            <tr>
-                <th>Teacher ID</th>
-                <th>Teacher</th>
-                <th>Department</th>
-                <th>Email</th>
-                <th>Specialization</th>
-                <th>Experience</th>
-                <th>Status</th>
-                <th></th>
-            </tr>
 
-        </thead>
+      <tbody id="teachers-body">
 
-        <tbody id="teachers-body">
 
-            <!-- ===== Teacher 1 ===== -->
-            <tr
-                data-search="tch-001 dr. alan whitfield computer science alan.whitfield@example.com artificial intelligence"
-                data-dept="Computer Science"
-                data-status="active"
+        <!-- Teacher 1 -->
+        <tr
+          data-search="tch-001 dr. alan whitfield programming alan.whitfield@greenfield.edu"
+          data-dept="Computer Science"
+          data-status="active"
+        >
+
+          <td data-label="Teacher ID">
+
+            <a href="{% url 'teachers:teacher_details' %}">
+              <span class="stamp">TCH-001</span>
+            </a>
+
+          </td>
+
+          <td data-label="Teacher Name" class="course-name">
+
+            <a
+              href="{% url 'teachers:teacher_details' %}"
+              style="color:inherit; text-decoration:none;"
             >
+              Dr. Alan Whitfield
+            </a>
 
-                <td data-label="Teacher ID">
-                    <a href="{% url 'teachers:teachers_details' %}">
-                        <span class="stamp">TCH-001</span>
-                    </a>
-                </td>
+          </td>
 
-                <td data-label="Teacher" class="course-name">
-                    <a
-                        href="{% url 'teachers:teachers_details' %}"
-                        style="color:inherit; text-decoration:none;"
-                    >
-                        Dr. Alan Whitfield
-                    </a>
-                </td>
+          <td data-label="Department" class="course-dept">
+            Computer Science
+          </td>
 
-                <td data-label="Department" class="course-dept">
-                    Computer Science
-                </td>
+          <td data-label="Subject">
+            Programming
+          </td>
 
-                <td data-label="Email">
-                    alan.whitfield@example.com
-                </td>
+          <td data-label="Email">
+            alan.whitfield@greenfield.edu
+          </td>
 
-                <td data-label="Specialization">
-                    Artificial Intelligence
-                </td>
+          <td data-label="Status">
+            <span class="pill active">
+              Active
+            </span>
+          </td>
 
-                <td data-label="Experience">
-                    8 years
-                </td>
+          <td data-label="">
 
-                <td data-label="Status">
-                    <span class="pill active">Active</span>
-                </td>
+            <div class="row-actions">
 
-                <td data-label="">
-                    <div class="row-actions">
+              <a
+                class="btn btn-ghost btn-sm"
+                href="add-teacher.html"
+              >
+                Edit
+              </a>
 
-                        <a
-                            class="btn btn-ghost btn-sm"
-                            href="{% url 'teachers:add_teachers' %}"
-                        >
-                            Edit
-                        </a>
+              <button
+                class="btn btn-danger btn-sm"
+                data-delete="Dr. Alan Whitfield"
+              >
+                Delete
+              </button>
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            data-delete="Dr. Alan Whitfield"
-                        >
-                            Delete
-                        </button>
+            </div>
 
-                    </div>
-                </td>
+          </td>
 
-            </tr>
+        </tr>
 
-            <!-- ===== Teacher 2 ===== -->
-            <tr
-                data-search="tch-002 ms. julia torres fine arts julia.torres@example.com graphic design"
-                data-dept="Fine Arts"
-                data-status="active"
+
+        <!-- Teacher 2 -->
+        <tr
+          data-search="tch-002 ms. julia torres design julia.torres@greenfield.edu"
+          data-dept="Fine Arts"
+          data-status="active"
+        >
+
+          <td data-label="Teacher ID">
+
+            <a href="{% url 'teachers:teacher_details' %}">
+              <span class="stamp">TCH-002</span>
+            </a>
+
+          </td>
+
+          <td data-label="Teacher Name" class="course-name">
+
+            <a
+              href="{% url 'teachers:teacher_details' %}"
+              style="color:inherit; text-decoration:none;"
             >
+              Ms. Julia Torres
+            </a>
 
-                <td data-label="Teacher ID">
-                    <a href="{% url 'teachers:teachers_details' %}">
-                        <span class="stamp">TCH-002</span>
-                    </a>
-                </td>
+          </td>
 
-                <td data-label="Teacher" class="course-name">
-                    <a
-                        href="{% url 'teachers:teachers_details' %}"
-                        style="color:inherit; text-decoration:none;"
-                    >
-                        Ms. Julia Torres
-                    </a>
-                </td>
+          <td data-label="Department" class="course-dept">
+            Fine Arts
+          </td>
 
-                <td data-label="Department" class="course-dept">
-                    Fine Arts
-                </td>
+          <td data-label="Subject">
+            Design
+          </td>
 
-                <td data-label="Email">
-                    julia.torres@example.com
-                </td>
+          <td data-label="Email">
+            julia.torres@greenfield.edu
+          </td>
 
-                <td data-label="Specialization">
-                    Graphic Design
-                </td>
+          <td data-label="Status">
+            <span class="pill active">
+              Active
+            </span>
+          </td>
 
-                <td data-label="Experience">
-                    6 years
-                </td>
+          <td data-label="">
 
-                <td data-label="Status">
-                    <span class="pill active">Active</span>
-                </td>
+            <div class="row-actions">
 
-                <td data-label="">
-                    <div class="row-actions">
+              <a
+                class="btn btn-ghost btn-sm"
+                href="add-teacher.html"
+              >
+                Edit
+              </a>
 
-                        <a
-                            class="btn btn-ghost btn-sm"
-                            href="{% url 'teachers:add_teachers' %}"
-                        >
-                            Edit
-                        </a>
+              <button
+                class="btn btn-danger btn-sm"
+                data-delete="Ms. Julia Torres"
+              >
+                Delete
+              </button>
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            data-delete="Ms. Julia Torres"
-                        >
-                            Delete
-                        </button>
+            </div>
 
-                    </div>
-                </td>
+          </td>
 
-            </tr>
+        </tr>
 
-            <!-- ===== Teacher 3 ===== -->
-            <tr
-                data-search="tch-003 prof. elena marsh history elena.marsh@example.com world history"
-                data-dept="History"
-                data-status="active"
+
+        <!-- Teacher 3 -->
+        <tr
+          data-search="tch-003 prof. elena marsh world history elena.marsh@greenfield.edu"
+          data-dept="History"
+          data-status="active"
+        >
+
+          <td data-label="Teacher ID">
+
+            <a href="{% url 'teachers:teacher_details' %}">
+              <span class="stamp">TCH-003</span>
+            </a>
+
+          </td>
+
+          <td data-label="Teacher Name" class="course-name">
+
+            <a
+              href="{% url 'teachers:teacher_details' %}"
+              style="color:inherit; text-decoration:none;"
             >
+              Prof. Elena Marsh
+            </a>
 
-                <td data-label="Teacher ID">
-                    <a href="{% url 'teachers:teachers_details' %}">
-                        <span class="stamp">TCH-003</span>
-                    </a>
-                </td>
+          </td>
 
-                <td data-label="Teacher" class="course-name">
-                    <a
-                        href="{% url 'teachers:teachers_details' %}"
-                        style="color:inherit; text-decoration:none;"
-                    >
-                        Prof. Elena Marsh
-                    </a>
-                </td>
+          <td data-label="Department" class="course-dept">
+            History
+          </td>
 
-                <td data-label="Department" class="course-dept">
-                    History
-                </td>
+          <td data-label="Subject">
+            World History
+          </td>
 
-                <td data-label="Email">
-                    elena.marsh@example.com
-                </td>
+          <td data-label="Email">
+            elena.marsh@greenfield.edu
+          </td>
 
-                <td data-label="Specialization">
-                    World History
-                </td>
+          <td data-label="Status">
+            <span class="pill active">
+              Active
+            </span>
+          </td>
 
-                <td data-label="Experience">
-                    10 years
-                </td>
+          <td data-label="">
 
-                <td data-label="Status">
-                    <span class="pill active">Active</span>
-                </td>
+            <div class="row-actions">
 
-                <td data-label="">
-                    <div class="row-actions">
+              <a
+                class="btn btn-ghost btn-sm"
+                href="add-teacher.html"
+              >
+                Edit
+              </a>
 
-                        <a
-                            class="btn btn-ghost btn-sm"
-                            href="{% url 'teachers:add_teachers' %}"
-                        >
-                            Edit
-                        </a>
+              <button
+                class="btn btn-danger btn-sm"
+                data-delete="Prof. Elena Marsh"
+              >
+                Delete
+              </button>
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            data-delete="Prof. Elena Marsh"
-                        >
-                            Delete
-                        </button>
+            </div>
 
-                    </div>
-                </td>
+          </td>
 
-            </tr>
+        </tr>
 
-            <!-- ===== Teacher 4 ===== -->
-            <tr
-                data-search="tch-004 dr. samuel okoro physics samuel.okoro@example.com classical mechanics"
-                data-dept="Physics"
-                data-status="inactive"
+
+        <!-- Teacher 4 -->
+        <tr
+          data-search="tch-004 dr. samuel okoro classical mechanics samuel.okoro@greenfield.edu"
+          data-dept="Physics"
+          data-status="active"
+        >
+
+          <td data-label="Teacher ID">
+
+            <a href="{% url 'teachers:teacher_details' %}">
+              <span class="stamp">TCH-004</span>
+            </a>
+
+          </td>
+
+          <td data-label="Teacher Name" class="course-name">
+
+            <a
+              href="{% url 'teachers:teacher_details' %}"
+              style="color:inherit; text-decoration:none;"
             >
+              Dr. Samuel Okoro
+            </a>
 
-                <td data-label="Teacher ID">
-                    <a href="{% url 'teachers:teachers_details' %}">
-                        <span class="stamp">TCH-004</span>
-                    </a>
-                </td>
+          </td>
 
-                <td data-label="Teacher" class="course-name">
-                    <a
-                        href="{% url 'teachers:teachers_details' %}"
-                        style="color:inherit; text-decoration:none;"
-                    >
-                        Dr. Samuel Okoro
-                    </a>
-                </td>
+          <td data-label="Department" class="course-dept">
+            Physics
+          </td>
 
-                <td data-label="Department" class="course-dept">
-                    Physics
-                </td>
+          <td data-label="Subject">
+            Classical Mechanics
+          </td>
 
-                <td data-label="Email">
-                    samuel.okoro@example.com
-                </td>
+          <td data-label="Email">
+            samuel.okoro@greenfield.edu
+          </td>
 
-                <td data-label="Specialization">
-                    Classical Mechanics
-                </td>
+          <td data-label="Status">
+            <span class="pill active">
+              Active
+            </span>
+          </td>
 
-                <td data-label="Experience">
-                    12 years
-                </td>
+          <td data-label="">
 
-                <td data-label="Status">
-                    <span class="pill inactive">Inactive</span>
-                </td>
+            <div class="row-actions">
 
-                <td data-label="">
-                    <div class="row-actions">
+              <a
+                class="btn btn-ghost btn-sm"
+                href="add-teacher.html"
+              >
+                Edit
+              </a>
 
-                        <a
-                            class="btn btn-ghost btn-sm"
-                            href="{% url 'teachers:add_teachers' %}"
-                        >
-                            Edit
-                        </a>
+              <button
+                class="btn btn-danger btn-sm"
+                data-delete="Dr. Samuel Okoro"
+              >
+                Delete
+              </button>
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            data-delete="Dr. Samuel Okoro"
-                        >
-                            Delete
-                        </button>
+            </div>
 
-                    </div>
-                </td>
+          </td>
 
-            </tr>
+        </tr>
 
-            <!-- ===== Teacher 5 ===== -->
-            <tr
-                data-search="tch-005 ms. priya nadar english priya.nadar@example.com academic writing"
-                data-dept="English"
-                data-status="active"
+
+        <!-- Teacher 5 -->
+        <tr
+          data-search="tch-005 ms. priya nadar academic writing priya.nadar@greenfield.edu"
+          data-dept="English"
+          data-status="active"
+        >
+
+          <td data-label="Teacher ID">
+
+            <a href="{% url 'teachers:teacher_details' %}">
+              <span class="stamp">TCH-005</span>
+            </a>
+
+          </td>
+
+          <td data-label="Teacher Name" class="course-name">
+
+            <a
+              href="{% url 'teachers:teacher_details' %}"
+              style="color:inherit; text-decoration:none;"
             >
+              Ms. Priya Nadar
+            </a>
 
-                <td data-label="Teacher ID">
-                    <a href="{% url 'teachers:teachers_details' %}">
-                        <span class="stamp">TCH-005</span>
-                    </a>
-                </td>
+          </td>
 
-                <td data-label="Teacher" class="course-name">
-                    <a
-                        href="{% url 'teachers:teachers_details' %}"
-                        style="color:inherit; text-decoration:none;"
-                    >
-                        Ms. Priya Nadar
-                    </a>
-                </td>
+          <td data-label="Department" class="course-dept">
+            English
+          </td>
 
-                <td data-label="Department" class="course-dept">
-                    English
-                </td>
+          <td data-label="Subject">
+            Academic Writing
+          </td>
 
-                <td data-label="Email">
-                    priya.nadar@example.com
-                </td>
+          <td data-label="Email">
+            priya.nadar@greenfield.edu
+          </td>
 
-                <td data-label="Specialization">
-                    Academic Writing
-                </td>
+          <td data-label="Status">
+            <span class="pill active">
+              Active
+            </span>
+          </td>
 
-                <td data-label="Experience">
-                    7 years
-                </td>
+          <td data-label="">
 
-                <td data-label="Status">
-                    <span class="pill active">Active</span>
-                </td>
+            <div class="row-actions">
 
-                <td data-label="">
-                    <div class="row-actions">
+              <a
+                class="btn btn-ghost btn-sm"
+                href="add-teacher.html"
+              >
+                Edit
+              </a>
 
-                        <a
-                            class="btn btn-ghost btn-sm"
-                            href="{% url 'teachers:add_teachers' %}"
-                        >
-                            Edit
-                        </a>
+              <button
+                class="btn btn-danger btn-sm"
+                data-delete="Ms. Priya Nadar"
+              >
+                Delete
+              </button>
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            data-delete="Ms. Priya Nadar"
-                        >
-                            Delete
-                        </button>
+            </div>
 
-                    </div>
-                </td>
+          </td>
 
-            </tr>
+        </tr>
 
-            <!-- ===== Teacher 6 ===== -->
-            <tr
-                data-search="tch-006 mr. michael carter mathematics michael.carter@example.com algebra"
-                data-dept="Mathematics"
-                data-status="active"
+
+        <!-- Teacher 6 -->
+        <tr
+          data-search="tch-006 mr. david anderson calculus david.anderson@greenfield.edu"
+          data-dept="Mathematics"
+          data-status="inactive"
+        >
+
+          <td data-label="Teacher ID">
+
+            <a href="{% url 'teachers:teacher_details' %}">
+              <span class="stamp">TCH-006</span>
+            </a>
+
+          </td>
+
+          <td data-label="Teacher Name" class="course-name">
+
+            <a
+              href="{% url 'teachers:teacher_details' %}"
+              style="color:inherit; text-decoration:none;"
             >
+              Mr. David Anderson
+            </a>
 
-                <td data-label="Teacher ID">
-                    <a href="{% url 'teachers:teachers_details' %}">
-                        <span class="stamp">TCH-006</span>
-                    </a>
-                </td>
+          </td>
 
-                <td data-label="Teacher" class="course-name">
-                    <a
-                        href="{% url 'teachers:teachers_details' %}"
-                        style="color:inherit; text-decoration:none;"
-                    >
-                        Mr. Michael Carter
-                    </a>
-                </td>
+          <td data-label="Department" class="course-dept">
+            Mathematics
+          </td>
 
-                <td data-label="Department" class="course-dept">
-                    Mathematics
-                </td>
+          <td data-label="Subject">
+            Calculus
+          </td>
 
-                <td data-label="Email">
-                    michael.carter@example.com
-                </td>
+          <td data-label="Email">
+            david.anderson@greenfield.edu
+          </td>
 
-                <td data-label="Specialization">
-                    Algebra
-                </td>
+          <td data-label="Status">
+            <span class="pill inactive">
+              Inactive
+            </span>
+          </td>
 
-                <td data-label="Experience">
-                    5 years
-                </td>
+          <td data-label="">
 
-                <td data-label="Status">
-                    <span class="pill active">Active</span>
-                </td>
+            <div class="row-actions">
 
-                <td data-label="">
-                    <div class="row-actions">
+              <a
+                class="btn btn-ghost btn-sm"
+                href="add-teacher.html"
+              >
+                Edit
+              </a>
 
-                        <a
-                            class="btn btn-ghost btn-sm"
-                            href="{% url 'teachers:add_teachers' %}"
-                        >
-                            Edit
-                        </a>
+              <button
+                class="btn btn-danger btn-sm"
+                data-delete="Mr. David Anderson"
+              >
+                Delete
+              </button>
 
-                        <button
-                            class="btn btn-danger btn-sm"
-                            data-delete="Mr. Michael Carter"
-                        >
-                            Delete
-                        </button>
+            </div>
 
-                    </div>
-                </td>
+          </td>
 
-            </tr>
+        </tr>
 
-        </tbody>
+
+      </tbody>
 
     </table>
 
+
     <!-- ===== Empty State ===== -->
     <div
-        class="empty-state"
-        id="empty-state"
-        style="display:none;"
+      class="empty-state"
+      id="teacher-empty-state"
+      style="display:none;"
     >
 
-        <h3>No teachers match</h3>
+      <h3>No teachers match</h3>
 
-        <p>
-            Try a different search term or clear the filters.
-        </p>
+      <p>
+        Try a different search term or clear the filters.
+      </p>
 
     </div>
 
-</div>
-
+  </div>
 
 </main>
 

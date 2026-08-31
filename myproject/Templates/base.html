@@ -1,198 +1,132 @@
-{% load static %}
-
 <!DOCTYPE html>
+{% load static %}
 
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {% block title %}
-            Mahendra Morang Aadarsha Multiple Campus
-        {% endblock %}
-    </title>
+  <title>
+    {% block title %}MMAMC Management System{% endblock %}
+  </title>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body data-page="{% block page %}home{% endblock %}">
 
-    <!-- ===== Common header ===== -->
+  <!-- ===== Common header ===== -->
+  <header class="site-header">
 
-    <header class="site-header">
+    <div class="header-top">
 
-        <div class="header-top">
+      <a class="brand" href="{% url 'home:home_page' %}">
+        <span class="brand-mark">MMAMC</span>
 
-            <a class="brand" href="{% url 'homepage' %}">
+        <span>
+          <div class="brand-name">MMAMC</div>
+          <div class="brand-sub">Management System</div>
+        </span>
+      </a>
 
-                <span class="brand-mark">
-                    MMAMC
-                </span>
+      <div class="header-meta">
+        Registrar's Office<br>
+        Signed in as
+        <strong style="color:#F2F0E8">A. Reyes</strong>
+      </div>
 
-                <span>
+    </div>
 
-                    <div class="brand-name">
-                        Mahendra Morang Aadarsha Multiple Campus
-                    </div>
 
-                    <div class="brand-sub">
-                        Management System
-                    </div>
+    <!-- ===== Navigation ===== -->
+    <nav class="catalog-tabs">
 
-                </span>
+      <a href="{% url 'home:home_page' %}"
+         data-tab="home">
+        Home
+      </a>
 
-            </a>
+      <a href="{% url 'courses:index' %}"
+         data-tab="dashboard">
+        Dashboard
+      </a>
 
+      <a href="{% url 'teachers:teachers' %}"
+         data-tab="teachers">
+        Teacher List
+      </a>
 
-            <div class="header-meta">
+      <a href="{% url 'students:student_list' %}"
+         data-tab="students">
+        Student List
+      </a>
 
-                Registrar's Office
-                <br>
+      <a href="{% url 'courses:courses' %}"
+         data-tab="courses">
+        Course List
+      </a>
 
-                Signed in as
 
-                <strong style="color:#F2F0E8">
-                    A. Reyes
-                </strong>
 
-            </div>
+    </nav>
 
-        </div>
+  </header>
 
 
-        <!-- ===== Navigation ===== -->
+  <!-- ===== Page Content ===== -->
 
-        <nav class="catalog-tabs">
+  {% block content %}
+  {% endblock %}
 
-            <!-- Always visible -->
 
-            <a href="{% url 'homepage' %}">
-                Home
-            </a>
+  <!-- ===== Footer ===== -->
 
+  <footer class="site-footer">
 
-            <a href="{% url 'dashboard' %}">
-                Dashboard
-            </a>
+    <div class="footer-inner">
 
+      <span>
+        &copy;
+        <span id="footer-year"></span>
+        MMAMC · Registrar's Office
+      </span>
 
-            <!-- ================================================= -->
-            <!-- TEACHERS NAVIGATION -->
-            <!-- ================================================= -->
+      <span class="footer-links">
 
-            {% if request.resolver_match.app_name == "teachers" %}
+        <a href="{% url 'home:home_page' %}">
+          Home
+        </a>
 
-                <a href="{% url 'teachers:teachers' %}">
-                    Teacher List
-                </a>
+        <a href="{% url 'courses:index' %}">
+          Dashboard
+        </a>
 
-                <a href="{% url 'teachers:add_teachers' %}">
-                    Add Teacher
-                </a>
+        <a href="{% url 'teachers:teachers' %}">
+          Teachers
+        </a>
 
+        <a href="{% url 'students:student_list' %}">
+          Students
+        </a>
 
-            <!-- ================================================= -->
-            <!-- COURSE NAVIGATION -->
-            <!-- ================================================= -->
+        <a href="{% url 'courses:courses' %}">
+          Courses
+        </a>
 
-            {% else %}
 
-                <a href="{% url 'courses:courses' %}">
-                    Course List
-                </a>
+      </span>
 
-                <a href="{% url 'courses:add_course' %}">
-                    Add Course
-                </a>
+      <span class="footer-stamp">
+        STATIC DEMO DATA
+      </span>
 
-            {% endif %}
+    </div>
 
-        </nav>
+  </footer>
 
-    </header>
 
-
-    <!-- ===== Page Content ===== -->
-
-    {% block content %}
-    {% endblock %}
-
-
-    <!-- ===== Common footer ===== -->
-
-    <footer class="site-footer">
-
-        <div class="footer-inner">
-
-            <span>
-
-                &copy;
-
-                <span id="footer-year"></span>
-
-                Mahendra Morang Campus · Registrar's Office
-
-            </span>
-
-
-            <span class="footer-links">
-
-                <a href="{% url 'homepage' %}">
-                    Home
-                </a>
-
-                <a href="{% url 'dashboard' %}">
-                    Dashboard
-                </a>
-
-
-                <!-- ================================================= -->
-                <!-- TEACHER FOOTER LINKS -->
-                <!-- ================================================= -->
-
-                {% if request.resolver_match.app_name == "teachers" %}
-
-                    <a href="{% url 'teachers:teachers' %}">
-                        Teachers
-                    </a>
-
-                    <a href="{% url 'teachers:add_teachers' %}">
-                        Add Teacher
-                    </a>
-
-
-                <!-- ================================================= -->
-                <!-- COURSE FOOTER LINKS -->
-                <!-- ================================================= -->
-
-                {% else %}
-
-                    <a href="{% url 'courses:courses' %}">
-                        Courses
-                    </a>
-
-                    <a href="{% url 'courses:add_course' %}">
-                        Add Course
-                    </a>
-
-                {% endif %}
-
-            </span>
-
-
-            <span class="footer-stamp">
-                STATIC DEMO DATA
-            </span>
-
-        </div>
-
-    </footer>
-
-
-    <script src="{% static 'js/script.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 
 </body>
-
 </html>

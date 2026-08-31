@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} Course List · Course Catalog · Greenfield School {% endblock %}
-
+{% block page %}courses{% endblock %}
 {% block content %}
   <!-- ===== Page content ===== -->
   <main>
@@ -51,8 +51,8 @@
           <!-- Static rows. data-search / data-dept / data-status power the JS filter. -->
 
           <tr data-search="cs-101 introduction to programming dr. alan whitfield" data-dept="Computer Science" data-status="active">
-            <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">CS-101</span></a></td>
-            <td data-label="Course" class="course-name"><a href="{% url 'courses:courses_details' %}" style="color:inherit; text-decoration:none;">Introduction to Programming</a></td>
+            <td data-label="Code"><a href="{% url 'courses:course_details' %}"><span class="stamp">CS-101</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' %}" style="color:inherit; text-decoration:none;">Introduction to Programming</a></td>
             <td data-label="Department" class="course-dept">Computer Science</td>
             <td data-label="Instructor">Dr. Alan Whitfield</td>
             <td data-label="Credits">4</td>
@@ -67,8 +67,8 @@
           </tr>
 
           <tr data-search="math-210 linear algebra prof. renata cole" data-dept="Mathematics" data-status="active">
-            <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">MATH-210</span></a></td>
-            <td data-label="Course" class="course-name"><a href="{% url 'courses:courses_details' %}" style="color:inherit; text-decoration:none;">Linear Algebra</a></td>
+            <td data-label="Code"><a href="{% url 'courses:course_details' %}"><span class="stamp">MATH-210</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' %}" style="color:inherit; text-decoration:none;">Linear Algebra</a></td>
             <td data-label="Department" class="course-dept">Mathematics</td>
             <td data-label="Instructor">Prof. Renata Cole</td>
             <td data-label="Credits">3</td>
@@ -83,8 +83,8 @@
           </tr>
 
           <tr data-search="eng-150 academic writing ms. priya nadar" data-dept="English" data-status="active">
-            <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">ENG-150</span></a></td>
-            <td data-label="Course" class="course-name"><a href="{% url 'courses:courses_details' %}" style="color:inherit; text-decoration:none;">Academic Writing</a></td>
+            <td data-label="Code"><a href="{% url 'courses:course_details' %}"><span class="stamp">ENG-150</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' %}" style="color:inherit; text-decoration:none;">Academic Writing</a></td>
             <td data-label="Department" class="course-dept">English</td>
             <td data-label="Instructor">Ms. Priya Nadar</td>
             <td data-label="Credits">2</td>
@@ -99,8 +99,8 @@
           </tr>
 
           <tr data-search="phy-201 classical mechanics dr. samuel okoro" data-dept="Physics" data-status="inactive">
-            <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">PHY-201</span></a></td>
-            <td data-label="Course" class="course-name"><a href="{% url 'courses:courses_details' %}" style="color:inherit; text-decoration:none;">Classical Mechanics</a></td>
+            <td data-label="Code"><a href="{% url 'courses:course_details' %}"><span class="stamp">PHY-201</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' %}" style="color:inherit; text-decoration:none;">Classical Mechanics</a></td>
             <td data-label="Department" class="course-dept">Physics</td>
             <td data-label="Instructor">Dr. Samuel Okoro</td>
             <td data-label="Credits">4</td>
@@ -115,8 +115,8 @@
           </tr>
 
           <tr data-search="his-115 world history since 1500 prof. elena marsh" data-dept="History" data-status="active">
-            <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">HIS-115</span></a></td>
-            <td data-label="Course" class="course-name"><a href="{% url 'courses:courses_details' %}" style="color:inherit; text-decoration:none;">World History Since 1500</a></td>
+            <td data-label="Code"><a href="{% url 'courses:course_details' %}"><span class="stamp">HIS-115</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' %}" style="color:inherit; text-decoration:none;">World History Since 1500</a></td>
             <td data-label="Department" class="course-dept">History</td>
             <td data-label="Instructor">Prof. Elena Marsh</td>
             <td data-label="Credits">3</td>
@@ -131,8 +131,8 @@
           </tr>
 
           <tr data-search="art-120 foundations of design ms. julia torres" data-dept="Fine Arts" data-status="inactive">
-            <td data-label="Code"><a href="{% url 'courses:courses_details' %}"><span class="stamp">ART-120</span></a></td>
-            <td data-label="Course" class="course-name"><a href="{% url 'courses:courses_details' %}" style="color:inherit; text-decoration:none;">Foundations of Design</a></td>
+            <td data-label="Code"><a href="{% url 'courses:course_details' %}"><span class="stamp">ART-120</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' %}" style="color:inherit; text-decoration:none;">Foundations of Design</a></td>
             <td data-label="Department" class="course-dept">Fine Arts</td>
             <td data-label="Instructor">Ms. Julia Torres</td>
             <td data-label="Credits">2</td>

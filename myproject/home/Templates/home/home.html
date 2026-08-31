@@ -1,381 +1,147 @@
 {% extends 'base.html' %}
 
-{% block title %}Home Page · Greenfield School{% endblock %}
+{% block title %}Home · MMAMC{% endblock %}
+
+{% block page %}home{% endblock %}
 
 {% block content %}
-
-<!-- ===== Hero ===== -->
-
-<section class="hero">
-
-
-<div class="hero-inner">
-
-    <div>
-
-        <p class="hero-eyebrow">
-            Mahendra Morang Campus &middot; Est. 1955
-        </p>
-
-        <h1>
-            The registrar's desk, digitized.
-        </h1>
-
-        <p class="lede">
-            One system for courses, teachers, students and staff —
-            built to feel as clear and dependable as a well-kept ledger,
-            without the filing cabinets.
-        </p>
-
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow">MMAMC &middot; Est. 1962</p>
+        <h1>The registrar's desk, digitized.</h1>
+        <p class="lede">One system for courses, students and staff — built to feel as clear and dependable as a well-kept ledger, without the filing cabinets.</p>
         <div class="hero-actions">
-
-            <a href="{% url 'courses:courses' %}" class="btn btn-primary">
-                Browse Courses
-            </a>
-
-            <a href="{% url 'teachers:teachers' %}" class="btn btn-ghost">
-                Browse Teachers
-            </a>
-
+          <a href="courses.html" class="btn btn-primary">Browse Courses</a>
+          <a href="add-course.html" class="btn btn-ghost">+ Add a Course</a>
         </div>
+      </div>
 
+      <div class="hero-panel">
+        <div class="ledger-title">Term at a glance — Fall 2026</div>
+        <div class="ledger-row"><span>Active courses</span><span class="v">4</span></div>
+        <div class="ledger-row"><span>Departments offering courses</span><span class="v">5</span></div>
+        <div class="ledger-row"><span>Total seats filled</span><span class="v">157 / 206</span></div>
+        <div class="ledger-row"><span>Full sections</span><span class="v">1</span></div>
+        <div class="ledger-row"><span>System status</span><span class="v">Demo data</span></div>
+      </div>
     </div>
+  </section>
 
-    <div class="hero-panel">
-
-        <div class="ledger-title">
-            Term at a glance — Fall 2026
-        </div>
-
-        <div class="ledger-row">
-            <span>Active courses</span>
-            <span class="v">4</span>
-        </div>
-
-        <div class="ledger-row">
-            <span>Total courses</span>
-            <span class="v">6</span>
-        </div>
-
-        <div class="ledger-row">
-            <span>Active teachers</span>
-            <span class="v">5</span>
-        </div>
-
-        <div class="ledger-row">
-            <span>Total teachers</span>
-            <span class="v">6</span>
-        </div>
-
-        <div class="ledger-row">
-            <span>Departments</span>
-            <span class="v">6</span>
-        </div>
-
-        <div class="ledger-row">
-            <span>System status</span>
-            <span class="v">Demo data</span>
-        </div>
-
-    </div>
-
-</div>
-
-
-</section>
-
-<!-- ===== Modules ===== -->
-
+  <!-- ===== Modules ===== -->
 <section class="section" id="modules">
-
-
-<div class="section-head">
-
-    <p class="eyebrow">
-        Where to go
-    </p>
-
-    <h2>
-        One system, several desks
-    </h2>
-
+  <div class="section-head">
+    <p class="eyebrow">Where to go</p>
+    <h2>One system, several desks</h2>
     <p>
-        Manage courses and teachers from one place.
-        Additional registrar modules can be added as the system grows.
+      Manage courses, students and teachers from one centralized registrar system.
     </p>
+  </div>
 
-</div>
-
-<div class="modules-grid">
+  <div class="modules-grid">
 
     <!-- Courses -->
-    <a
-        href="{% url 'courses:courses' %}"
-        class="module-card is-active"
-    >
-
-        <span class="module-icon">
-            01
-        </span>
-
-        <h3>
-            Courses
-        </h3>
-
-        <p>
-            Browse the catalog, add new courses and manage
-            enrollment status.
-        </p>
-
-        <span class="module-status">
-            Open →
-        </span>
-
+    <a href="courses.html" class="module-card is-active">
+      <span class="module-icon">01</span>
+      <h3>Courses</h3>
+      <p>
+        Browse the catalog, add new courses and manage enrollment status.
+      </p>
+      <span class="module-status">Open →</span>
     </a>
-
-
-    <!-- Teachers -->
-    <a
-        href="{% url 'teachers:teachers' %}"
-        class="module-card is-active"
-    >
-
-        <span class="module-icon">
-            02
-        </span>
-
-        <h3>
-            Teachers
-        </h3>
-
-        <p>
-            Browse teacher profiles, manage faculty information,
-            departments and teaching assignments.
-        </p>
-
-        <span class="module-status">
-            Open →
-        </span>
-
-    </a>
-
 
     <!-- Students -->
-    <div class="module-card is-disabled">
+    <a href="students.html" class="module-card is-active">
+      <span class="module-icon">02</span>
+      <h3>Students</h3>
+      <p>
+        Manage student profiles, enrollment records, contact details and academic information.
+      </p>
+      <span class="module-status">Open →</span>
+    </a>
 
-        <span class="module-icon">
-            03
-        </span>
-
-        <h3>
-            Students
-        </h3>
-
-        <p>
-            Enrollment records, contact details and academic history.
-        </p>
-
-        <span class="module-status">
-            Coming soon
-        </span>
-
-    </div>
-
+    <!-- Teachers -->
+    <a href="teachers.html" class="module-card is-active">
+      <span class="module-icon">03</span>
+      <h3>Teachers</h3>
+      <p>
+        Manage teacher profiles, subjects, departments, teaching assignments and workloads.
+      </p>
+      <span class="module-status">Open →</span>
+    </a>
 
     <!-- Attendance -->
     <div class="module-card is-disabled">
-
-        <span class="module-icon">
-            04
-        </span>
-
-        <h3>
-            Attendance
-        </h3>
-
-        <p>
-            Daily attendance capture and per-class absence reporting.
-        </p>
-
-        <span class="module-status">
-            Coming soon
-        </span>
-
+      <span class="module-icon">04</span>
+      <h3>Attendance</h3>
+      <p>
+        Record daily attendance and generate class-wise absence reports.
+      </p>
+      <span class="module-status">Coming soon</span>
     </div>
-
 
     <!-- Exams & Grades -->
     <div class="module-card is-disabled">
-
-        <span class="module-icon">
-            05
-        </span>
-
-        <h3>
-            Exams &amp; Grades
-        </h3>
-
-        <p>
-            Schedule exams, record marks and publish report cards.
-        </p>
-
-        <span class="module-status">
-            Coming soon
-        </span>
-
+      <span class="module-icon">05</span>
+      <h3>Exams &amp; Grades</h3>
+      <p>
+        Schedule examinations, record marks and publish student report cards.
+      </p>
+      <span class="module-status">Coming soon</span>
     </div>
-
 
     <!-- Fees -->
     <div class="module-card is-disabled">
-
-        <span class="module-icon">
-            06
-        </span>
-
-        <h3>
-            Fees
-        </h3>
-
-        <p>
-            Tuition invoices, payment history and outstanding balances.
-        </p>
-
-        <span class="module-status">
-            Coming soon
-        </span>
-
+      <span class="module-icon">06</span>
+      <h3>Fees</h3>
+      <p>
+        Manage tuition invoices, payment records and outstanding student balances.
+      </p>
+      <span class="module-status">Coming soon</span>
     </div>
 
-</div>
-
-
+  </div>
 </section>
 
-<!-- ===== Why this system ===== -->
 
-<section
-    class="section"
-    id="features"
-    style="padding-top:0;"
->
-
-
-<div class="section-head">
-
-    <p class="eyebrow">
-        Built for the registrar
-    </p>
-
-    <h2>
-        Made for how the office actually works
-    </h2>
-
-</div>
-
-<div class="features-grid">
-
-    <!-- Clarity -->
-    <div class="feature">
-
-        <span class="feature-num">
-            Clarity
-        </span>
-
-        <h3>
-            Everything has one home
-        </h3>
-
-        <p>
-            Courses and teachers each have a single record,
-            keeping important information organized and easy to find.
-        </p>
-
+  <!-- ===== Why this system ===== -->
+  <section class="section" id="features" style="padding-top:0;">
+    <div class="section-head">
+      <p class="eyebrow">Built for the registrar</p>
+      <h2>Made for how the office actually works</h2>
     </div>
 
-
-    <!-- Speed -->
-    <div class="feature">
-
-        <span class="feature-num">
-            Speed
-        </span>
-
-        <h3>
-            Find what you need in seconds
-        </h3>
-
-        <p>
-            Search courses by code, name or instructor and quickly
-            find teachers by name, department or specialization.
-        </p>
-
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-num">Clarity</span>
+        <h3>Everything has one home</h3>
+        <p>Each course has a single record — code, instructor, capacity and status — so nothing gets tracked twice in two spreadsheets.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">Speed</span>
+        <h3>Find a course in seconds</h3>
+        <p>Search by code, name or instructor, or filter by department and status, without digging through folders.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-num">Confidence</span>
+        <h3>Nothing changes by accident</h3>
+        <p>Removing a course always asks first, so an entire term's record can't disappear with a stray click.</p>
+      </div>
     </div>
+  </section>
 
-
-    <!-- Confidence -->
-    <div class="feature">
-
-        <span class="feature-num">
-            Confidence
-        </span>
-
-        <h3>
-            Nothing changes by accident
-        </h3>
-
-        <p>
-            Important actions can require confirmation, helping protect
-            course and teacher records from accidental changes.
-        </p>
-
+  <!-- ===== CTA ===== -->
+  <section class="cta-banner">
+    <div class="cta-inner">
+      <div>
+        <h2>Ready to see the catalog?</h2>
+        <p>Six courses are already on file for Fall 2026.</p>
+      </div>
+      <a href="courses.html" class="btn btn-primary">Open Course List</a>
     </div>
+  </section>
 
-</div>
-
-
-</section>
-
-<!-- ===== CTA ===== -->
-
-<section class="cta-banner">
-
-
-<div class="cta-inner">
-
-    <div>
-
-        <h2>
-            Ready to manage the catalog?
-        </h2>
-
-        <p>
-            Explore courses and teachers currently on file for Fall 2026.
-        </p>
-
-    </div>
-
-    <div class="hero-actions">
-
-        <a
-            href="{% url 'courses:courses' %}"
-            class="btn btn-primary"
-        >
-            Open Course List
-        </a>
-
-        <a
-            href="{% url 'teachers:teachers' %}"
-            class="btn btn-ghost"
-        >
-            Open Teacher List
-        </a>
-
-    </div>
-
-</div>
-
-
-</section>
-
-{% endblock %}
+  <!-- ===== Common footer ===== -->
+ 
+{% endblock content %}
