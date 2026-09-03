@@ -1,179 +1,131 @@
-# Django Project - MMAMC
+# Django Learning Project - MMAMC
 
-A comprehensive Django educational project demonstrating web development fundamentals, Python concepts, and Django application development.
+This repository contains the Django work completed during the MMAMC web development lessons. It starts with Python and web development fundamentals and grows into a multi-app Django application for managing students, teachers, courses, and user profiles.
 
-## Project Overview
+## Current Progress
 
-This is a multi-app Django project designed for learning and understanding Django web development. It includes apps for managing students, teachers, courses, and home page content with proper template organization and static file management.
+The main application in `myproject/` currently includes:
 
-## Project Structure
+- A Django project with SQLite configured as the development database.
+- Four domain apps: `home`, `students`, `teachers`, and `courses`.
+- An `accounts` app for registration, login, logout, and Django session authentication.
+- A project-level `base.html` template plus app-specific templates.
+- Static CSS and JavaScript files, image support, and media uploads for profile pictures.
+- Models, relationships, choices, timestamps, admin integration points, and migrations.
+- Authenticated student, teacher, and course pages with add, list, detail, edit, and delete workflows.
+- A protected profile page using a one-to-one relationship with Django's built-in `User` model.
+- Jupyter notebooks covering Python, web development, templates, models, ORM relationships, forms, authentication, and regular expressions.
 
-```
+## Repository Layout
+
+```text
 Django/
-├── README.md                           # This file
-├── requirements.txt                    # Python dependencies
-├── Day_1_Web Development.ipynb        # Learning materials
+├── README.md
+├── detail.md
+├── requirements.txt
+├── Day_1_Web Development .ipynb
 ├── Day_2_Python Fundamentals for Django.ipynb
 ├── Day_3_Advanced Python Fundamentals.ipynb
 ├── Day_4_OOP & Django Fundamentals.ipynb
 ├── Day_5_Django Templates & Static Files.ipynb
-└── myproject/                         # Main Django project
-    ├── manage.py                      # Django management script
-    ├── db.sqlite3                     # SQLite database
-    ├── myproject/                     # Project settings package
-    │   ├── settings.py               # Django settings
-    │   ├── urls.py                   # URL routing
-    │   ├── asgi.py                   # ASGI configuration
-    │   └── wsgi.py                   # WSGI configuration
-    ├── home/                         # Home app
-    │   ├── models.py
-    │   ├── views.py
-    │   ├── urls.py
-    │   ├── admin.py
-    │   └── Templates/
-    │       └── home/
-    │           ├── home.html
-    │           └── about.html
-    ├── students/                     # Students app
-    │   ├── models.py
-    │   ├── views.py
-    │   ├── urls.py
-    │   ├── admin.py
-    │   └── Templates/
-    │       └── students/
-    │           ├── home.html
-    │           ├── about.html
-    │           └── student_list.html
-    ├── teachers/                     # Teachers app
-    │   ├── models.py
-    │   ├── views.py
-    │   ├── urls.py
-    │   ├── admin.py
-    │   └── Templates/
-    │       └── teachers/
-    │           ├── home.html
-    │           └── about.html
-    ├── courses/                      # Courses app
-    │   ├── models.py
-    │   ├── views.py
-    │   ├── urls.py
-    │   ├── admin.py
-    │   └── Templates/
-    │       ├── home.html
-    │       └── about.html
-    └── Templates/                    # Project-level base templates
-        └── base.html
+├── Day_6_Django Models & Database.ipynb
+├── Day_7_Django ORM & Relationships.ipynb
+├── Day_8_Forms & User Input.ipynb
+├── Day_9_User Authentication & Authorization.ipynb
+├── Day_12_regex.ipynb
+├── django_orm_practice.md
+├── myproject/                 # Main Django learning application
+│   ├── manage.py
+│   ├── db.sqlite3
+│   ├── myproject/             # Settings and root URL configuration
+│   ├── accounts/              # Registration and authentication
+│   ├── home/                  # Home, dashboard, and user profiles
+│   ├── students/              # Student management
+│   ├── teachers/              # Teacher management
+│   ├── courses/               # Course management and relationships
+│   ├── Templates/             # Shared project templates
+│   ├── static/                # Source CSS, JavaScript, and images
+│   └── media/                 # Uploaded files, including profiles
+└── portfolio/                 # Separate portfolio Django project
 ```
 
-## Installed Apps
+## Application Routes
 
-- **home** - Home page and general content management
-- **students** - Student management and listing
-- **teachers** - Teacher management and profiles
-- **courses** - Course management and organization
+The root URL configuration includes these app prefixes:
+
+- `/` - Home page
+- `/dashboard/` - Dashboard page
+- `/accounts/login/` - Log in
+- `/accounts/register/` - Create an account
+- `/accounts/logout/` - Log out
+- `/profile/` - User profile editing
+- `/students/` - Student pages
+- `/teachers/` - Teacher pages
+- `/courses/` - Course pages
+- `/admin/` - Django administration
+
+Most management pages are protected with `login_required`. Create an account or a superuser before testing those workflows.
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.8 or newer
 - Django 6.1
-- asgiref 3.12.1
+- Packages listed in `requirements.txt`
+- A terminal such as PowerShell on Windows
 
-## Setup Instructions
+## Quick Start
 
-### 1. Install Dependencies
+From the repository root, create and activate a virtual environment, install the dependencies, and enter the active project:
 
-```bash
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 pip install -r requirements.txt
-```
-
-### 2. Navigate to Project Directory
-
-```bash
 cd myproject
-```
-
-### 3. Run Migrations
-
-```bash
 python manage.py migrate
-```
-
-### 4. Create a Superuser (Admin)
-
-```bash
+python manage.py collectstatic --noinput
 python manage.py createsuperuser
-```
-
-Follow the prompts to create your admin account.
-
-### 5. Run Development Server
-
-```bash
 python manage.py runserver
 ```
 
-The application will be available at `http://localhost:8000/`
+Open `http://127.0.0.1:8000/` in a browser. The longer explanation, including what each step does and how the Django pieces work together, is in [detail.md](detail.md).
 
-## Usage
+## Common Development Commands
 
-### Admin Interface
+Run these commands from `myproject/`:
 
-Access the Django admin interface at `http://localhost:8000/admin/` with your superuser credentials.
-
-### Apps
-
-- **Home** - General website homepage and navigation
-- **Students** - Manage and view student information
-- **Teachers** - Manage and view teacher profiles
-- **Courses** - Manage course offerings and details
-
-## Learning Resources
-
-This project includes Jupyter notebooks for comprehensive learning:
-
-- **Day 1** - Web Development fundamentals
-- **Day 2** - Python Fundamentals for Django
-- **Day 3** - Advanced Python Fundamentals
-- **Day 4** - OOP & Django Fundamentals
-- **Day 5** - Django Templates & Static Files
-
-## Development
-
-### Creating Migrations
-
-After modifying models, create migrations with:
-
-```bash
+```powershell
+python manage.py check
 python manage.py makemigrations
-```
-
-### Applying Migrations
-
-```bash
 python manage.py migrate
-```
-
-### Running Tests
-
-```bash
+python manage.py collectstatic
 python manage.py test
+python manage.py runserver
 ```
 
-## Project Settings
+Run `makemigrations` after model changes, then `migrate` to apply the generated schema changes to SQLite. Use `check` as a quick configuration check before starting the server.
 
-Key settings in `myproject/settings.py`:
-- DEBUG mode is enabled (for development)
-- SQLite database (db.sqlite3)
-- Installed apps: home, students, teachers, courses
-- Static files and template configuration
+When running with `DEBUG=False`, run `collectstatic --noinput` after installing or changing static assets. WhiteNoise uses a compressed manifest in this project, and the manifest must contain every file referenced by `{% static %}` template tags.
 
-## Notes
+## Important Settings
 
-- The project uses SQLite for the database (suitable for development)
-- Template structure follows Django best practices with app-specific template directories
-- Each app has its own templates folder to maintain organization
+The active project settings configure:
 
-## License
+- `home`, `accounts`, `students`, `teachers`, and `courses` in `INSTALLED_APPS`.
+- SQLite at `myproject/db.sqlite3`.
+- Project-level templates and app template discovery through `APP_DIRS`.
+- Source static files in `myproject/static/` and collected files in `staticfiles/`.
+- WhiteNoise middleware and compressed static-file storage.
+- Uploaded media at `myproject/media/`, served locally while `DEBUG` is enabled.
+- Login redirects for authenticated and unauthenticated users.
 
-This is an educational project created for learning Django web development.
+These settings are intended for learning and local development. Before production use, replace the development secret key, set explicit allowed hosts, disable debug mode, and review the Django deployment checklist.
 
+## Learning Materials
+
+The notebooks follow the progression from Python fundamentals to Django implementation. `django_orm_practice.md` provides additional ORM exercises, [detail.md](detail.md) records the implementation progress in prose, [command.md](command.md) is the practical command reference for daily development, [django_debugging_checklist.md](django_debugging_checklist.md) is the step-by-step error-tracing guide, and [statuscodes.md](statuscodes.md) explains HTTP status codes and where to investigate each one.
+
+## Status
+
+This is an educational project under active development. The `portfolio/` directory is retained as a separate Django project and is not part of the `myproject/` commands above.

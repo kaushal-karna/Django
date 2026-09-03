@@ -1,0 +1,613 @@
+# Command Guide for the MMAMC Django Project
+
+This is a practical command reference for working in this repository on Windows with PowerShell. The main application is in `myproject/`, and its `manage.py` file is inside that directory.
+
+## 1. Open the Project
+
+From PowerShell:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+```
+
+Check the current directory and list its files:
+
+```powershell
+Get-Location
+Get-ChildItem
+```
+
+A short alias version is also common:
+
+```powershell
+pwd
+ls
+```
+
+## 2. Activate the Virtual Environment
+
+Activate the repository virtual environment:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+If PowerShell blocks the activation script for the current terminal only:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+.\venv\Scripts\Activate.ps1
+```
+
+Confirm which Python is active:
+
+```powershell
+python --version
+python -c "import sys; print(sys.executable)"
+```
+
+The executable should point to:
+
+```text
+C:\Users\USER\Desktop\MMAMC\Django\venv\Scripts\python.exe
+```
+
+Leave the virtual environment with:
+
+```powershell
+deactivate
+```
+
+## 3. Install and Inspect Packages
+
+Upgrade `pip` and install the repository requirements:
+
+```powershell
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+Show installed packages:
+
+```powershell
+python -m pip list
+python -m pip freeze
+```
+
+Check individual packages:
+
+```powershell
+python -m django --version
+python -c "import whitenoise; print('WhiteNoise is installed')"
+```
+
+When a package is missing, install it into the active environment, then update the requirements file if it belongs to the project:
+
+```powershell
+python -m pip install package-name
+python -m pip freeze > requirements.txt
+```
+
+Review the generated requirements file before keeping it, because freezing can include packages used only by notebooks or local tools.
+
+## 4. Run the Active Django Project
+
+Move into the directory containing the active project's `manage.py`:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+```
+
+Start the development server:
+
+```powershell
+python manage.py runserver
+```
+
+Open the site at:
+
+```text
+http://127.0.0.1:8000/
+```
+
+Use another port when necessary:
+
+```powershell
+python manage.py runserver 8001
+```
+
+Stop the server with `Ctrl+C`.
+
+## 5. Commands Used to Check This Project
+
+Run the standard Django configuration check:
+
+```powershell
+python manage.py check
+```
+
+Run the stricter deployment check:
+
+```powershell
+python manage.py check --deploy
+```
+
+The deployment check reports security improvements such as secret-key handling, HTTPS, secure cookies, and production email configuration. These are important for deployment but are not all required for local learning.
+
+Check whether model changes require a migration:
+
+```powershell
+python manage.py makemigrations --check --dry-run
+```
+
+Show migration status:
+
+```powershell
+python manage.py showmigrations
+```
+
+Show the complete migration execution plan:
+
+```powershell
+python manage.py showmigrations --plan
+```
+
+Run the test suite:
+
+```powershell
+python manage.py test
+```
+
+This project currently runs successfully but has no discovered automated tests. `Found 0 test(s)` means the test command worked, not that behavior is fully tested.
+
+Compile project Python files without compiling the virtual environment:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+python -m compileall -q myproject portfolio
+```
+
+Check Git whitespace errors:
+
+```powershell
+git diff --check
+```
+
+Check changed and untracked files:
+
+```powershell
+git status --short
+```
+
+Review changes:
+
+```powershell
+git diff
+```
+
+Review a summary only:
+
+```powershell
+git diff --stat
+```
+
+## 6. Commands Used During This Project Review
+
+These are the real checks used while fixing and reviewing the project. They form a useful audit recipe when you want confidence before pushing changes.
+
+### Check the Active Project
+
+Use the repository virtual-environment interpreter explicitly when more than one Python installation exists:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+& ..\venv\Scripts\python.exe manage.py check
+& ..\venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+& ..\venv\Scripts\python.exe manage.py test
+```
+
+Expected results for the current project are no system-check issues, no migration changes, and a successful test command. The project currently has no discovered tests, so `Found 0 test(s)` means the test runner completed but test coverage has not been added yet.
+
+### Check the Separate Portfolio Project
+
+The repository contains a second Django project. Run its command from its own directory:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\portfolio
+Remove-Item Env:DJANGO_SETTINGS_MODULE -ErrorAction SilentlyContinue
+& ..\venv\Scripts\python.exe manage.py check
+& ..\venv\Scripts\python.exe manage.py test
+```
+
+The environment-variable command matters when a previous terminal session set `DJANGO_SETTINGS_MODULE` for `myproject`. An inherited setting can make the portfolio command load the wrong settings package.
+
+### Compile Both Projects
+
+Run this from the repository root. It checks project Python syntax without scanning the virtual environment:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+& .\venv\Scripts\python.exe -m compileall -q myproject portfolio
+```
+
+### Reproduce a Production-Style Request
+
+This checks representative pages with `DEBUG=False` without permanently changing `settings.py`:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+@'
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+import django
+django.setup()
+from django.test import Client, override_settings
+
+with override_settings(DEBUG=False):
+    client = Client(raise_request_exception=False)
+    for path in ['/', '/accounts/login/', '/accounts/register/', '/courses/']:
+        response = client.get(path, HTTP_HOST='127.0.0.1')
+        print(path, response.status_code)
+'@ | & ..\venv\Scripts\python.exe -
+```
+
+Expected output is HTTP `200` for the public pages. If the result is `500`, read the traceback produced by the same script without `raise_request_exception=False` or inspect the running server's terminal.
+
+### Build and Check Static Files
+
+The active project uses WhiteNoise's compressed manifest storage:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+& ..\venv\Scripts\python.exe manage.py collectstatic --noinput
+Test-Path .\staticfiles\staticfiles.json
+& ..\venv\Scripts\python.exe manage.py findstatic css/style.css --verbosity 1
+```
+
+The manifest check should return `True`, and `findstatic` should locate the source stylesheet. Missing the manifest can cause a `DEBUG=False` 500 error when a template uses `{% static %}`.
+
+### Final Review Commands
+
+Run these from the repository root after editing documentation or code:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+git diff --check
+git status --short
+git diff --stat
+```
+
+These checks catch whitespace problems, show untracked files that might need adding, and provide a compact view of the change size.
+
+## 7. Database and Migration Workflow
+
+After changing a model:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+python manage.py check
+python manage.py makemigrations
+python manage.py migrate
+python manage.py test
+```
+
+Create migrations for one app only:
+
+```powershell
+python manage.py makemigrations students
+python manage.py makemigrations teachers
+python manage.py makemigrations courses
+```
+
+Apply migrations for one app:
+
+```powershell
+python manage.py migrate students
+```
+
+Inspect the SQL for a migration:
+
+```powershell
+python manage.py sqlmigrate students 0001
+```
+
+Open the Django database shell:
+
+```powershell
+python manage.py dbshell
+```
+
+The SQLite command may require the SQLite executable to be installed separately. You can still inspect data using Django's shell:
+
+```powershell
+python manage.py shell
+```
+
+Example ORM inspection inside the Django shell:
+
+```python
+from students.models import Student
+Student.objects.count()
+Student.objects.all()
+exit()
+```
+
+Create an administrator account:
+
+```powershell
+python manage.py createsuperuser
+```
+
+Then visit:
+
+```text
+http://127.0.0.1:8000/admin/
+```
+
+## 8. Static Files and DEBUG=False
+
+The active project uses WhiteNoise's compressed manifest storage. Generate the manifest after installing or changing CSS, JavaScript, or image assets:
+
+```powershell
+python manage.py collectstatic --noinput
+```
+
+Check the production-style configuration:
+
+```powershell
+python manage.py check --deploy
+```
+
+The important sequence is:
+
+```powershell
+python manage.py collectstatic --noinput
+python manage.py runserver --insecure
+```
+
+`runserver --insecure` is useful for local static-file testing with `DEBUG=False`, but it is not a production server. If the manifest is missing, templates using `{% static %}` can produce a 500 error such as:
+
+```text
+ValueError: Missing staticfiles manifest entry for 'css/style.css'
+```
+
+Generated files under `myproject/staticfiles/` are ignored by Git. Source assets belong in `myproject/static/`.
+
+## 9. Temporarily Test DEBUG=False
+
+The current settings file has `DEBUG = True` as a development default. To test production-style rendering without permanently editing settings, use a short Django shell script:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+@'
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+import django
+django.setup()
+from django.test import Client, override_settings
+
+with override_settings(DEBUG=False):
+    client = Client(raise_request_exception=False)
+    for path in ['/', '/accounts/login/', '/accounts/register/', '/courses/']:
+        response = client.get(path, HTTP_HOST='127.0.0.1')
+        print(path, response.status_code)
+'@ | python -
+```
+
+A healthy result prints HTTP `200` for the public pages. Use the project's virtual-environment interpreter explicitly when the active shell may be using another Python:
+
+```powershell
+@' ... '@ | & C:\Users\USER\Desktop\MMAMC\Django\venv\Scripts\python.exe -
+```
+
+## 10. Find Errors Quickly
+
+Search all Python files for a word or setting:
+
+```powershell
+rg "DEBUG|SECRET_KEY|STATIC|login_required" myproject -g "*.py"
+```
+
+Search templates for static references:
+
+```powershell
+rg "static|url |extends|include" myproject -g "*.html"
+```
+
+Find all Django files:
+
+```powershell
+rg --files myproject -g "*.py"
+rg --files myproject -g "*.html"
+rg --files myproject -g "*migration*.py"
+```
+
+Find a specific URL name:
+
+```powershell
+rg "name=['\"](student_lists|course_lists|profile)" myproject
+```
+
+Check whether a file exists:
+
+```powershell
+Test-Path .\myproject\staticfiles\staticfiles.json
+Test-Path .\myproject\Templates\base.html
+```
+
+List files by extension:
+
+```powershell
+Get-ChildItem -Recurse -File -Filter *.py
+Get-ChildItem -Recurse -File -Filter *.html
+```
+
+When a page returns 500, run the server in the terminal and read the traceback. With `DEBUG=True`, Django shows the exception details. With `DEBUG=False`, inspect the server terminal because the browser intentionally shows only a generic error page.
+
+## 11. Daily Workflow
+
+Use this compact routine at the beginning of a work session:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+.\venv\Scripts\Activate.ps1
+cd myproject
+python manage.py check
+python manage.py showmigrations
+python manage.py runserver
+```
+
+Before changing a model:
+
+```powershell
+python manage.py check
+python manage.py makemigrations --check --dry-run
+```
+
+After changing a model:
+
+```powershell
+python manage.py makemigrations
+python manage.py migrate
+python manage.py check
+python manage.py test
+```
+
+Before finishing work:
+
+```powershell
+python manage.py check
+python manage.py test
+cd ..
+git diff --check
+git status --short
+```
+
+## 12. Git Basics for Safe Progress
+
+See what changed:
+
+```powershell
+git status
+```
+
+Review one file:
+
+```powershell
+git diff -- myproject\students\views.py
+```
+
+Stage a deliberate set of files:
+
+```powershell
+git add .gitignore README.md myproject\myproject\settings.py command.md detail.md django_debugging_checklist.md statuscodes.md
+```
+
+Create a commit only after reviewing the staged diff:
+
+```powershell
+git diff --cached
+git commit -m "Document Django setup and commands"
+```
+
+Do not use `git reset --hard` or `git checkout --` casually. They can destroy work that has not been backed up.
+
+## 13. Run the Separate Portfolio Project
+
+The `portfolio/` directory has its own `manage.py` and settings package. Run it independently:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\portfolio
+python manage.py check
+python manage.py migrate
+python manage.py runserver 8001
+```
+
+Its site is then available at:
+
+```text
+http://127.0.0.1:8001/
+```
+
+Always run commands from the project directory whose `manage.py` you intend to use.
+
+## 14. Learn Django by Tracing the Request
+
+When you open a URL, follow this path:
+
+```text
+Browser request
+    -> root urls.py
+    -> app urls.py
+    -> view function
+    -> model or form logic
+    -> template
+    -> static and media assets
+    -> HTTP response
+```
+
+Practice tracing one feature at a time:
+
+1. Find its URL in the app's `urls.py`.
+2. Find the view named by that URL.
+3. Identify the model query or form validation.
+4. Find the template returned by the view.
+5. Check the template's `{% url %}` and `{% static %}` references.
+6. Test the page while watching the server terminal.
+
+This habit makes errors easier to localize and builds a strong understanding of Django's architecture.
+
+## 15. A Geek-Level Learning Path
+
+Use the commands above as experiments rather than memorized recipes:
+
+1. Change one model field and observe `makemigrations`.
+2. Read the generated migration and inspect it with `sqlmigrate`.
+3. Query the model in `manage.py shell`.
+4. Trace a list page from URL to view to template.
+5. Add a test for the view and run only that app's tests.
+6. Break a template URL intentionally, read the traceback, and repair it.
+7. Run `check --deploy` and resolve one security advisory at a time.
+8. Run `collectstatic`, inspect the manifest, and compare source versus generated assets.
+9. Use Git diff to understand every line before committing.
+
+Useful focused test commands after tests are added:
+
+```powershell
+python manage.py test students
+python manage.py test courses
+python manage.py test students.tests.StudentViewTests
+python manage.py test students.tests.StudentViewTests.test_student_list_requires_login
+```
+
+The goal is not to run many commands; it is to understand what each command proves about the application.
+
+## 16. Recommended Command Sequence
+
+For ordinary daily work, this is the most useful short sequence:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+.\venv\Scripts\Activate.ps1
+cd myproject
+python manage.py check
+python manage.py runserver
+```
+
+For a model change:
+
+```powershell
+python manage.py makemigrations
+python manage.py migrate
+python manage.py test
+```
+
+For a deployment-style check:
+
+```powershell
+python manage.py check --deploy
+python manage.py collectstatic --noinput
+python manage.py runserver --insecure
+```
+
+Keep the server terminal visible while developing. The traceback, request path, and line number usually tell you where the problem begins.
