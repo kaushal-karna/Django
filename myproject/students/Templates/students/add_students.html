@@ -13,52 +13,52 @@
     </div>
 
     <div class="card card-pad">
-      <form id="student-form" action="{% url 'students:add_students' %}" method="post" novalidate>
+      <form id="student-form" action="{% url 'students:add_students' %}" method="POST" novalidate>
         {% csrf_token %}
         <div class="form-grid">
           <div class="field">
             <label for="student_id">Student ID</label>
-            <input type="text" id="student_id" placeholder="e.g. STU-2026-001" required>
+            <input type="text" id="student_id" name="student_id" placeholder="e.g. STU-2026-001" required>
           </div>
 
           <div class="field">
             <label for="first_name">First name</label>
-            <input type="text" id="first_name" placeholder="e.g. Emily" required>
+            <input type="text" id="first_name" name="first_name" placeholder="e.g. Emily" required>
           </div>
 
           <div class="field">
             <label for="last_name">Last name</label>
-            <input type="text" id="last_name" placeholder="e.g. Carter" required>
+            <input type="text" id="last_name" name="last_name" placeholder="e.g. Carter" required>
           </div>
 
           <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" placeholder="e.g. emily.carter@example.com" required>
+            <input type="email" id="email"  name="email" placeholder="e.g. emily.carter@example.com" required>
           </div>
 
           <div class="field">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" placeholder="e.g. +1 555 123 4567">
+            <input type="tel" id="phone" name="phone" placeholder="e.g. +1 555 123 4567">
           </div>
 
           <div class="field">
             <label for="date_of_birth">Date of birth</label>
-            <input type="date" id="date_of_birth" required>
+            <input type="date" id="date_of_birth" name="date_of_birth" required>
           </div>
 
           <div class="field">
             <label for="department">Department</label>
-            <input type="text" id="department" placeholder="e.g. Computer Science" required>
+            <input type="text" id="department" name="department" placeholder="e.g. Computer Science" required>
           </div>
 
           <div class="field">
             <label for="program">Program</label>
-            <input type="text" id="program" placeholder="e.g. BSc Computer Science" required>
+            <input type="text" id="program" name="program" placeholder="e.g. BSc Computer Science" required>
           </div>
 
           <div class="field">
             <label for="semester">Semester</label>
-            <select id="semester" required>
+            <select id="semester" name="semester" required>
               <option value="">Select semester</option>
               <option>Spring 2026</option>
               <option>Fall 2026</option>
@@ -69,7 +69,7 @@
 
           <div class="field">
             <label for="status">Status</label>
-            <select id="status" required>
+            <select id="status" name="status" required>
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
               <option value="graduated">Graduated</option>
@@ -79,13 +79,13 @@
 
           <div class="field span-2">
             <label for="address">Address</label>
-            <textarea id="address" placeholder="Student's current address…"></textarea>
+            <textarea id="address" name="address" placeholder="Student's current address…"></textarea>
             <span class="field-hint">Enter the student's current residential address.</span>
           </div>
 
           <div class="field span-2">
             <label for="notes">Notes</label>
-            <textarea id="notes" placeholder="Additional notes about the student…"></textarea>
+            <textarea id="notes" name="personal_info" placeholder="Additional notes about the student…"></textarea>
             <span class="field-hint">Optional information for administrative use.</span>
           </div>
         </div>

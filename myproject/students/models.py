@@ -15,7 +15,7 @@ class Student(models.Model):
 
     SEMESTER_CHOICES = [
         ("Spring 2026", "Spring 2026"),
-        ("Fall  2026", "Fall 2026"),
+        ("Fall 2026", "Fall 2026"),
         ("Spring 2027", "Spring 2027"),
         ("Fall 2027", "Fall 2027"),
     ]

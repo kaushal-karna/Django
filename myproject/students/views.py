@@ -29,8 +29,8 @@ def index(request):
 
 @login_required
 def add_students(request):
-    student = Student.objects.all()
     if request.method == "POST":
+        print(request.POST)
         student = Student.objects.create(
            student_id=request.POST.get("student_id"), 
            first_name=request.POST.get("first_name"), 
@@ -42,8 +42,11 @@ def add_students(request):
            program=request.POST.get("program"), 
            semester=request.POST.get("semester"), 
            status=request.POST.get("status"),
+           address=request.POST.get("address"),
+           personal_info=request.POST.get("personal_info")
         )
         messages.success( request, f"{student.first_name} {student.last_name} has been added successfully." )
+        return redirect("students:student_lists")
     return render(request, 'students/add_students.html')
 
 
