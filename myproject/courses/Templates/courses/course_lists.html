@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %} Course List · Course Catalog · Mahendra Morang Campus {% endblock %}
+{% block page %}courses{% endblock %}
+{% block content %}
+  <!-- ===== Page content ===== -->
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Full catalog</p>
+        <h1>All Courses</h1>
+        <p class="lede">Browse, search and manage every course on record.</p>
+      </div>
+      <a href="{% url 'courses:add_courses' %}" class="btn btn-primary">+ Add New Course</a>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="search-input" class="search-input" placeholder="Search by code, name or instructor…">
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <select id="dept-filter" class="filter-select">
+          <option value="">All departments</option>
+          {% for course in courses %}
+            <option value="{{ course.department }}">{{ course.department }}</option>
+          {% endfor %}
+
+        </select>
+        <select id="status-filter" class="filter-select">
+          <option value="">All statuses</option>
+          {% for status, display in course.status.choices %}
+            <option value="{{ status }}">{{ course.get_status_display }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="catalog">
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Course</th>
+            <th>Department</th>
+            <th>Instructor</th>
+            <th>Credits</th>
+            <th>Enrolled</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="courses-body">
+          <!-- Static rows. data-search / data-dept / data-status power the JS filter. -->
+
+          {% for course in courses %}
+          <tr data-search="{{ course.code }} {{ course.name }} {{ course.instructor }}" data-dept="{{ course.department }}" data-status="{{ course.status }}">
+            <td data-label="Code"><a href="{% url 'courses:course_details' course.pk %}"><span class="stamp">{{ course.code }}</span></a></td>
+            <td data-label="Course" class="course-name"><a href="{% url 'courses:course_details' course.pk %}" style="color:inherit; text-decoration:none;">{{ course.name }}</a></td>
+            <td data-label="Department" class="course-dept">{{ course.department }}</td>
+            <td data-label="Instructor">{{ course.instructor }}</td>
+            <td data-label="Credits">{{ course.credits }}</td>
+            <td data-label="Enrolled">{{ course.capacity }} / {{ course.capacity }}</td>
+            <td data-label="Status"><span class="pill {{ course.status }}">{{ course.get_status_display }}</span></td>
+            <td data-label="">
+              <div class="row-actions">
+                <a class="btn btn-ghost btn-sm" href="{% url 'courses:edit_course'  course.id %}">Edit</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'courses:delete_course' course.id %}" data-delete="{{ course.name }}">Delete</a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+
+          
+        </tbody>
+      </table>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <h3>No courses match</h3>
+        <p>Try a different search term or clear the filters.</p>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

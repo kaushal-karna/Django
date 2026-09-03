@@ -1,9 +1,8 @@
 from django.db import models
 
+
 # Create your models here.
 
-
-from django.db import models
 
 
 class Course(models.Model):
@@ -22,9 +21,20 @@ class Course(models.Model):
     code = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=200)
     department = models.CharField(max_length=100)
-    instructor = models.CharField(max_length=150)
+    instructor = models.ForeignKey(
+        "teachers.Teacher",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name= "courses"
+    )
     credits = models.PositiveIntegerField()
     duration = models.CharField(max_length=50)
+    enrolled_students = models.ManyToManyField(
+        "students.Student",
+        blank=True,
+        related_name="enrolled_courses"
+    )
     semester = models.CharField(
         max_length=20,
         choices=SEMESTER_CHOICES

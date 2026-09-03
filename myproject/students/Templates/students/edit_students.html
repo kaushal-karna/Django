@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Student · Student Management · MMAMC{% endblock %}
+
+{% block page %}edit-student{% endblock %}
+
+{% block content %}
+
+<main>
+
+  <!-- ===== Page Header ===== -->
+
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Update entry</p>
+
+  <h1>Edit Student</h1>
+
+  <p class="lede">
+    Update the details below to modify this student in the student records.
+  </p>
+</div>
+
+  </div>
+
+  <!-- ===== Edit Student Card ===== -->
+
+  <div class="card card-pad">
+
+<form
+  id="student-form"
+  action="{% url 'students:student_edit' student.id %}"
+  method="POST"
+  novalidate
+>
+
+  {% csrf_token %}
+
+  <div class="form-grid">
+
+
+    <!-- Student ID -->
+    <div class="field">
+      <label for="student_id">
+        Student ID
+      </label>
+
+      <input
+        type="text"
+        id="student_id"
+        name="student_id"
+        value="{{ student.student_id }}"
+        placeholder="e.g. STU001"
+        required
+      >
+    </div>
+
+
+    <!-- First Name -->
+    <div class="field">
+      <label for="first_name">
+        First name
+      </label>
+
+      <input
+        type="text"
+        id="first_name"
+        name="first_name"
+        value="{{ student.first_name }}"
+        placeholder="e.g. Kaushal"
+        required
+      >
+    </div>
+
+
+    <!-- Last Name -->
+    <div class="field">
+      <label for="last_name">
+        Last name
+      </label>
+
+      <input
+        type="text"
+        id="last_name"
+        name="last_name"
+        value="{{ student.last_name }}"
+        placeholder="e.g. Karn"
+        required
+      >
+    </div>
+
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="{{ student.email }}"
+        placeholder="e.g. student@example.com"
+        required
+      >
+    </div>
+
+
+    <!-- Phone -->
+    <div class="field">
+      <label for="phone">
+        Phone
+      </label>
+
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        value="{{ student.phone }}"
+        placeholder="e.g. 98XXXXXXXX"
+      >
+    </div>
+
+
+    <!-- Date of Birth -->
+    <div class="field">
+      <label for="date_of_birth">
+        Date of birth
+      </label>
+
+      <input
+        type="date"
+        id="date_of_birth"
+        name="date_of_birth"
+        value="{{ student.date_of_birth|date:'Y-m-d' }}"
+        required
+      >
+    </div>
+
+
+    <!-- Department -->
+    <div class="field">
+      <label for="department">
+        Department
+      </label>
+
+      <input
+        type="text"
+        id="department"
+        name="department"
+        value="{{ student.department }}"
+        placeholder="e.g. Computer Science"
+        required
+      >
+    </div>
+
+
+    <!-- Program -->
+    <div class="field">
+      <label for="program">
+        Program
+      </label>
+
+      <input
+        type="text"
+        id="program"
+        name="program"
+        value="{{ student.program }}"
+        placeholder="e.g. BSc.CSIT"
+        required
+      >
+    </div>
+
+
+    <!-- Semester -->
+    <div class="field">
+      <label for="semester">
+        Semester
+      </label>
+
+      <select
+        id="semester"
+        name="semester"
+        required
+      >
+
+        {% for value, label in student.SEMESTER_CHOICES %}
+
+          <option
+            value="{{ value }}"
+            {% if student.semester == value %}
+              selected
+            {% endif %}
+          >
+            {{ label }}
+          </option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+    <!-- Status -->
+    <div class="field">
+      <label for="status">
+        Status
+      </label>
+
+      <select
+        id="status"
+        name="status"
+        required
+      >
+
+        {% for value, label in student.STATUS_CHOICES %}
+
+          <option
+            value="{{ value }}"
+            {% if student.status == value %}
+              selected
+            {% endif %}
+          >
+            {{ label }}
+          </option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+    <!-- Enrollment Year -->
+    <div class="field">
+      <label for="enrollment_year">
+        Enrollment year
+      </label>
+
+      <input
+        type="number"
+        id="enrollment_year"
+        name="enrollment_year"
+        value="{{ student.enrollment_year }}"
+        min="2000"
+        max="2100"
+        required
+      >
+    </div>
+
+
+    <!-- Address -->
+    <div class="field span-2">
+      <label for="address">
+        Address
+      </label>
+
+      <textarea
+        id="address"
+        name="address"
+        placeholder="Student's address..."
+      >{{ student.address }}</textarea>
+    </div>
+
+
+    <!-- Personal Information -->
+    <div class="field span-2">
+      <label for="personal_info">
+        Personal information
+      </label>
+
+      <textarea
+        id="personal_info"
+        name="personal_info"
+        placeholder="Additional information about the student..."
+      >{{ student.personal_info }}</textarea>
+    </div>
+
+
+  </div>
+
+
+  <!-- ===== Form Actions ===== -->
+
+  <div class="form-actions">
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+    >
+      Update Student
+    </button>
+
+    <a
+      href="{% url 'students:student_lists' %}"
+      class="btn btn-ghost"
+    >
+      Cancel
+    </a>
+
+  </div>
+
+</form>
+
+  </div>
+
+</main>
+
+{% endblock %}

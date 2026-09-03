@@ -3,13 +3,12 @@ from . import views
 
 app_name = "teachers"
 urlpatterns = [      
-            path('', views.teachers_list, name='teachers_list'),  
-            path('home/', views.teachers_home, name='teachers_home'),
-            path('about/', views.teachers_about, name='teachers_about'),       
             # started rendering teachers page
             
-            path('teachers/', views.teachers, name='teachers'),
-            path('teacher-details/', views.teacher_details, name='teacher_details'),
-            path('index/', views.teachers_index, name='index'),  
+            path('index/', views.index, name='index'),  
             path('add-teachers/', views.add_teachers, name='add_teachers'),
+            path('teacher-lists/', views.teacher_lists, name='teacher_lists'),
+            path('teacher-details/', views.teacher_details, name='teacher_details'),
+            path('teacher-edit/<int:teacher_id>/', views.teacher_edit, name='teacher_edit'),
+            path('delete-teacher/<int:teacher_id>/', views.delete_teacher, name='delete_teacher'),
 ]

@@ -31,12 +31,29 @@
       </a>
 
       <div class="header-meta">
-        Registrar's Office<br>
-        Signed in as
-        <strong style="color:#F2F0E8">A. Reyes</strong>
+        {% if user.is_authenticated %}
+        <div>
+          <strong style="color:#F2F0E8">
+          <a href="{% url 'home:profile' %}" class="profile-link">
+            <span class="profile-name">{{ user.username }}</span>
+          </a>
+        </strong>
+        </div>
+          <div>
+            <a href="{% url 'accounts:logout' %}" class="logout-link">Sign Out</a> 
+          </div>
+        {% else %}
+        <div> 
+          <a href="{% url 'accounts:login' %}" class="login-link">Sign In</a>
+        </div>
+        <div>
+          <a href="{% url 'accounts:register' %}" class="register-link">Register</a>
+        </div>
+        {% endif %}
       </div>
 
     </div>
+
 
 
     <!-- ===== Navigation ===== -->
@@ -52,17 +69,17 @@
         Dashboard
       </a>
 
-      <a href="{% url 'teachers:teachers' %}"
+      <a href="{% url 'teachers:teacher_lists' %}"
          data-tab="teachers">
         Teacher List
       </a>
 
-      <a href="{% url 'students:student_list' %}"
+      <a href="{% url 'students:student_lists' %}"
          data-tab="students">
         Student List
       </a>
 
-      <a href="{% url 'courses:courses' %}"
+      <a href="{% url 'courses:course_lists' %}"
          data-tab="courses">
         Course List
       </a>
@@ -75,6 +92,15 @@
 
 
   <!-- ===== Page Content ===== -->
+<div class="messages">
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+  {% endif %}
+  </div>
 
   {% block content %}
   {% endblock %}
@@ -102,15 +128,15 @@
           Dashboard
         </a>
 
-        <a href="{% url 'teachers:teachers' %}">
+        <a href="{% url 'teachers:index' %}">
           Teachers
         </a>
 
-        <a href="{% url 'students:student_list' %}">
+        <a href="{% url 'students:index' %}">
           Students
         </a>
 
-        <a href="{% url 'courses:courses' %}">
+        <a href="{% url 'courses:index' %}">
           Courses
         </a>
 
@@ -125,8 +151,6 @@
 
   </footer>
 
-
-  <script src="{% static 'js/script.js' %}"></script>
 
 </body>
 </html>

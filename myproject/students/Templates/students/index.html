@@ -44,22 +44,22 @@
 
     <div class="stat-card">
       <div class="stat-label">Total Students</div>
-      <div class="stat-value">120</div>
+      <div class="stat-value">{{total}}</div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Active Students</div>
-      <div class="stat-value">108</div>
+      <div class="stat-value">{{active}}</div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Inactive</div>
-      <div class="stat-value">12</div>
+      <div class="stat-value">{{inactive}} </div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Departments</div>
-      <div class="stat-value">5</div>
+      <div class="stat-value"> {{departments}} </div>
     </div>
 
   </div>
@@ -90,183 +90,35 @@
         <tbody>
 
           <!-- Student 1 -->
-          <tr>
-            <td data-label="Student ID">
-              <a href="{% url 'students:student_details' %}">
-                <span class="stamp">STU-001</span>
-              </a>
-            </td>
+          {% for student in students %}
+            <tr>
+              <td data-label="Student ID">
+                <a href="{% url 'students:student_details' pk=student.pk %}">
+                  <span class="stamp">{{ student.student_id }}</span>
+                </a>
+              </td>
 
-            <td data-label="Student Name" class="course-name">
-              John Anderson
-            </td>
+              <td data-label="Student Name" class="course-name">
+                {{ student.first_name }} {{ student.last_name }}
+              </td>
 
-            <td data-label="Department" class="course-dept">
-              Computer Science
-            </td>
+              <td data-label="Department" class="course-dept">
+                {{ student.department }}
+              </td>
 
-            <td data-label="Semester">
-              1st Semester
-            </td>
+              <td data-label="Semester">
+                {{ student.semester }}
+              </td>
 
-            <td data-label="Email">
-              john.anderson@greenfield.edu
-            </td>
+              <td data-label="Email">
+                {{ student.email }}
+              </td>
 
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Student 2 -->
-          <tr>
-            <td data-label="Student ID">
-              <a href="{% url 'students:student_details' %}">
-                <span class="stamp">STU-002</span>
-              </a>
-            </td>
-
-            <td data-label="Student Name" class="course-name">
-              Sarah Williams
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Fine Arts
-            </td>
-
-            <td data-label="Semester">
-              3rd Semester
-            </td>
-
-            <td data-label="Email">
-              sarah.williams@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Student 3 -->
-          <tr>
-            <td data-label="Student ID">
-              <a href="{% url 'students:student_details' %}">
-                <span class="stamp">STU-003</span>
-              </a>
-            </td>
-
-            <td data-label="Student Name" class="course-name">
-              Michael Brown
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Physics
-            </td>
-
-            <td data-label="Semester">
-              5th Semester
-            </td>
-
-            <td data-label="Email">
-              michael.brown@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Student 4 -->
-          <tr>
-            <td data-label="Student ID">
-              <a href="{% url 'students:student_details' %}">
-                <span class="stamp">STU-004</span>
-              </a>
-            </td>
-
-            <td data-label="Student Name" class="course-name">
-              Emily Carter
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              English
-            </td>
-
-            <td data-label="Semester">
-              2nd Semester
-            </td>
-
-            <td data-label="Email">
-              emily.carter@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Student 5 -->
-          <tr>
-            <td data-label="Student ID">
-              <a href="{% url 'students:student_details' %}">
-                <span class="stamp">STU-005</span>
-              </a>
-            </td>
-
-            <td data-label="Student Name" class="course-name">
-              Daniel Wilson
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Mathematics
-            </td>
-
-            <td data-label="Semester">
-              4th Semester
-            </td>
-
-            <td data-label="Email">
-              daniel.wilson@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Student 6 -->
-          <tr>
-            <td data-label="Student ID">
-              <a href="{% url 'students:student_details' %}">
-                <span class="stamp">STU-006</span>
-              </a>
-            </td>
-
-            <td data-label="Student Name" class="course-name">
-              Olivia Martinez
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Computer Science
-            </td>
-
-            <td data-label="Semester">
-              6th Semester
-            </td>
-
-            <td data-label="Email">
-              olivia.martinez@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill inactive">Inactive</span>
-            </td>
-          </tr>
+              <td data-label="Status">
+                <span class="pill {{ student.status }}">{{ student.get_status_display }}</span>
+              </td>
+            </tr>
+          {% endfor %}
 
         </tbody>
 

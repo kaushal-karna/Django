@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Course · Course Catalog · MMAMC{% endblock %}
+
+{% block page %}edit-course{% endblock %}
+
+{% block content %}
+
+<main>
+
+  <!-- ===== Page Header ===== -->
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Update entry</p>
+
+      <h1>Edit Course</h1>
+
+      <p class="lede">
+        Update the details below to modify this course in the catalog.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ===== Edit Course Card ===== -->
+  <div class="card card-pad">
+
+    <form
+      id="course-form"
+      action="{% url 'courses:edit_course' course.id %}"
+      method="POST"
+      novalidate
+    >
+
+      {% csrf_token %}
+
+
+      <div class="form-grid">
+
+
+        <!-- Course Code -->
+        <div class="field">
+
+          <label for="code">
+            Course code
+          </label>
+
+          <input
+            type="text"
+            id="code"
+            name="code"
+            value="{{ course.code }}"
+            placeholder="e.g. CS-101"
+            required
+          >
+
+        </div>
+
+
+        <!-- Course Name -->
+        <div class="field">
+
+          <label for="name">
+            Course name
+          </label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{ course.name }}"
+            placeholder="e.g. Introduction to Programming"
+            required
+          >
+
+        </div>
+
+
+        <!-- Department -->
+        <div class="field">
+
+          <label for="department">
+            Department
+          </label>
+
+          <input
+            type="text"
+            id="department"
+            name="department"
+            value="{{ course.department }}"
+            placeholder="e.g. Computer Science"
+            required
+          >
+
+        </div>
+
+
+        <!-- Instructor -->
+        <div class="field">
+
+          <label for="instructor">
+            Instructor
+          </label>
+
+          <select
+            name="instructor"
+            id="instructor"
+          >
+
+            <option value="">
+              Select instructor
+            </option>
+
+            {% for teacher in teachers %}
+
+              <option
+                value="{{ teacher.id }}"
+                {% if course.instructor_id == teacher.id %}
+                  selected
+                {% endif %}
+              >
+                {{ teacher.full_name }}
+              </option>
+
+            {% endfor %}
+
+          </select>
+
+        </div>
+
+
+        <!-- Credits -->
+        <div class="field">
+
+          <label for="credits">
+            Credits
+          </label>
+
+          <input
+            type="number"
+            id="credits"
+            name="credits"
+            value="{{ course.credits }}"
+            min="1"
+            max="10"
+            placeholder="e.g. 3"
+            required
+          >
+
+        </div>
+
+
+        <!-- Duration -->
+        <div class="field">
+
+          <label for="duration">
+            Duration
+          </label>
+
+          <input
+            type="text"
+            id="duration"
+            name="duration"
+            value="{{ course.duration }}"
+            placeholder="e.g. 15 weeks"
+            required
+          >
+
+        </div>
+
+
+        <!-- Semester -->
+        <div class="field">
+
+          <label for="semester">
+            Semester
+          </label>
+
+          <select
+            id="semester"
+            name="semester"
+            required
+          >
+
+            <option value="">
+              Select semester
+            </option>
+
+            <option
+              value="Spring 2026"
+              {% if course.semester == "Spring 2026" %}
+                selected
+              {% endif %}
+            >
+              Spring 2026
+            </option>
+
+            <option
+              value="Fall 2026"
+              {% if course.semester == "Fall 2026" %}
+                selected
+              {% endif %}
+            >
+              Fall 2026
+            </option>
+
+            <option
+              value="Spring 2027"
+              {% if course.semester == "Spring 2027" %}
+                selected
+              {% endif %}
+            >
+              Spring 2027
+            </option>
+
+            <option
+              value="Fall 2027"
+              {% if course.semester == "Fall 2027" %}
+                selected
+              {% endif %}
+            >
+              Fall 2027
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Capacity -->
+        <div class="field">
+
+          <label for="capacity">
+            Capacity
+          </label>
+
+          <input
+            type="number"
+            id="capacity"
+            name="capacity"
+            value="{{ course.capacity }}"
+            min="1"
+            placeholder="e.g. 40"
+            required
+          >
+
+        </div>
+
+
+        <!-- Status -->
+        <div class="field">
+
+          <label for="status">
+            Status
+          </label>
+
+          <select
+            id="status"
+            name="status"
+            required
+          >
+
+            <option
+              value="active"
+              {% if course.status == "active" %}
+                selected
+              {% endif %}
+            >
+              Active
+            </option>
+
+            <option
+              value="inactive"
+              {% if course.status == "inactive" %}
+                selected
+              {% endif %}
+            >
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- Description -->
+        <div class="field span-2">
+
+          <label for="description">
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Short summary of what the course covers…"
+          >{{ course.description }}</textarea>
+
+        </div>
+
+      </div>
+
+
+      <!-- ===== Form Actions ===== -->
+      <div class="form-actions">
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Update Course
+        </button>
+
+        <a
+          href="{% url 'courses:course_lists' %}"
+          class="btn btn-ghost"
+        >
+          Cancel
+        </a>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</main>
+
+{% endblock %}

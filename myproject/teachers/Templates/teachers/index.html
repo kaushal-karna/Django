@@ -43,22 +43,22 @@
 
     <div class="stat-card">
       <div class="stat-label">Total Teachers</div>
-      <div class="stat-value">12</div>
+      <div class="stat-value"> {{ total }} </div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Active Teachers</div>
-      <div class="stat-value">10</div>
+      <div class="stat-value"> {{ active }} </div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Inactive</div>
-      <div class="stat-value">2</div>
+      <div class="stat-value"> {{ inactive }}</div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Departments</div>
-      <div class="stat-value">5</div>
+      <div class="stat-value"> {{ departments }}</div>
     </div>
 
   </div>
@@ -88,184 +88,37 @@
 
         <tbody>
 
-          <!-- Teacher 1 -->
+          <!-- Teachers  -->
+          {% for teacher in teachers %}
           <tr>
             <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-001</span>
+              <a href="{% url 'teachers:teacher_details' teacher.id %}">
+                <span class="stamp">{{ teacher.id }}</span>
               </a>
             </td>
 
             <td data-label="Teacher Name" class="course-name">
-              Dr. Alan Whitfield
+              {{ teacher.name }}
             </td>
 
             <td data-label="Department" class="course-dept">
-              Computer Science
+              {{ teacher.department }}
             </td>
 
             <td data-label="Subject">
-              Programming
+              {{ teacher.subject }}
             </td>
 
             <td data-label="Email">
-              alan.whitfield@greenfield.edu
+              {{ teacher.email }}
             </td>
 
             <td data-label="Status">
-              <span class="pill active">Active</span>
+              <span class="pill {{ teacher.status }}">{{ teacher.get_status_display }}</span>
             </td>
           </tr>
+          {% endfor %}
 
-
-          <!-- Teacher 2 -->
-          <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-002</span>
-              </a>
-            </td>
-
-            <td data-label="Teacher Name" class="course-name">
-              Ms. Julia Torres
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Fine Arts
-            </td>
-
-            <td data-label="Subject">
-              Design
-            </td>
-
-            <td data-label="Email">
-              julia.torres@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Teacher 3 -->
-          <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-003</span>
-              </a>
-            </td>
-
-            <td data-label="Teacher Name" class="course-name">
-              Prof. Elena Marsh
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              History
-            </td>
-
-            <td data-label="Subject">
-              World History
-            </td>
-
-            <td data-label="Email">
-              elena.marsh@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Teacher 4 -->
-          <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-004</span>
-              </a>
-            </td>
-
-            <td data-label="Teacher Name" class="course-name">
-              Dr. Samuel Okoro
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Physics
-            </td>
-
-            <td data-label="Subject">
-              Classical Mechanics
-            </td>
-
-            <td data-label="Email">
-              samuel.okoro@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Teacher 5 -->
-          <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-005</span>
-              </a>
-            </td>
-
-            <td data-label="Teacher Name" class="course-name">
-              Ms. Priya Nadar
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              English
-            </td>
-
-            <td data-label="Subject">
-              Academic Writing
-            </td>
-
-            <td data-label="Email">
-              priya.nadar@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-
-          <!-- Teacher 6 -->
-          <tr>
-            <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' %}">
-                <span class="stamp">TCH-006</span>
-              </a>
-            </td>
-
-            <td data-label="Teacher Name" class="course-name">
-              Mr. David Anderson
-            </td>
-
-            <td data-label="Department" class="course-dept">
-              Mathematics
-            </td>
-
-            <td data-label="Subject">
-              Calculus
-            </td>
-
-            <td data-label="Email">
-              david.anderson@greenfield.edu
-            </td>
-
-            <td data-label="Status">
-              <span class="pill inactive">Inactive</span>
-            </td>
-          </tr>
 
         </tbody>
 

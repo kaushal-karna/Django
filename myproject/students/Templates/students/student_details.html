@@ -7,25 +7,25 @@
 <main>
 
   <p>
-    <a href="{% url 'students' %}">&larr; Back to all students</a>
+    <a href="{% url 'students:index' %}">&larr; Back to all students</a>
   </p>
 
   <div class="card card-pad" style="margin-top:16px;">
 
     <div class="details-head">
       <div>
-        <span class="stamp teal">STU-001</span>
+        <span class="stamp teal">{{ student.student_id }}</span>
 
         <h1 style="font-family:var(--font-display); font-size:28px; margin:12px 0 4px;">
-          John Anderson
+          {{ student.first_name }} {{ student.last_name }}
         </h1>
 
         <p style="color:var(--ink-soft); margin:0;">
-          Computer Science &middot; 1st Semester
+          {{ student.department }} &middot; {{ student.semester }}
         </p>
       </div>
 
-      <span class="pill active">Active</span>
+      <span class="pill {{ student.status }}">{{ student.get_status_display }}</span>
     </div>
 
 
@@ -34,32 +34,32 @@
 
       <div class="item">
         <div class="k">Student ID</div>
-        <div class="v">STU-001</div>
+        <div class="v">{{ student.student_id }}</div>
       </div>
 
       <div class="item">
         <div class="k">Department</div>
-        <div class="v">Computer Science</div>
+        <div class="v">{{ student.department }}</div>
       </div>
 
       <div class="item">
         <div class="k">Semester</div>
-        <div class="v">1st Semester</div>
+        <div class="v">{{ student.semester }}</div>
       </div>
 
       <div class="item">
         <div class="k">Email</div>
-        <div class="v">john.anderson@greenfield.edu</div>
+        <div class="v">{{ student.email }}</div>
       </div>
 
       <div class="item">
         <div class="k">Phone</div>
-        <div class="v">+1 555 010 1001</div>
+        <div class="v">{{ student.phone }}</div>
       </div>
 
       <div class="item">
         <div class="k">Enrollment Year</div>
-        <div class="v">2026</div>
+        <div class="v">{{ student.enrollment_year }}</div>
       </div>
 
     </div>
@@ -74,8 +74,7 @@
       <div class="k">Student Information</div>
 
       <p style="margin-top:8px; max-width:70ch;">
-        John Anderson is a Computer Science student currently enrolled
-        in the first semester of the Fall 2026 academic term.
+        {{ student.personal_info}}
       </p>
 
     </div>
@@ -183,17 +182,17 @@
     <!-- ===== Actions ===== -->
     <div class="form-actions">
 
-      <a href="add-student.html" class="btn btn-primary">
+      <a href="{% url 'students:edit_student' student.id %}" class="btn btn-primary">
         Edit Student
       </a>
 
       <button
         class="btn btn-danger"
-        data-delete="John Anderson">
+        data-delete="{{ student.first_name }} {{ student.last_name }}">
         Delete Student
       </button>
 
-      <a href="{% url 'students' %}" class="btn btn-ghost">
+      <a href="{% url 'students:student_lists' %}" class="btn btn-ghost">
         Back to List
       </a>
 

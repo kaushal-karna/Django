@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% block title %}Add Course · Course Catalog · Greenfield School{% endblock %}
+{% block page %}add-course{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">New entry</p>
+        <h1>Add a Course</h1>
+        <p class="lede">Fill in the details below to add a new course to the catalog. This is a demo form — submitting does not save the data.</p>
+      </div>
+    </div>
+
+    <div class="card card-pad">
+      <form id="course-form"
+            action="{% url 'courses:add_courses' %}"
+            method="POST"
+            novalidate>
+
+          {% csrf_token %}
+
+          <div class="form-grid">
+
+              <div class="field">
+                  <label for="code">Course code</label>
+                  <input
+                      type="text"
+                      id="code"
+                      name="code"
+                      placeholder="e.g. CS-101"
+                      required
+                  >
+              </div>
+
+              <div class="field">
+                  <label for="name">Course name</label>
+                  <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      placeholder="e.g. Introduction to Programming"
+                      required
+                  >
+              </div>
+
+              <div class="field">
+                  <label for="department">Department</label>
+                  <input
+                      type="text"
+                      id="department"
+                      name="department"
+                      placeholder="e.g. Computer Science"
+                      required
+                  >
+              </div>
+
+              <div class="field">
+                  <label for="instructor">Instructor</label>
+                 
+                  <select name="instructor" id="instructor">
+                    <option value="">Select instructor</option>
+
+                    {% for teacher in teachers %}
+                        <option value="{{ teacher.id }}">
+                            {{ teacher.full_name }}
+                        </option>
+                    {% endfor %}
+                </select>
+              </div>
+
+              <div class="field">
+                  <label for="credits">Credits</label>
+                  <input
+                      type="number"
+                      id="credits"
+                      name="credits"
+                      min="1"
+                      max="10"
+                      placeholder="e.g. 3"
+                      required
+                  >
+              </div>
+
+              <div class="field">
+                  <label for="duration">Duration</label>
+                  <input
+                      type="text"
+                      id="duration"
+                      name="duration"
+                      placeholder="e.g. 15 weeks"
+                      required
+                  >
+              </div>
+
+              <div class="field">
+                  <label for="semester">Semester</label>
+                  <select id="semester" name="semester" required>
+                      <option value="">Select semester</option>
+                      <option value="Spring 2026">Spring 2026</option>
+                      <option value="Fall 2026">Fall 2026</option>
+                      <option value="Spring 2027">Spring 2027</option>
+                      <option value="Fall 2027">Fall 2027</option>
+                  </select>
+              </div>
+
+              <div class="field">
+                  <label for="capacity">Capacity</label>
+                  <input
+                      type="number"
+                      id="capacity"
+                      name="capacity"
+                      min="1"
+                      placeholder="e.g. 40"
+                      required
+                  >
+              </div>
+
+              <div class="field">
+                  <label for="status">Status</label>
+                  <select id="status" name="status" required>
+                      <option value="active">Active</option>
+                      <option value="inactive">Inactive</option>
+                  </select>
+              </div>
+
+              <div class="field span-2">
+                  <label for="description">Description</label>
+                  <textarea
+                      id="description"
+                      name="description"
+                      placeholder="Short summary of what the course covers…"
+                  ></textarea>
+              </div>
+
+          </div>
+
+          <div class="form-actions">
+              <button type="submit" class="btn btn-primary">
+                  Save Course
+              </button>
+
+              <a href="{% url 'courses:course_lists' %}" class="btn btn-ghost">
+                  Cancel
+              </a>
+          </div>
+      </form>
+
+    </div>
+  </main>
+  {% endblock %}

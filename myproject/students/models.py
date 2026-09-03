@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
+from datetime import datetime, date
 
 
 class Student(models.Model):
@@ -25,7 +26,7 @@ class Student(models.Model):
 
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=30, blank=True)
-
+    students_enrolled = models.PositiveIntegerField(default=0, blank=True)
     date_of_birth = models.DateField()
 
     department = models.CharField(max_length=150)
@@ -43,8 +44,14 @@ class Student(models.Model):
     )
 
     address = models.TextField(blank=True)
-    notes = models.TextField(blank=True)
-
+    
+    # Additional fields for student information
+    personal_info = models.TextField(blank=True)
+    CURRENT_YEAR = date.today().year
+    YEAR_CHOICES = [(year, year) for year in range(2000, CURRENT_YEAR + 1)]
+    
+    enrollment_year = models.PositiveIntegerField(default=CURRENT_YEAR)
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

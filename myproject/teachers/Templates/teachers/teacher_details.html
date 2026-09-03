@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% block title %}Teacher Details · Greenfield School{% endblock %}
+
+{% block content %}
+
+<!-- ===== Page content ===== -->
+<main>
+
+  <p>
+    <a href="{% url 'teachers:index' %}">&larr; Back to all teachers</a>
+  </p>
+
+  <div class="card card-pad" style="margin-top:16px;">
+
+    <div class="details-head">
+      <div>
+        <span class="stamp teal">TCH-001</span>
+
+        <h1 style="font-family:var(--font-display); font-size:28px; margin:12px 0 4px;">
+          Dr. Alan Whitfield
+        </h1>
+
+        <p style="color:var(--ink-soft); margin:0;">
+          Computer Science &middot; Faculty
+        </p>
+      </div>
+
+      <span class="pill active">Active</span>
+    </div>
+
+
+    <!-- ===== Teacher Details ===== -->
+    <div class="details-grid">
+
+      <div class="item">
+        <div class="k">Teacher ID</div>
+        <div class="v">TCH-001</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Department</div>
+        <div class="v">Computer Science</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Subject</div>
+        <div class="v">Programming</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Email</div>
+        <div class="v">alan.whitfield@greenfield.edu</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Phone</div>
+        <div class="v">+1 555 010 2001</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Experience</div>
+        <div class="v">8 Years</div>
+      </div>
+
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ===== Teacher Description ===== -->
+    <div class="item">
+
+      <div class="k">About Teacher</div>
+
+      <p style="margin-top:8px; max-width:70ch;">
+        Dr. Alan Whitfield is a Computer Science instructor specializing
+        in programming, software development and introductory computer
+        science education.
+      </p>
+
+    </div>
+
+
+    <hr class="divider">
+
+
+    <!-- ===== Courses Taught ===== -->
+    <div class="item">
+
+      <div class="k">Courses Taught</div>
+
+      <div class="table-wrap" style="margin-top:12px;">
+
+        <table class="catalog">
+
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Course</th>
+              <th>Department</th>
+              <th>Semester</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td data-label="Code">
+                <span class="stamp">CS-101</span>
+              </td>
+
+              <td data-label="Course" class="course-name">
+                Introduction to Programming
+              </td>
+
+              <td data-label="Department" class="course-dept">
+                Computer Science
+              </td>
+
+              <td data-label="Semester">
+                Fall 2026
+              </td>
+            </tr>
+
+            <tr>
+              <td data-label="Code">
+                <span class="stamp">CS-201</span>
+              </td>
+
+              <td data-label="Course" class="course-name">
+                Data Structures
+              </td>
+
+              <td data-label="Department" class="course-dept">
+                Computer Science
+              </td>
+
+              <td data-label="Semester">
+                Fall 2026
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- ===== Actions ===== -->
+    <div class="form-actions">
+
+      <a href="{% url 'teachers:add_teachers' %}" class="btn btn-primary">
+        Edit Teacher
+      </a>
+
+      <button
+        class="btn btn-danger"
+        data-delete="Dr. Alan Whitfield">
+        Delete Teacher
+      </button>
+
+      <a href="{% url 'teachers:teacher_lists' %}" class="btn btn-ghost">
+        Back to List
+      </a>
+
+    </div>
+
+  </div>
+
+</main>
+
+{% endblock %}

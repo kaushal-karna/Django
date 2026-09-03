@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign In · MMAMC Management System
+{% endblock %}
+
+{% block page %}
+login
+{% endblock %}
+
+{% block content %}
+
+<main>
+<div class="page-head">
+
+    <div>
+
+        <p class="eyebrow">
+            Welcome back
+        </p>
+
+        <h1>
+            Sign In
+        </h1>
+
+        <p class="lede">
+            Sign in to access the MMAMC Management System.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="card card-pad auth-card">
+
+    <form method="POST" novalidate>
+
+        {% csrf_token %}
+
+
+        {% if form.non_field_errors %}
+
+            <div class="form-error">
+                {{ form.non_field_errors }}
+            </div>
+
+        {% endif %}
+
+
+        <div class="form-grid">
+
+            <div class="field span-2">
+
+                <label for="{{ form.username.id_for_label }}">
+                    Username
+                </label>
+
+                {{ form.username }}
+
+
+                {% if form.username.errors %}
+
+                    <div class="field-error">
+                        {{ form.username.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="field span-2">
+
+                <label for="{{ form.password.id_for_label }}">
+                    Password
+                </label>
+
+                {{ form.password }}
+
+
+                {% if form.password.errors %}
+
+                    <div class="field-error">
+                        {{ form.password.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Sign In
+            </button>
+
+
+            <a
+                href="{% url 'accounts:register' %}"
+                class="btn btn-ghost"
+            >
+                Create Account
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</main>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} {{ course.name }} · Course Catalog · Mahendra Morang Campus {% endblock %}
+
+{% block content %}
+  <!-- ===== Page content ===== -->
+  <main>
+    <p><a href="{% url 'courses:index' %}">&larr; Back to all courses</a></p>
+
+    <div class="card card-pad" style="margin-top:16px;">
+      <div class="details-head">
+        <div>
+          <span class="stamp teal">{{ course.code }}</span>
+          <h1 style="font-family:var(--font-display); font-size:28px; margin:12px 0 4px;"> {{ course.name }} </h1>
+          <p style="color:var(--ink-soft); margin:0;"> {{ course.department }} &middot; {{ course.semester }}</p>
+        </div>
+        <span class="pill {{course.status }}"> {{ course.get_status_display}}</span>
+      </div>
+
+      <div class="details-grid">
+        <div class="item"><div class="k">Instructor</div><div class="v">
+          {% if course.instructor %}
+            {{ course.instructor }}
+          {% else %}
+            <span style="color:var(--ink-soft);">Not assigned</span>
+          {% endif %}
+        </div></div>
+        <div class="item"><div class="k">Credits</div><div class="v">{{ course.credits }}</div></div>
+        <div class="item"><div class="k">Duration</div><div class="v">{{ course.duration }}</div></div>
+        <div class="item"><div class="k">Capacity</div><div class="v">{{ course.capacity }}</div></div>
+        <div class="item"><div class="k">Enrolled</div><div class="v">{{ course.enrolled_students.count }}</div></div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="item">
+        <div class="k">Description</div>
+        <p style="margin-top:8px; max-width:70ch;">Foundational course covering variables, control flow, functions and basic data structures using Python.</p>
+      </div>
+
+      <div class="form-actions">
+        <a href="{% url 'courses:add_courses' %}" class="btn btn-primary">Edit Course</a>
+        <button class="btn btn-danger" data-delete="{{ course.name }}">Delete Course</button>
+        <a href="{% url 'courses:course_lists' %}" class="btn btn-ghost">Back to List</a>
+      </div>
+    </div>
+  </main>
+
+{% endblock %}

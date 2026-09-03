@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Teacher · Teacher Management · MMAMC{% endblock %}
+
+{% block page %}edit-teacher{% endblock %}
+
+{% block content %}
+
+<main>
+
+  <!-- ===== Page Header ===== -->
+
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Update entry</p>
+      <h1>Edit Teacher</h1>
+      <p class="lede">
+        Update the details below to modify this teacher in the faculty records.
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== Edit Teacher Card ===== -->
+
+  <div class="card card-pad">
+
+```
+<form
+  id="teacher-form"
+  action="{% url 'teachers:edit_teacher' teacher.id %}"
+  method="POST"
+  novalidate
+>
+
+  {% csrf_token %}
+
+  <div class="form-grid">
+
+
+    <!-- First Name -->
+    <div class="field">
+      <label for="first_name">
+        First name
+      </label>
+
+      <input
+        type="text"
+        id="first_name"
+        name="first_name"
+        value="{{ teacher.first_name }}"
+        placeholder="e.g. Ram"
+        required
+      >
+    </div>
+
+
+    <!-- Last Name -->
+    <div class="field">
+      <label for="last_name">
+        Last name
+      </label>
+
+      <input
+        type="text"
+        id="last_name"
+        name="last_name"
+        value="{{ teacher.last_name }}"
+        placeholder="e.g. Sharma"
+        required
+      >
+    </div>
+
+
+    <!-- Email -->
+    <div class="field">
+      <label for="email">
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="{{ teacher.email }}"
+        placeholder="e.g. teacher@example.com"
+        required
+      >
+    </div>
+
+
+    <!-- Phone -->
+    <div class="field">
+      <label for="phone">
+        Phone
+      </label>
+
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        value="{{ teacher.phone }}"
+        placeholder="e.g. 98XXXXXXXX"
+      >
+    </div>
+
+
+    <!-- Department -->
+    <div class="field">
+      <label for="department">
+        Department
+      </label>
+
+      <input
+        type="text"
+        id="department"
+        name="department"
+        value="{{ teacher.department }}"
+        placeholder="e.g. Computer Science"
+        required
+      >
+    </div>
+
+
+    <!-- Position -->
+    <div class="field">
+      <label for="position">
+        Position
+      </label>
+
+      <input
+        type="text"
+        id="position"
+        name="position"
+        value="{{ teacher.position }}"
+        placeholder="e.g. Assistant Professor"
+        required
+      >
+    </div>
+
+
+    <!-- Qualification -->
+    <div class="field">
+      <label for="qualification">
+        Qualification
+      </label>
+
+      <input
+        type="text"
+        id="qualification"
+        name="qualification"
+        value="{{ teacher.qualification }}"
+        placeholder="e.g. MSc. Computer Science"
+        required
+      >
+    </div>
+
+
+    <!-- Experience -->
+    <div class="field">
+      <label for="experience">
+        Experience
+      </label>
+
+      <input
+        type="number"
+        id="experience"
+        name="experience"
+        value="{{ teacher.experience }}"
+        min="0"
+        placeholder="e.g. 5"
+        required
+      >
+    </div>
+
+
+    <!-- Joining Date -->
+    <div class="field">
+      <label for="joining_date">
+        Joining date
+      </label>
+
+      <input
+        type="date"
+        id="joining_date"
+        name="joining_date"
+        value="{{ teacher.joining_date|date:'Y-m-d' }}"
+        required
+      >
+    </div>
+
+
+    <!-- Subject / Course -->
+    <div class="field">
+      <label for="subject">
+        Subject / Course
+      </label>
+
+      <select
+        id="subject"
+        name="subject"
+        required
+      >
+
+        <option value="">
+          Select course
+        </option>
+
+        {% for course in courses %}
+
+          <option
+            value="{{ course.id }}"
+            {% if teacher.subject_id == course.id %}
+              selected
+            {% endif %}
+          >
+            {{ course.name }}
+          </option>
+
+        {% endfor %}
+
+      </select>
+    </div>
+
+
+    <!-- Status -->
+    <div class="field">
+      <label for="status">
+        Status
+      </label>
+
+      <select
+        id="status"
+        name="status"
+        required
+      >
+
+        <option
+          value="active"
+          {% if teacher.status == "active" %}
+            selected
+          {% endif %}
+        >
+          Active
+        </option>
+
+        <option
+          value="inactive"
+          {% if teacher.status == "inactive" %}
+            selected
+          {% endif %}
+        >
+          Inactive
+        </option>
+
+        <option
+          value="on_leave"
+          {% if teacher.status == "on_leave" %}
+            selected
+          {% endif %}
+        >
+          On Leave
+        </option>
+
+      </select>
+    </div>
+
+
+    <!-- Bio -->
+    <div class="field span-2">
+      <label for="bio">
+        Bio
+      </label>
+
+      <textarea
+        id="bio"
+        name="bio"
+        placeholder="Short description about the teacher..."
+      >{{ teacher.bio }}</textarea>
+    </div>
+
+  </div>
+
+
+  <!-- ===== Form Actions ===== -->
+  <div class="form-actions">
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+    >
+      Update Teacher
+    </button>
+
+    <a
+      href="{% url 'teachers:teacher_lists' %}"
+      class="btn btn-ghost"
+    >
+      Cancel
+    </a>
+
+  </div>
+
+</form>
+```
+
+  </div>
+
+</main>
+
+{% endblock %}

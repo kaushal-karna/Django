@@ -43,22 +43,22 @@
 
     <div class="stat-card">
       <div class="stat-label">Total Courses</div>
-      <div class="stat-value">6</div>
+      <div class="stat-value">{{ total }}</div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Active</div>
-      <div class="stat-value">4</div>
+      <div class="stat-value"> {{ active }} </div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Inactive</div>
-      <div class="stat-value">2</div>
+      <div class="stat-value"> {{ inactive }} </div>
     </div>
 
     <div class="stat-card">
       <div class="stat-label">Departments</div>
-      <div class="stat-value">5</div>
+      <div class="stat-value"> {{ departments }} </div>
     </div>
 
   </div>
@@ -87,106 +87,27 @@
 
         <tbody>
 
-          <tr>
-            <td data-label="Code">
-              <a href="{% url 'courses:course_details' %}">
-                <span class="stamp">ART-120</span>
-              </a>
-            </td>
-            <td data-label="Course" class="course-name">
-              Foundations of Design
-            </td>
-            <td data-label="Department" class="course-dept">
-              Fine Arts
-            </td>
-            <td data-label="Instructor">
-              Ms. Julia Torres
-            </td>
-            <td data-label="Status">
-              <span class="pill inactive">Inactive</span>
-            </td>
-          </tr>
+          {% for course in courses %}
+            <tr>
+              <td data-label="Code">
+                <a href="{% url 'courses:course_details' pk=course.pk %}">
+                  <span class="stamp">{{ course.code }}</span>
+                </a>
+              </td>
+              <td data-label="Course" class="course-name">
+                {{ course.name }}
+              </td>
+              <td data-label="Department" class="course-dept">
+                {{ course.department }}
+              </td>
+              <td data-label="Instructor">
+                {{ course.instructor }}
+              </td>
+               <td data-label="Status"><span class="pill {{ course.status }}">{{ course.get_status_display }}</span></td>
+             </tr>
+            {% endfor %}
 
-          <tr>
-            <td data-label="Code">
-              <a href="{% url 'courses:course_details' %}">
-                <span class="stamp">HIS-115</span>
-              </a>
-            </td>
-            <td data-label="Course" class="course-name">
-              World History Since 1500
-            </td>
-            <td data-label="Department" class="course-dept">
-              History
-            </td>
-            <td data-label="Instructor">
-              Prof. Elena Marsh
-            </td>
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td data-label="Code">
-              <a href="{% url 'courses:course_details' %}">
-                <span class="stamp">PHY-201</span>
-              </a>
-            </td>
-            <td data-label="Course" class="course-name">
-              Classical Mechanics
-            </td>
-            <td data-label="Department" class="course-dept">
-              Physics
-            </td>
-            <td data-label="Instructor">
-              Dr. Samuel Okoro
-            </td>
-            <td data-label="Status">
-              <span class="pill inactive">Inactive</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td data-label="Code">
-              <a href="{% url 'courses:course_details' %}">
-                <span class="stamp">ENG-150</span>
-              </a>
-            </td>
-            <td data-label="Course" class="course-name">
-              Academic Writing
-            </td>
-            <td data-label="Department" class="course-dept">
-              English
-            </td>
-            <td data-label="Instructor">
-              Ms. Priya Nadar
-            </td>
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
-          <tr>
-            <td data-label="Code">
-              <a href="{% url 'courses:course_details' %}">
-                <span class="stamp">CS-101</span>
-              </a>
-            </td>
-            <td data-label="Course" class="course-name">
-              Introduction to Programming
-            </td>
-            <td data-label="Department" class="course-dept">
-              Computer Science
-            </td>
-            <td data-label="Instructor">
-              Dr. Alan Whitfield
-            </td>
-            <td data-label="Status">
-              <span class="pill active">Active</span>
-            </td>
-          </tr>
-
+      
         </tbody>
 
       </table>

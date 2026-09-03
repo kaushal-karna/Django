@@ -1,13 +1,11 @@
 from django.db import models
 
-
 class Teacher(models.Model):
     STATUS_CHOICES = [
         ("active", "Active"),
         ("inactive", "Inactive"),
         ("on_leave", "On Leave"),
     ]
-
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     email = models.EmailField(unique=True)
@@ -27,6 +25,12 @@ class Teacher(models.Model):
     )
 
     bio = models.TextField(blank=True)
+    
+    subject = models.ForeignKey(
+        "courses.Course",
+        on_delete=models.CASCADE,
+        related_name = "teachers"
+    )
 
     @property
     def full_name(self):

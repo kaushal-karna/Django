@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-b4jlh^+*)(_7w99i2!ss72!dibbo+wz0)*pz3lskbwg^*vic2f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'accounts',
     'students',
     'teachers',
     'courses',  
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -128,6 +130,33 @@ STATICFILES_DIRS = [
 # Production static files
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+"default": {
+"BACKEND": "django.core.files.storage.FileSystemStorage",
+},
+"staticfiles": {
+"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+},
+}
+
+# # Optional: Enables compression and long-term caching
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
+
+
+# Media Url
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
+# ]
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
