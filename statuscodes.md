@@ -2,6 +2,12 @@
 
 An HTTP status code is the short numeric result sent by a web server after a browser or API client makes a request. It tells you whether the request succeeded, needs another action, or failed. The number does not always identify the root cause by itself, but it tells you where to begin looking.
 
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+
+**Recommended Next:** Use [django_debugging_checklist.md](django_debugging_checklist.md) to trace the status code to the responsible project file.
+
+**Quick Route:** Identify the status-code group here, trace the request with [django_debugging_checklist.md](django_debugging_checklist.md), and run the relevant command from [command.md](command.md).
+
 ## The Five Status Code Groups
 
 | Group | Range | Meaning | First place to inspect |
@@ -397,3 +403,5 @@ Did the server start?
 - `5xx`: inspect the server traceback, starting at the first line in your code.
 
 Keep this file beside [django_debugging_checklist.md](django_debugging_checklist.md). Use the status code to choose the branch, then use the checklist to trace the request to the responsible file.
+
+**Previous:** [django_orm_practice.md](django_orm_practice.md) | **Next:** [django_debugging_checklist.md](django_debugging_checklist.md) | **All Guides:** [README.md](README.md)

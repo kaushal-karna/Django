@@ -2,6 +2,12 @@
 
 Use this checklist whenever the Django server starts but a page, form, API, asset, or database operation misbehaves. Start at the first visible symptom and move through the request path in order. Use [statuscodes.md](statuscodes.md) to understand the HTTP result before following the relevant branch. Do not change several files at once; make one small change, reload, and check whether the error changed.
 
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+
+**Recommended Next:** Return to [command.md](command.md) for the command that verifies the fix, or practise the related query in [django_orm_practice.md](django_orm_practice.md).
+
+**Quick Route:** Read the status code in [statuscodes.md](statuscodes.md), find the first project file in the traceback, then use [command.md](command.md) to run the smallest useful check.
+
 ## 1. Start With the Exact Symptom
 
 Write down four facts before editing anything:
@@ -672,3 +678,5 @@ Confirm manually:
 - You understand every line in the diff before committing.
 
 The most valuable debugging habit is to follow evidence: exact request, exact status, exact traceback, first project line, one small change, one focused verification.
+
+**Previous:** [statuscodes.md](statuscodes.md) | **Next:** [README.md](README.md) | **All Guides:** [README.md](README.md)

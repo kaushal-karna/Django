@@ -2,6 +2,10 @@
 
 This repository contains the Django work completed during the MMAMC web development lessons. It starts with Python and web development fundamentals and grows into a multi-app Django application for managing students, teachers, courses, and user profiles.
 
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+
+**Daily Use:** Start here when you are unsure what to read. Follow the study order below, then use [command.md](command.md) as the central reference for running, checking, reviewing, committing, and pushing the project.
+
 ## Current Progress
 
 The main application in `myproject/` currently includes:
@@ -91,6 +95,19 @@ python manage.py runserver
 
 Open `http://127.0.0.1:8000/` in a browser. The longer explanation, including what each step does and how the Django pieces work together, is in [detail.md](detail.md).
 
+## Recommended Study Order
+
+Follow this path if you are learning Django from the beginning:
+
+1. Start here: [README.md](README.md) for the project overview and current structure.
+2. Learn the setup: [detail.md](detail.md) for Python, virtual environments, Django, apps, models, migrations, templates, and authentication.
+3. Practise daily commands: [command.md](command.md) for starting the server, checking code, working with migrations, and using Git.
+4. Understand data: [django_orm_practice.md](django_orm_practice.md) for querying and practising the Django ORM.
+5. Understand errors: [statuscodes.md](statuscodes.md) to identify what an HTTP status code means.
+6. Trace the problem: [django_debugging_checklist.md](django_debugging_checklist.md) to locate the responsible URL, view, form, model, template, or asset.
+
+After the first pass, use [command.md](command.md) during daily work, [django_debugging_checklist.md](django_debugging_checklist.md) whenever something fails, and [statuscodes.md](statuscodes.md) whenever you see an unfamiliar HTTP response.
+
 ## Common Development Commands
 
 Run these commands from `myproject/`:
@@ -122,10 +139,18 @@ The active project settings configure:
 
 These settings are intended for learning and local development. Before production use, replace the development secret key, set explicit allowed hosts, disable debug mode, and review the Django deployment checklist.
 
-## Learning Materials
+## Markdown Guides
 
-The notebooks follow the progression from Python fundamentals to Django implementation. `django_orm_practice.md` provides additional ORM exercises, [detail.md](detail.md) records the implementation progress in prose, [command.md](command.md) is the practical command reference for daily development, [django_debugging_checklist.md](django_debugging_checklist.md) is the step-by-step error-tracing guide, and [statuscodes.md](statuscodes.md) explains HTTP status codes and where to investigate each one.
+The notebooks follow the progression from Python fundamentals to Django implementation. Use these Markdown guides as a connected reference:
+
+- [detail.md](detail.md) - Complete setup and implementation explanation.
+- [command.md](command.md) - Commands for daily development and project review.
+- [django_orm_practice.md](django_orm_practice.md) - ORM concepts and query practice.
+- [statuscodes.md](statuscodes.md) - HTTP status-code meanings and first checks.
+- [django_debugging_checklist.md](django_debugging_checklist.md) - Step-by-step error tracing.
 
 ## Status
 
 This is an educational project under active development. The `portfolio/` directory is retained as a separate Django project and is not part of the `myproject/` commands above.
+
+**Learning Path:** Start here -> [detail.md](detail.md) -> [command.md](command.md) -> [django_orm_practice.md](django_orm_practice.md) -> [statuscodes.md](statuscodes.md) -> [django_debugging_checklist.md](django_debugging_checklist.md) -> return to [README.md](README.md).

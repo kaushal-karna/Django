@@ -2,6 +2,12 @@
 
 This document explains the development journey and the work completed so far in the MMAMC Django project. The main working application is `myproject/`. The `portfolio/` directory is a separate Django project and should be run independently.
 
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+
+**Recommended Next:** Read [command.md](command.md) after this guide, then use [django_orm_practice.md](django_orm_practice.md) to practise database queries.
+
+**When You Forget a Step:** Return to [README.md](README.md) for the learning order and [command.md](command.md) for the exact command to run.
+
 ## 1. Installing Python
 
 Django is a Python web framework, so Python is the first requirement. Install Python 3.8 or a newer version from the official Python website. On Windows, enable the option to add Python to `PATH` during installation.
@@ -333,3 +339,5 @@ The project is intended for learning and local development. Before using it as a
 - Continue the notebook lessons and keep the implementation notes synchronized with new features.
 
 The current codebase already demonstrates the central Django workflow: define models, create migrations, route requests, execute view logic, render templates, validate user input, authenticate users, and serve static and media files.
+
+**Previous:** [README.md](README.md) | **Next:** [command.md](command.md) | **All Guides:** [README.md](README.md)

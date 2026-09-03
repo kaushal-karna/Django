@@ -2,6 +2,12 @@
 
 This is a practical command reference for working in this repository on Windows with PowerShell. The main application is in `myproject/`, and its `manage.py` file is inside that directory.
 
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+
+**Recommended Next:** Use [django_orm_practice.md](django_orm_practice.md) for data practice, then keep [statuscodes.md](statuscodes.md) and [django_debugging_checklist.md](django_debugging_checklist.md) open during daily development.
+
+**Central Reference:** Use this file for commands. Use [README.md](README.md) for the learning order, [detail.md](detail.md) for concepts, [django_debugging_checklist.md](django_debugging_checklist.md) for error tracing, [statuscodes.md](statuscodes.md) for HTTP results, and [django_orm_practice.md](django_orm_practice.md) for database queries.
+
 ## 1. Open the Project
 
 From PowerShell:
@@ -105,7 +111,6 @@ python manage.py runserver
 ```
 
 Open the site at:
-
 ```text
 http://127.0.0.1:8000/
 ```
@@ -485,32 +490,164 @@ git status --short
 
 ## 12. Git Basics for Safe Progress
 
-See what changed:
+Run Git commands from the repository root:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django
+```
+
+Git tracks changes to the project so you can review, restore, share, and safely collaborate on your work. The usual order is **review -> stage -> review staged files -> commit -> verify -> push**. Do not skip the second review: the staged diff is exactly what will enter the commit.
+
+### Review Before Staging
 
 ```powershell
 git status
-```
-
-Review one file:
-
-```powershell
+git status --short
+git diff
+git diff --stat
+git diff --check
 git diff -- myproject\students\views.py
+git log -5 --oneline
+git branch --show-current
+git branch -vv
 ```
 
-Stage a deliberate set of files:
+- `git status` shows the branch, staged files, unstaged files, and untracked files.
+- `git status --short` gives the same information in a compact two-column format.
+- `git diff` shows edits that are not staged yet.
+- `git diff --stat` shows only a file and line-change summary.
+- `git diff --check` finds whitespace errors before they reach a commit.
+- `git diff -- myproject\students\views.py` limits the diff to one file.
+- `git log -5 --oneline` shows the five latest commits in a compact format.
+- `git branch --show-current` prints the branch you are currently using.
+- `git branch -vv` shows local branches and their upstream remote branches.
+
+### Stage the Intended Files
+
+Stage only files you have reviewed:
 
 ```powershell
-git add .gitignore README.md myproject\myproject\settings.py command.md detail.md django_debugging_checklist.md statuscodes.md
+git add README.md command.md detail.md django_debugging_checklist.md django_orm_practice.md statuscodes.md
 ```
 
-Create a commit only after reviewing the staged diff:
+For the complete current update, include the settings and ignore-file changes:
 
 ```powershell
+git add .gitignore README.md myproject\myproject\settings.py command.md detail.md django_debugging_checklist.md django_orm_practice.md statuscodes.md
+```
+
+Use `git add -A` only after checking every new, modified, and deleted file:
+
+```powershell
+git add -A
+```
+
+- `git add path\to\file` stages one selected file.
+- `git add README.md command.md ...` stages only the reviewed files listed in the command.
+- `git add -A` stages all changes, including new and deleted files, so use it only after reviewing `git status`.
+
+### Review Staged Changes
+
+```powershell
+git status
 git diff --cached
-git commit -m "Document Django setup and commands"
+git diff --cached --stat
+git diff --cached --check
 ```
+
+- `git status` confirms which files are staged.
+- `git diff --cached` shows the exact content that the next commit will contain.
+- `git diff --cached --stat` summarizes only staged changes.
+- `git diff --cached --check` checks staged changes for whitespace problems.
+
+If an unintended file was staged, unstage it without deleting it:
+
+```powershell
+git restore --staged path\to\file
+```
+
+`git restore --staged` removes a file from the staging area but keeps your edits on disk. It is the normal fix when you staged a file by mistake.
+
+### Commit and Verify
+
+```powershell
+git commit -m "docs: add Django setup, commands, and debugging guides"
+git log -1 --oneline
+git show --stat --oneline HEAD
+git status
+```
+
+- `git commit -m "message"` creates a permanent commit from the staged snapshot.
+- `git log -1 --oneline` confirms the newest commit message and ID.
+- `git show --stat --oneline HEAD` shows what the newest commit changed.
+- `git status` confirms whether the working tree is clean after committing.
+
+### Push to GitHub
+
+Confirm the remote and branch before pushing:
+
+```powershell
+git remote -v
+git branch --show-current
+git fetch origin
+git push origin main
+git status
+```
+
+- `git remote -v` displays the GitHub fetch and push URLs.
+- `git fetch origin` downloads remote branch information without changing your files.
+- `git push origin main` uploads the local `main` commits to GitHub.
+- The final `git status` confirms whether the local branch is synchronized with its remote.
+
+For a new branch, publish it and set its upstream:
+
+```powershell
+git push -u origin branch-name
+```
+
+`git push -u origin branch-name` uploads a new branch and remembers its upstream, so later `git push` and `git pull` commands can omit the remote and branch names.
+
+If Git says the remote has commits you do not have, inspect both sides before trying again:
+
+```powershell
+git fetch origin
+git log --oneline HEAD..origin/main
+git log --oneline origin/main..HEAD
+```
+
+- `git log --oneline HEAD..origin/main` shows commits on GitHub that are missing locally.
+- `git log --oneline origin/main..HEAD` shows local commits not yet on GitHub.
+- Read both lists before deciding whether to pull, merge, rebase, or ask for help.
 
 Do not use `git reset --hard` or `git checkout --` casually. They can destroy work that has not been backed up.
+
+- `git reset --hard` discards local tracked edits and moves the current branch; use only when you fully understand the data loss.
+- `git checkout -- path` discards local edits in a file; use `git restore path` only with the same caution.
+- Prefer `git restore --staged path` when you only need to unstage a file.
+
+### Complete Current Workflow
+
+Run Django checks first, then review, stage, commit, and push:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+& ..\venv\Scripts\python.exe manage.py check
+& ..\venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+& ..\venv\Scripts\python.exe manage.py test
+cd ..
+git diff --check
+git status
+git diff --stat
+git add .gitignore README.md myproject\myproject\settings.py command.md detail.md django_debugging_checklist.md django_orm_practice.md statuscodes.md
+git status
+git diff --cached --check
+git diff --cached --stat
+git commit -m "docs: add Django setup, commands, and debugging guides"
+git log -1 --oneline
+git status
+git push origin main
+git status
+```
 
 ## 13. Run the Separate Portfolio Project
 
@@ -581,6 +718,8 @@ python manage.py test students.tests.StudentViewTests.test_student_list_requires
 ```
 
 The goal is not to run many commands; it is to understand what each command proves about the application.
+
+**Previous:** [detail.md](detail.md) | **Next:** [django_orm_practice.md](django_orm_practice.md) | **All Guides:** [README.md](README.md)
 
 ## 16. Recommended Command Sequence
 

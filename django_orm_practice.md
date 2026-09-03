@@ -2,6 +2,12 @@
 
 A working reference and daily-practice log for Django ORM, built around the real `Course` model.
 
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+
+**Recommended Next:** Use [command.md](command.md) to run the project and [django_debugging_checklist.md](django_debugging_checklist.md) when a query or page does not behave as expected.
+
+**Daily Practice:** Run ORM experiments with `python manage.py shell`, verify model changes with [command.md](command.md), and use [django_debugging_checklist.md](django_debugging_checklist.md) if a query or relationship fails.
+
 ## The Model
 
 ```python
@@ -365,3 +371,5 @@ Course.objects.values_list("semester", flat=True).distinct().order_by("semester"
 ## Practice Log
 
 - **[Date]** — Exercises completed / mistakes made / new things learned:
+
+**Previous:** [command.md](command.md) | **Next:** [statuscodes.md](statuscodes.md) | **All Guides:** [README.md](README.md)
