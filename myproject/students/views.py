@@ -1,9 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from datetime import datetime
-from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Student
+from courses.models import Course
 # Create your views here.
 
 @login_required
@@ -29,6 +28,7 @@ def index(request):
 
 @login_required
 def add_students(request):
+    courses = Course.objects.filter(status="active")
     if request.method == "POST":
         print(request.POST)
         student = Student.objects.create(
@@ -45,9 +45,22 @@ def add_students(request):
            address=request.POST.get("address"),
            personal_info=request.POST.get("personal_info")
         )
-        messages.success( request, f"{student.first_name} {student.last_name} has been added successfully." )
+        
+        # Get selected course IDs
+        course_ids = request.POST.getlist("courses")
+        
+        # Add courses to student
+        student.enrolled_courses.set(course_ids)
+        
+                
+        messages.success( request, f"{student.full_name} has been added successfully." )
+        
         return redirect("students:student_lists")
-    return render(request, 'students/add_students.html')
+    
+    context = {
+        "courses":courses
+    }
+    return render(request, 'students/add_students.html', context)
 
 
 @login_required
@@ -76,8 +89,13 @@ def student_details(request, pk):
 
 @login_required
 def student_edit(request, student_id):
-    student = get_object_or_404(Student, id=student_id)
-
+    
+    student = get_object_or_404(
+        Student, 
+        pk=student_id
+        )
+    courses = Course.objects.filter(status="active")
+    
     if request.method == "POST":
         student.student_id = request.POST.get("student_id")
         student.first_name = request.POST.get("first_name")
@@ -91,19 +109,24 @@ def student_edit(request, student_id):
         student.status = request.POST.get("status")
         student.address = request.POST.get("address")
         student.personal_info = request.POST.get("personal_info")
-        student.enrollment_year = request.POST.get("enrollment_year")
+        student.enrolled_course = request.POST.get("enrollment_year")
 
         student.save()
 
+        # Update student's courses
+        course_ids = request.POST.getlist("courses")
+        student.enrolled_courses.set(course_ids)
+        
         messages.success(
             request,
-            "Student details updated successfully."
+            f"{student.full_name} has been updated successfully."
         )
 
         return redirect("students:student_lists")
 
     context = {
         "student": student,
+        "courses":courses,
     }
 
     return render(request, "students/edit_students.html", context)
@@ -114,7 +137,7 @@ def delete_student(request, student_id):
     student.delete()
     messages.success(
         request,
-        "Student deleted successfully."
+        f"{student.full_name} has been deleted successfully."
     )
     return redirect("students:student_lists")
 

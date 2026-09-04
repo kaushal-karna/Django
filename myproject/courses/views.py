@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404    
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-
 from .models import Course
 from teachers.models import Teacher
+from django.contrib import messages
 
 # Showing text in httpresponse 
 
@@ -37,7 +37,7 @@ def index(request):
 def add_courses(request):
     teachers = Teacher.objects.filter(status="active")
     if request.method == "POST":
-        Course.objects.create(
+        courses = Course.objects.create(
             code=request.POST.get("code"),
             name=request.POST.get("name"),
             department=request.POST.get("department"),
@@ -49,15 +49,30 @@ def add_courses(request):
             status=request.POST.get("status"),
             description=request.POST.get("description"),
         )
+        
+        messages.success(request,
+            f"{ courses.code } { courses.name } has been added successfully."
+        )
         return redirect('courses:course_lists')
+    context = {
+        "teachers": teachers
+    }
       
-    return render(request, 'courses/add_courses.html')
+    return render(request, 'courses/add_courses.html', context)
 
 @login_required
 def course_lists(request):
     courses = Course.objects.all()
+    departments = (
+        Course.objects
+        .values_list("department", flat=True)
+        .distinct()
+        .order_by("department")
+    )
     context = {
         "courses": courses,
+        "departments": departments,
+        "status_choices": Course.STATUS_CHOICES,
     }
     return render(request, 'courses/course_lists.html', context)
 
@@ -99,6 +114,11 @@ def edit_course(request, course_id):
         course.description = request.POST.get("description")
 
         course.save()
+        
+        messages.success(
+                    request,
+                    f"{course.code} has been updated successfully."
+                )
 
         return redirect("courses:course_lists")
 
@@ -117,6 +137,10 @@ def edit_course(request, course_id):
 def delete_course(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     course.delete()
+    messages.success(
+        request,
+        f"{course.code} {course.name} has been deleted successfully"
+    )
     return redirect("courses:course_lists")
 
 

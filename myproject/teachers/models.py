@@ -1,16 +1,16 @@
 from django.db import models
-
+from django.utils import timezone
 class Teacher(models.Model):
     STATUS_CHOICES = [
         ("active", "Active"),
         ("inactive", "Inactive"),
         ("on_leave", "On Leave"),
     ]
+    teacher_id = models.CharField(max_length=15, default=0)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=30, blank=True)
-
     department = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
     qualification = models.CharField(max_length=200)
@@ -31,6 +31,9 @@ class Teacher(models.Model):
         on_delete=models.CASCADE,
         related_name = "teachers"
     )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     @property
     def full_name(self):

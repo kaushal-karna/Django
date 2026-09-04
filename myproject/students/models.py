@@ -1,11 +1,9 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-from datetime import datetime, date
-
-
+from datetime import date
 class Student(models.Model):
+    
     STATUS_CHOICES = [
         ("active", "Active"),
         ("inactive", "Inactive"),
@@ -26,7 +24,6 @@ class Student(models.Model):
 
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=30, blank=True)
-    students_enrolled = models.PositiveIntegerField(default=0, blank=True)
     date_of_birth = models.DateField()
 
     department = models.CharField(max_length=150)
@@ -47,10 +44,6 @@ class Student(models.Model):
     
     # Additional fields for student information
     personal_info = models.TextField(blank=True)
-    CURRENT_YEAR = date.today().year
-    YEAR_CHOICES = [(year, year) for year in range(2000, CURRENT_YEAR + 1)]
-    
-    enrollment_year = models.PositiveIntegerField(default=CURRENT_YEAR)
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -58,5 +51,10 @@ class Student(models.Model):
     class Meta:
         ordering = ["last_name", "first_name"]
 
+    @property
+    
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+        
     def __str__(self):
         return f"{self.student_id} - {self.first_name} {self.last_name}"

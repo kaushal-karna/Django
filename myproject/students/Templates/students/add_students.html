@@ -77,6 +77,22 @@
             </select>
           </div>
 
+           <div class="field">
+              <label for="courses">Courses</label>
+
+              <select name="courses" id="courses" multiple>
+                  {% for course in courses %}
+                      <option value="{{ course.id }}">
+                          {{ course.code }} - {{ course.name }}
+                      </option>
+                  {% endfor %}
+              </select>
+
+              <small>
+                  Hold Ctrl (Windows) or Command (Mac) to select multiple courses.
+              </small>
+          </div>
+
           <div class="field span-2">
             <label for="address">Address</label>
             <textarea id="address" name="address" placeholder="Student's current address…"></textarea>

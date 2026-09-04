@@ -103,72 +103,33 @@
           </thead>
 
           <tbody>
+            {% for course in student.enrolled_courses.all %}
+              <tr>
+                <td data-label="Code">
+                  <span class="stamp">{{ course.code }}</span>
+                </td>
 
-            <tr>
-              <td data-label="Code">
-                <span class="stamp">CS-101</span>
-              </td>
+                <td data-label="Course" class="course-name">
+                  {{ course.name }}
+                </td>
 
-              <td data-label="Course" class="course-name">
-                Introduction to Programming
-              </td>
+                <td data-label="Department" class="course-dept">
+                  {{ course.department }}
+                </td>
 
-              <td data-label="Department" class="course-dept">
-                Computer Science
-              </td>
+                <td data-label="Instructor">
+                  {{ course.instructor }}
+                </td>
 
-              <td data-label="Instructor">
-                Dr. Alan Whitfield
-              </td>
-
-              <td data-label="Status">
-                <span class="pill active">Enrolled</span>
-              </td>
-            </tr>
-
-            <tr>
-              <td data-label="Code">
-                <span class="stamp">MAT-101</span>
-              </td>
-
-              <td data-label="Course" class="course-name">
-                Calculus I
-              </td>
-
-              <td data-label="Department" class="course-dept">
-                Mathematics
-              </td>
-
-              <td data-label="Instructor">
-                Mr. David Anderson
-              </td>
-
-              <td data-label="Status">
-                <span class="pill active">Enrolled</span>
-              </td>
-            </tr>
-
-            <tr>
-              <td data-label="Code">
-                <span class="stamp">ENG-101</span>
-              </td>
-
-              <td data-label="Course" class="course-name">
-                Academic Writing
-              </td>
-
-              <td data-label="Department" class="course-dept">
-                English
-              </td>
-
-              <td data-label="Instructor">
-                Ms. Priya Nadar
-              </td>
-
-              <td data-label="Status">
-                <span class="pill active">Enrolled</span>
-              </td>
-            </tr>
+                <td data-label="Status">
+                  <span class="pill active">Enrolled</span>
+                </td>
+            {% empty %}
+                <td data-label="Status">
+                  <span class="pill inactive"> No courses enrolled.</span>
+                </td>
+              </tr>
+            {% endfor %}
 
           </tbody>
 
@@ -182,7 +143,7 @@
     <!-- ===== Actions ===== -->
     <div class="form-actions">
 
-      <a href="{% url 'students:edit_student' student.id %}" class="btn btn-primary">
+      <a href="{% url 'students:student_edit' student.id %}" class="btn btn-primary">
         Edit Student
       </a>
 

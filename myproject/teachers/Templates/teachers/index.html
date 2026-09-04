@@ -92,13 +92,13 @@
           {% for teacher in teachers %}
           <tr>
             <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' teacher.id %}">
-                <span class="stamp">{{ teacher.id }}</span>
+              <a href="{% url 'teachers:teacher_details' teacher.teacher_id %}">
+                <span class="stamp">{{ teacher.teacher_id }}</span>
               </a>
             </td>
 
             <td data-label="Teacher Name" class="course-name">
-              {{ teacher.name }}
+              {{ teacher.full_name }}
             </td>
 
             <td data-label="Department" class="course-dept">
