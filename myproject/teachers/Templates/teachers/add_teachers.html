@@ -4,13 +4,37 @@
 
 {% block content %}
 
-<main> <div class="page-head"> <div> <p class="eyebrow">New entry</p> <h1>Add a Teacher</h1> <p class="lede">Fill in the details below to add a new teacher to the directory. This is a demo form — submitting does not save the data.</p> </div> </div>
+<main>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">New entry</p>
+      <h1>Add a Teacher</h1>
+      <p class="lede">Fill in the details below to add a new teacher to the directory.</p>
+    </div>
+  </div>
 <div class="card card-pad">
   <form id="teacher-form" action="{% url 'teachers:add_teachers' %}" method="POST" novalidate>
     {% csrf_token %}
+
+    {% if form.errors %}
+    <div class="alert alert-error" style="margin-bottom: 20px;">
+      <strong>Please correct the following errors:</strong>
+      <ul>
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li>{{ field.label }}: {{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
     <div class="form-grid">
       <div class="field">
-        <label for="student_id">Teacher ID</label>
+        <label for="teacher_id">Teacher ID</label>
         <input type="text" id="teacher_id" name="teacher_id" placeholder="e.g. TCH-2026-001" required>
       </div>
       <div class="field">

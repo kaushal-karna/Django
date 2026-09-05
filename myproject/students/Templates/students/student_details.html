@@ -58,8 +58,18 @@
       </div>
 
       <div class="item">
-        <div class="k">Enrollment Year</div>
-        <div class="v">{{ student.enrollment_year }}</div>
+        <div class="k">Program</div>
+        <div class="v">{{ student.program }}</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Date of Birth</div>
+        <div class="v">{{ student.date_of_birth|date:"M d, Y" }}</div>
+      </div>
+
+      <div class="item">
+        <div class="k">Address</div>
+        <div class="v">{{ student.address|default:"N/A" }}</div>
       </div>
 
     </div>
@@ -124,9 +134,11 @@
                 <td data-label="Status">
                   <span class="pill active">Enrolled</span>
                 </td>
+              </tr>
             {% empty %}
-                <td data-label="Status">
-                  <span class="pill inactive"> No courses enrolled.</span>
+              <tr>
+                <td colspan="5" style="text-align:center; color:var(--ink-soft); padding:16px;">
+                  No courses enrolled.
                 </td>
               </tr>
             {% endfor %}

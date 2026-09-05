@@ -52,9 +52,16 @@ def add_students(request):
 @login_required
 def student_lists(request):
     students = Student.objects.all().order_by("student_id")
-
-    context={
-        "students": students
+    departments = (
+        Student.objects
+        .values_list("department", flat=True)
+        .distinct()
+        .order_by("department")
+    )
+    context = {
+        "students": students,
+        "departments": departments,
+        "status_choices": Student.STATUS_CHOICES,
     }
     return render(request, 'students/student_lists.html', context)
 
@@ -116,7 +123,7 @@ def delete_student(request, student_id):
 
 
 
-class StudentListView(ListView):
+class StudentListView(LoginRequiredMixin, ListView):
     model = Student
     template_name = "students/students_lists_cbv.html"
     context_object_name = 'students'

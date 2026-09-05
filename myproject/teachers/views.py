@@ -44,24 +44,27 @@ def add_teachers(request):
 
 
 @login_required
-# (login_url='accounts:login')
 def teacher_lists(request):
     teachers = Teacher.objects.all().order_by("teacher_id")
-    
-    context={
-            "teachers": teachers
-        }
+    departments = (
+        Teacher.objects
+        .values_list("department", flat=True)
+        .distinct()
+        .order_by("department")
+    )
+    context = {
+        "teachers": teachers,
+        "departments": departments,
+        "status_choices": Teacher.STATUS_CHOICES,
+    }
     return render(request, 'teachers/teacher_lists.html', context)
 
 
 @login_required
 def teacher_details(request, pk):
-    teachers = get_object_or_404(Teacher, pk=pk)
-    teacher = Teacher.objects.all()
+    teacher = get_object_or_404(Teacher, pk=pk)
     context = {
         "teacher": teacher,
-        "teachers": teachers,
-        
     }   
     return render(request, 'teachers/teacher_details.html', context)
 
@@ -100,12 +103,15 @@ def teacher_edit(request, teacher_id):
     }
     return render(request, 'teachers/edit_teachers.html', context)
 
-@login_required
 @require_POST
 @login_required
 def delete_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     teacher.delete()
+    messages.success(
+        request,
+        f"{teacher.full_name} has been deleted successfully."
+    )
     return redirect("teachers:teacher_lists")
 
 

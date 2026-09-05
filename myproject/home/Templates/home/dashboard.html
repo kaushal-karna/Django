@@ -88,7 +88,10 @@
 
 
     <!-- Student Dashboard -->
-    <div class="module-card is-disabled">
+    <a
+        href="{% url 'students:index' %}"
+        class="module-card is-active"
+    >
 
         <span class="module-icon">
             03
@@ -104,10 +107,10 @@
         </p>
 
         <span class="module-status">
-            Coming soon
+            Open →
         </span>
 
-    </div>
+    </a>
 
 
     <!-- Attendance Dashboard -->

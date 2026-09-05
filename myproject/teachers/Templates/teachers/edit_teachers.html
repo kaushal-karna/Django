@@ -24,34 +24,64 @@
 
   <div class="card card-pad">
 
-```
-<form
-  id="teacher-form"
-  action="{% url 'teachers:edit_teacher' teacher.id %}"
-  method="POST"
-  novalidate
->
+    <form
+      id="teacher-form"
+      action="{% url 'teachers:teacher_edit' teacher.id %}"
+      method="POST"
+      novalidate
+    >
 
-  {% csrf_token %}
+      {% csrf_token %}
 
-  <div class="form-grid">
+      {% if form.errors %}
+      <div class="alert alert-error" style="margin-bottom: 20px;">
+        <strong>Please correct the following errors:</strong>
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
 
+      <div class="form-grid">
 
-    <!-- First Name -->
-    <div class="field">
-      <label for="first_name">
-        First name
-      </label>
+        <!-- Teacher ID -->
+        <div class="field">
+          <label for="teacher_id">
+            Teacher ID
+          </label>
 
-      <input
-        type="text"
-        id="first_name"
-        name="first_name"
-        value="{{ teacher.first_name }}"
-        placeholder="e.g. Ram"
-        required
-      >
-    </div>
+          <input
+            type="text"
+            id="teacher_id"
+            name="teacher_id"
+            value="{{ teacher.teacher_id }}"
+            placeholder="e.g. TCH-001"
+            required
+          >
+        </div>
+
+        <!-- First Name -->
+        <div class="field">
+          <label for="first_name">
+            First name
+          </label>
+
+          <input
+            type="text"
+            id="first_name"
+            name="first_name"
+            value="{{ teacher.first_name }}"
+            placeholder="e.g. Ram"
+            required
+          >
+        </div>
 
 
     <!-- Last Name -->
@@ -298,7 +328,6 @@
   </div>
 
 </form>
-```
 
   </div>
 

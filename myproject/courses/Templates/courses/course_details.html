@@ -34,7 +34,49 @@
 
       <div class="item">
         <div class="k">Description</div>
-        <p style="margin-top:8px; max-width:70ch;">Foundational course covering variables, control flow, functions and basic data structures using Python.</p>
+        <p style="margin-top:8px; max-width:70ch;">{{ course.description|default:"No description provided."|linebreaks }}</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="item">
+        <div class="k">Enrolled Students ({{ course.enrolled_students.count }} / {{ course.capacity }})</div>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table class="catalog">
+            <thead>
+              <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Department</th>
+                <th>Semester</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for student in course.enrolled_students.all %}
+              <tr>
+                <td data-label="Student ID">
+                  <a href="{% url 'students:student_details' student.pk %}">
+                    <span class="stamp">{{ student.student_id }}</span>
+                  </a>
+                </td>
+                <td data-label="Student Name" class="course-name">
+                  <a href="{% url 'students:student_details' student.pk %}" style="color:inherit; text-decoration:none;">
+                    {{ student.full_name }}
+                  </a>
+                </td>
+                <td data-label="Department" class="course-dept">{{ student.department }}</td>
+                <td data-label="Semester">{{ student.semester }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4" style="text-align:center; color:var(--ink-soft); padding:16px;">
+                  No students currently enrolled in this course.
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="form-actions">

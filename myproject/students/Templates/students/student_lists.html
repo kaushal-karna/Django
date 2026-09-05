@@ -27,17 +27,17 @@ Campus{% endblock %} {% block page %}students{% endblock %} {% block content %}
     <div style="display: flex; gap: 10px; flex-wrap: wrap">
       <select id="student-dept-filter" class="filter-select">
         <option value="">All departments</option>
-        {% for student in students %}
-        <option value="{{ student.department }}">
-          {{ student.department }}
+        {% for dept in departments %}
+        <option value="{{ dept }}">
+          {{ dept }}
         </option>
         {% endfor %}
       </select>
 
       <select id="student-status-filter" class="filter-select">
         <option value="">All statuses</option>
-        {% for status, display in student.status.choices %}
-        <option value="{{ status }}">{{ student.get_status_display }}</option>
+        {% for status, display in status_choices %}
+        <option value="{{ status }}">{{ display }}</option>
         {% endfor %}
       </select>
     </div>

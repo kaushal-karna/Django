@@ -37,52 +37,17 @@
     <div style="display:flex; gap:10px; flex-wrap:wrap;">
 
       <select id="teacher-dept-filter" class="filter-select">
-
-        <option value="">
-          All departments
-        </option>
-
-        <option value="Computer Science">
-          Computer Science
-        </option>
-
-        <option value="Mathematics">
-          Mathematics
-        </option>
-
-        <option value="English">
-          English
-        </option>
-
-        <option value="Physics">
-          Physics
-        </option>
-
-        <option value="History">
-          History
-        </option>
-
-        <option value="Fine Arts">
-          Fine Arts
-        </option>
-
+        <option value="">All departments</option>
+        {% for dept in departments %}
+          <option value="{{ dept }}">{{ dept }}</option>
+        {% endfor %}
       </select>
 
-
       <select id="teacher-status-filter" class="filter-select">
-
-        <option value="">
-          All statuses
-        </option>
-
-        <option value="active">
-          Active
-        </option>
-
-        <option value="inactive">
-          Inactive
-        </option>
-
+        <option value="">All statuses</option>
+        {% for status, display in status_choices %}
+          <option value="{{ status }}">{{ display }}</option>
+        {% endfor %}
       </select>
 
     </div>
@@ -100,7 +65,7 @@
           <th>Teacher ID</th>
           <th>Teacher Name</th>
           <th>Department</th>
-          <th>Subject</th>
+          <th>Position</th>
           <th>Email</th>
           <th>Status</th>
           <th></th>
@@ -111,11 +76,10 @@
       <tbody id="teachers-body">
 
         {% for teacher in teachers %}
-        <!-- Teacher 1 -->
           <tr
-            data-search="tch-001 dr. alan whitfield programming alan.whitfield@greenfield.edu"
-            data-dept="Computer Science"
-            data-status="active"
+            data-search="{{ teacher.teacher_id }} {{ teacher.full_name }} {{ teacher.department }} {{ teacher.position }} {{ teacher.email }}"
+            data-dept="{{ teacher.department }}"
+            data-status="{{ teacher.status }}"
           >
 
           <td data-label="Teacher ID">
@@ -132,7 +96,7 @@
               href="{% url 'teachers:teacher_details' teacher.pk %}"
               style="color:inherit; text-decoration:none;"
             >
-              {{ teacher.first_name }} {{ teacher.last_name }}
+              {{ teacher.full_name }}
             </a>
 
           </td>
@@ -141,17 +105,17 @@
             {{ teacher.department }}
           </td>
 
-          <td data-label="Subject">
-            {{teacher.subject}}
+          <td data-label="Position">
+            {{ teacher.position }}
           </td>
 
           <td data-label="Email">
-            {{teacher.email}}
+            {{ teacher.email }}
           </td>
 
           <td data-label="Status">
-            <span class="pill active">
-              {{teacher.status}}
+            <span class="pill {{ teacher.status }}">
+              {{ teacher.get_status_display }}
             </span>
           </td>
 

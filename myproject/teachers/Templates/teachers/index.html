@@ -80,7 +80,7 @@
             <th>Teacher ID</th>
             <th>Teacher Name</th>
             <th>Department</th>
-            <th>Subject</th>
+            <th>Position</th>
             <th>Email</th>
             <th>Status</th>
           </tr>
@@ -92,7 +92,7 @@
           {% for teacher in teachers %}
           <tr>
             <td data-label="Teacher ID">
-              <a href="{% url 'teachers:teacher_details' teacher.teacher_id %}">
+              <a href="{% url 'teachers:teacher_details' teacher.pk %}">
                 <span class="stamp">{{ teacher.teacher_id }}</span>
               </a>
             </td>
@@ -105,8 +105,8 @@
               {{ teacher.department }}
             </td>
 
-            <td data-label="Subject">
-              {{ teacher.subject }}
+            <td data-label="Position">
+              {{ teacher.position }}
             </td>
 
             <td data-label="Email">

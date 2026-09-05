@@ -8,7 +8,7 @@
       <div>
         <p class="eyebrow">New entry</p>
         <h1>Add a Course</h1>
-        <p class="lede">Fill in the details below to add a new course to the catalog. This is a demo form — submitting does not save the data.</p>
+        <p class="lede">Fill in the details below to add a new course to the catalog.</p>
       </div>
     </div>
 
@@ -19,6 +19,22 @@
             novalidate>
 
           {% csrf_token %}
+
+          {% if form.errors %}
+          <div class="alert alert-error" style="margin-bottom: 20px;">
+            <strong>Please correct the following errors:</strong>
+            <ul>
+              {% for field in form %}
+                {% for error in field.errors %}
+                  <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+              {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
 
           <div class="form-grid">
 
@@ -97,6 +113,8 @@
                   <label for="semester">Semester</label>
                   <select id="semester" name="semester" required>
                       <option value="">Select semester</option>
+                      <option value="Spring 2025">Spring 2025</option>
+                      <option value="Fall 2025">Fall 2025</option>
                       <option value="Spring 2026">Spring 2026</option>
                       <option value="Fall 2026">Fall 2026</option>
                       <option value="Spring 2027">Spring 2027</option>
