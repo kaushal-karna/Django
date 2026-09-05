@@ -4,7 +4,7 @@ This is a practical command reference for working in this repository on Windows 
 
 **Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Review and Learning](review_and_learning.md) | [Production Settings](track.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
 
-**Recommended Next:** Use [django_orm_practice.md](django_orm_practice.md) for data practice, then keep [statuscodes.md](statuscodes.md) and [django_debugging_checklist.md](django_debugging_checklist.md) open during daily development.
+**Recommended Next:** Use [django_orm_practice.md](django_orm_practice.md) for data practice, then read [track.md](track.md) for production settings. Keep [statuscodes.md](statuscodes.md) and [django_debugging_checklist.md](django_debugging_checklist.md) open during daily development.
 
 **Central Reference:** Use this file for commands. Use [README.md](README.md) for the learning order, [detail.md](detail.md) for concepts, [django_debugging_checklist.md](django_debugging_checklist.md) for error tracing, [statuscodes.md](statuscodes.md) for HTTP results, and [django_orm_practice.md](django_orm_practice.md) for database queries.
 
@@ -123,7 +123,62 @@ python manage.py runserver 8001
 
 Stop the server with `Ctrl+C`.
 
-## 5. Commands Used to Check This Project
+## 5. Development and Production Modes
+
+The settings files use environment variables. Environment values are strings, so the project converts the text `True` or `False` into a real Python boolean.
+
+### Run with `DEBUG=True`
+
+Use this mode while building pages and debugging local errors:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+$env:DJANGO_DEBUG='True'
+$env:DJANGO_ALLOWED_HOSTS='127.0.0.1,localhost'
+python manage.py check
+python manage.py runserver
+```
+
+Advantages:
+
+- Detailed local tracebacks help locate the failing file and line.
+- Django's development server serves local static assets conveniently.
+- Iteration is quick while learning.
+
+Never expose this mode publicly because detailed error pages can reveal sensitive implementation information.
+
+### Run with `DEBUG=False`
+
+Use this mode to imitate deployment before pushing or deploying:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+$env:DJANGO_DEBUG='False'
+$env:DJANGO_SECRET_KEY='long-random-validation-secret-not-for-committing'
+$env:DJANGO_ALLOWED_HOSTS='127.0.0.1,localhost'
+$env:DJANGO_SECURE_SSL_REDIRECT='False'
+$env:DJANGO_SESSION_COOKIE_SECURE='False'
+$env:DJANGO_CSRF_COOKIE_SECURE='False'
+python manage.py check --deploy
+python manage.py collectstatic --noinput
+python manage.py test
+```
+
+For a real HTTPS deployment, set the secure redirect and cookie values to `True`, use real domain names in `DJANGO_ALLOWED_HOSTS`, and configure HSTS only after HTTPS works correctly. See [track.md](track.md) for each setting's purpose.
+
+Check the active value inside Django:
+
+```powershell
+python manage.py shell -c "from django.conf import settings; print('DEBUG=', settings.DEBUG); print('ALLOWED_HOSTS=', settings.ALLOWED_HOSTS)"
+```
+
+Remove temporary values from the current PowerShell session when finished:
+
+```powershell
+Remove-Item Env:DJANGO_DEBUG,Env:DJANGO_SECRET_KEY,Env:DJANGO_ALLOWED_HOSTS,Env:DJANGO_SECURE_SSL_REDIRECT,Env:DJANGO_SESSION_COOKIE_SECURE,Env:DJANGO_CSRF_COOKIE_SECURE -ErrorAction SilentlyContinue
+```
+
+## 6. Commands Used to Check This Project
 
 Run the standard Django configuration check:
 
@@ -196,7 +251,7 @@ Review a summary only:
 git diff --stat
 ```
 
-## 6. Commands Used During This Project Review
+## 7. Commands Used During This Project Review
 
 These are the real checks used while fixing and reviewing the project. They form a useful audit recipe when you want confidence before pushing changes.
 
@@ -211,7 +266,7 @@ cd C:\Users\USER\Desktop\MMAMC\Django\myproject
 & ..\venv\Scripts\python.exe manage.py test
 ```
 
-Expected results for the current project are no system-check issues, no migration changes, and a successful test command. The project currently has no discovered tests, so `Found 0 test(s)` means the test runner completed but test coverage has not been added yet.
+Expected results for the current project are no system-check issues, no migration changes, and five passing tests. The separate `portfolio/` project currently has no discovered tests, so `Found 0 test(s)` there means only that the test runner completed; it is not meaningful behavioral coverage.
 
 ### Check the Separate Portfolio Project
 
@@ -363,7 +418,7 @@ Remove-Item Env:DJANGO_DEBUG,Env:DJANGO_SECRET_KEY,Env:DJANGO_ALLOWED_HOSTS,Env:
 
 Read [review_and_learning.md](review_and_learning.md) for the complete explanation of the audit, dashboard, security fixes, tests, green-signal checklist, and safe commit workflow.
 
-## 7. Database and Migration Workflow
+## 8. Database and Migration Workflow
 
 After changing a model:
 
@@ -428,7 +483,65 @@ Then visit:
 http://127.0.0.1:8000/admin/
 ```
 
-## 8. Static Files and DEBUG=False
+## 9. Useful Commands for Future Projects
+
+Inspect the settings Django is actually using. This helps find unexpected environment variables or inherited configuration:
+
+```powershell
+python manage.py diffsettings
+```
+
+List every URL registered by the project. Django does not include this command by default, so install a URL-inspection package only if your project needs it; otherwise trace routes through the root and app `urls.py` files.
+
+Inspect the migration graph and planned operations:
+
+```powershell
+python manage.py showmigrations
+python manage.py showmigrations --plan
+python manage.py sqlmigrate students 0001
+```
+
+Create a database backup fixture and load a fixture later:
+
+```powershell
+python manage.py dumpdata --indent 2 > backup.json
+python manage.py loaddata backup.json
+```
+
+Use `dumpdata` carefully because fixtures may contain personal data. Do not commit private production data.
+
+Inspect an existing database and generate model suggestions:
+
+```powershell
+python manage.py inspectdb
+```
+
+Manage accounts and sessions:
+
+```powershell
+python manage.py createsuperuser
+python manage.py changepassword username
+python manage.py clearsessions
+```
+
+Inspect the active interpreter and installed Django version:
+
+```powershell
+python -c "import sys; print(sys.executable)"
+python --version
+python -m django --version
+python -m pip list
+```
+
+Use these commands as a toolbox, but always read the command's help before using an unfamiliar option:
+
+```powershell
+python manage.py help
+python manage.py help check
+python manage.py help migrate
+```
+
+## 10. Static Files and DEBUG=False
 
 The active project uses WhiteNoise's compressed manifest storage. Generate the manifest after installing or changing CSS, JavaScript, or image assets:
 
@@ -457,7 +570,7 @@ ValueError: Missing staticfiles manifest entry for 'css/style.css'
 
 Generated files under `myproject/staticfiles/` are ignored by Git. Source assets belong in `myproject/static/`.
 
-## 9. Temporarily Test DEBUG=False
+## 11. Temporarily Test DEBUG=False
 
 The current settings file has `DEBUG = True` as a development default. To test production-style rendering without permanently editing settings, use a short Django shell script:
 
@@ -484,7 +597,7 @@ A healthy result prints HTTP `200` for the public pages. Use the project's virtu
 @' ... '@ | & C:\Users\USER\Desktop\MMAMC\Django\venv\Scripts\python.exe -
 ```
 
-## 10. Find Errors Quickly
+## 12. Find Errors Quickly
 
 Search all Python files for a word or setting:
 
@@ -528,7 +641,7 @@ Get-ChildItem -Recurse -File -Filter *.html
 
 When a page returns 500, run the server in the terminal and read the traceback. With `DEBUG=True`, Django shows the exception details. With `DEBUG=False`, inspect the server terminal because the browser intentionally shows only a generic error page.
 
-## 11. Daily Workflow
+## 13. Daily Workflow
 
 Use this compact routine at the beginning of a work session:
 
@@ -567,7 +680,7 @@ git diff --check
 git status --short
 ```
 
-## 12. Git Basics for Safe Progress
+## 14. Git Basics for Safe Progress
 
 Run Git commands from the repository root:
 
@@ -728,7 +841,7 @@ git push origin main
 git status
 ```
 
-## 13. Run the Separate Portfolio Project
+## 15. Run the Separate Portfolio Project
 
 The `portfolio/` directory has its own `manage.py` and settings package. Run it independently:
 
@@ -747,7 +860,7 @@ http://127.0.0.1:8001/
 
 Always run commands from the project directory whose `manage.py` you intend to use.
 
-## 14. Learn Django by Tracing the Request
+## 16. Learn Django by Tracing the Request
 
 When you open a URL, follow this path:
 

@@ -130,6 +130,29 @@ Run `makemigrations` after model changes, then `migrate` to apply the generated 
 
 When running with `DEBUG=False`, run `collectstatic --noinput` after installing or changing static assets. WhiteNoise uses a compressed manifest in this project, and the manifest must contain every file referenced by `{% static %}` template tags.
 
+## Development and Production Modes
+
+This project reads `DEBUG` from the `DJANGO_DEBUG` environment variable. Use `DEBUG=True` for local development and `DEBUG=False` for production-style testing or deployment.
+
+Local development:
+
+```powershell
+$env:DJANGO_DEBUG='True'
+python manage.py runserver
+```
+
+Production-style validation:
+
+```powershell
+$env:DJANGO_DEBUG='False'
+$env:DJANGO_SECRET_KEY='use-a-long-random-secret-here'
+$env:DJANGO_ALLOWED_HOSTS='example.com,www.example.com'
+python manage.py check --deploy
+python manage.py collectstatic --noinput
+```
+
+`DEBUG=False` changes error pages, static-file handling, and security expectations. Never commit a real secret key. Read [track.md](track.md) for the complete explanation of this settings pattern.
+
 ## Important Settings
 
 The active project settings configure:
@@ -150,6 +173,7 @@ The notebooks follow the progression from Python fundamentals to Django implemen
 
 - [detail.md](detail.md) - Complete setup and implementation explanation.
 - [command.md](command.md) - Commands for daily development and project review.
+- [track.md](track.md) - Production settings, environment variables, and `DEBUG` modes.
 - [django_orm_practice.md](django_orm_practice.md) - ORM concepts and query practice.
 - [statuscodes.md](statuscodes.md) - HTTP status-code meanings and first checks.
 - [django_debugging_checklist.md](django_debugging_checklist.md) - Step-by-step error tracing.
