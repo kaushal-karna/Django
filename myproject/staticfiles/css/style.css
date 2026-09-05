@@ -109,16 +109,404 @@ select:focus-visible, textarea:focus-visible{
 }
 
 
-.profile-container {
-    width: 90%;
-    max-width: 650px;
-    margin: 50px auto;
-    padding: 30px;
-    background: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+/* =========================================================
+   Profile Page + Header User Profile
+   ========================================================= */
+
+
+/* =========================================================
+   Profile Page
+   ========================================================= */
+
+.profile-page {
+    max-width: 760px;
+    margin: 0 auto;
 }
+
+
+/* ---------- Profile Card ---------- */
+
+.profile-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 28px;
+}
+
+
+/* ---------- Profile Header ---------- */
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+/* ---------- Profile Avatar ---------- */
+
+.profile-avatar {
+    width: 88px;
+    height: 88px;
+    flex: 0 0 88px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--active-bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--accent-dark);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ---------- Profile Information ---------- */
+
+.profile-info h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+
+    margin: 0 0 4px;
+
+    color: var(--ink);
+}
+
+.profile-info p {
+    margin: 0;
+
+    color: var(--ink-soft);
+
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.03em;
+}
+
+
+/* ---------- Divider ---------- */
+
+.profile-divider {
+    border-top: 1px solid var(--line);
+    margin: 26px 0;
+}
+
+
+/* =========================================================
+   Django Profile Form
+   ========================================================= */
+
+.profile-form p {
+    margin: 0 0 18px;
+}
+
+.profile-form label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    color: var(--ink-soft);
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+    width: 100%;
+
+    font-family: var(--font-body);
+    font-size: 14px;
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+
+    background: #FCFCFA;
+    color: var(--ink);
+
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+    outline: none;
+
+    border-color: var(--accent);
+    background: #fff;
+
+    box-shadow: 0 0 0 2px rgba(47, 111, 98, 0.08);
+}
+
+.profile-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+/* =========================================================
+   Profile Picture Upload
+   ========================================================= */
+
+.profile-form input[type="file"] {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.profile-form input[type="file"]::file-selector-button {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13px;
+
+    color: var(--accent-dark);
+    background: var(--active-bg);
+
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+
+    padding: 7px 12px;
+    margin-right: 10px;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease;
+}
+
+.profile-form input[type="file"]::file-selector-button:hover {
+    background: #d8e9e3;
+}
+
+
+/* =========================================================
+   Help Text
+   ========================================================= */
+
+.profile-form .helptext {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 12px;
+    color: var(--ink-soft);
+}
+
+
+/* =========================================================
+   Form Error Messages
+   ========================================================= */
+
+.profile-form .errorlist {
+    margin: 5px 0 8px;
+    padding: 0;
+
+    list-style: none;
+
+    color: var(--stamp);
+    font-size: 12px;
+}
+
+.profile-form .errorlist li {
+    padding: 4px 0;
+}
+
+
+/* =========================================================
+   Profile Actions
+   ========================================================= */
+
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 26px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--line);
+}
+
+
+/* =========================================================
+   Header User Profile
+   ========================================================= */
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 14px;
+}
+
+
+/* ---------- Header Profile Link ---------- */
+
+.profile-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    line-height: 0;
+
+    border-radius: 50%;
+}
+
+
+/* ---------- Header Avatar ---------- */
+
+.header-avatar {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    background: var(--active-bg);
+    border: 2px solid var(--seal);
+
+    color: var(--accent-dark);
+
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* ---------- Avatar Hover ---------- */
+
+.profile-link:hover .header-avatar {
+    transform: scale(1.06);
+
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 3px rgba(47, 111, 98, 0.2);
+}
+
+
+/* ---------- Avatar Fallback ---------- */
+
+.header-avatar-fallback {
+    background: var(--active-bg);
+}
+
+
+/* =========================================================
+   Sign Out
+   ========================================================= */
+
+.logout-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+
+    letter-spacing: 0.04em;
+
+    color: #C7CBD1;
+    text-decoration: none;
+
+    transition: color 0.15s ease;
+}
+
+.logout-link:hover {
+    color: #F2F0E8;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    /* ---------- Profile Page ---------- */
+
+    .profile-page {
+        width: 100%;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-avatar {
+        width: 76px;
+        height: 76px;
+        flex-basis: 76px;
+
+        font-size: 28px;
+    }
+
+    .profile-info h2 {
+        font-size: 21px;
+    }
+
+    .profile-actions {
+        justify-content: stretch;
+    }
+
+    .profile-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+
+    /* ---------- Header User ---------- */
+
+    .user-menu {
+        gap: 10px;
+    }
+
+    .header-avatar {
+        width: 38px;
+        height: 38px;
+
+        font-size: 15px;
+    }
+
+    .logout-link {
+        font-size: 11px;
+    }
+}
+
+/* Brand Section */
 
 
 .brand{

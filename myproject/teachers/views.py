@@ -29,7 +29,16 @@ def index(request):
 @login_required
 def add_teachers(request):
     if request.method == "POST":
-        print(request.POST)
+        courses = Course.objects.filter(
+        status="active")
+        print("========== POST DATA ==========")
+
+        for key, value in request.POST.items():
+            print(key, "=>", value)
+
+        print("===============================")
+
+
         teacher = Teacher.objects.create(
             teacher_id=request.POST.get("teacher_id"),
             first_name=request.POST.get("first_name"), 
@@ -42,8 +51,15 @@ def add_teachers(request):
             qualification=request.POST.get("qualification"),
             experience=request.POST.get("experience"),
             status=request.POST.get("status"),
-            bio=request.POST.get("bio"),
-            subject=request.POST.get("subject"),              
+            bio=request.POST.get("bio"),         
+        )
+        
+        course_ids = request.POST.getlist("courses")
+
+        Course.objects.filter(
+            id__in=course_ids
+        ).update(
+            instructor=teacher
         )
         messages.success(
             request,
@@ -76,7 +92,6 @@ def teacher_details(request, pk):
 
 def teacher_edit(request, teacher_id):
     teacher = get_object_or_404(Teacher, pk=teacher_id)
-    
     if request.method == "POST":
         teacher.teacher_id = request.POST.get("teacher_id")
         teacher.first_name = request.POST.get("first_name")
@@ -90,8 +105,22 @@ def teacher_edit(request, teacher_id):
         teacher.experience = request.POST.get("experience")
         teacher.status = request.POST.get("status")
         teacher.bio = request.POST.get("bio")
-        teacher.subject = get_object_or_404(Course, pk=request.POST.get('subject'))
+        
         teacher.save()
+        course_ids = request.POST.getlist("courses")
+
+        # Remove courses previously assigned to this teacher
+        teacher.courses.update(
+            instructor=None
+        )
+
+        # Assign selected courses to this teacher
+        Course.objects.filter(
+            id__in=course_ids
+        ).update(
+            instructor=teacher
+        )
+        
         messages.success(
             request,
             f"{ teacher.full_name } has been updated successfully"
@@ -99,7 +128,7 @@ def teacher_edit(request, teacher_id):
         return redirect('teachers:teacher_lists')
     
     context = {
-        "teacher": teacher
+        "teacher": teacher,
     }
     return render(request, 'teachers/edit_teachers.html', context)
 

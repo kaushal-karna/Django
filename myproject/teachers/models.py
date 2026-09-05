@@ -6,7 +6,7 @@ class Teacher(models.Model):
         ("inactive", "Inactive"),
         ("on_leave", "On Leave"),
     ]
-    teacher_id = models.CharField(max_length=15, default=0)
+    teacher_id = models.CharField(max_length=15, default=0, unique=True)
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)
     email = models.EmailField(unique=True)
@@ -25,13 +25,6 @@ class Teacher(models.Model):
     )
 
     bio = models.TextField(blank=True)
-    
-    subject = models.ForeignKey(
-        "courses.Course",
-        on_delete=models.CASCADE,
-        related_name = "teachers"
-    )
-    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

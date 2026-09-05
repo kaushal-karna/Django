@@ -6,7 +6,8 @@
 
 <main> <div class="page-head"> <div> <p class="eyebrow">New entry</p> <h1>Add a Teacher</h1> <p class="lede">Fill in the details below to add a new teacher to the directory. This is a demo form — submitting does not save the data.</p> </div> </div>
 <div class="card card-pad">
-  <form id="teacher-form" novalidate>
+  <form id="teacher-form" action="{% url 'teachers:add_teachers' %}" method="POST" novalidate>
+    {% csrf_token %}
     <div class="form-grid">
       <div class="field">
         <label for="student_id">Teacher ID</label>
@@ -14,62 +15,82 @@
       </div>
       <div class="field">
         <label for="first_name">First name</label>
-        <input type="text" id="first_name" placeholder="e.g. Alan" required>
+        <input type="text" id="first_name" name="first_name" placeholder="e.g. Alan" required>
       </div>
 
       <div class="field">
         <label for="last_name">Last name</label>
-        <input type="text" id="last_name" placeholder="e.g. Whitfield" required>
+        <input type="text" id="last_name" name="last_name" placeholder="e.g. Whitfield" required>
       </div>
 
       <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" placeholder="e.g. alan.whitfield@greenfield.edu" required>
+        <input type="email" id="email" name="email" placeholder="e.g. alan.whitfield@greenfield.edu" required>
       </div>
 
       <div class="field">
         <label for="phone">Phone</label>
-        <input type="tel" id="phone" placeholder="e.g. +1 555 123 4567">
+        <input type="tel" id="phone" name="phone" placeholder="e.g. +1 555 123 4567">
       </div>
 
       <div class="field">
         <label for="department">Department</label>
-        <input type="text" id="department" placeholder="e.g. Computer Science" required>
+        <input type="text" id="department" name="department" placeholder="e.g. Computer Science" required>
       </div>
 
       <div class="field">
         <label for="position">Position</label>
-        <input type="text" id="position" placeholder="e.g. Professor" required>
+        <input type="text" id="position" name="position" placeholder="e.g. Professor" required>
       </div>
 
       <div class="field">
         <label for="qualification">Qualification</label>
-        <input type="text" id="qualification" placeholder="e.g. Ph.D. in Computer Science" required>
+        <input type="text" id="qualification" name="qualification" placeholder="e.g. Ph.D. in Computer Science" required>
       </div>
 
       <div class="field">
         <label for="experience">Experience</label>
-        <input type="number" id="experience" min="0" max="60" placeholder="e.g. 8" required>
+        <input type="number" id="experience" name="experience" min="0" max="60" placeholder="e.g. 8" required>
         <span class="field-hint">Enter the number of years of teaching experience.</span>
       </div>
 
       <div class="field">
         <label for="joining_date">Joining date</label>
-        <input type="date" id="joining_date" required>
+        <input type="date" id="joining_date" name="joining_date" required>
       </div>
 
       <div class="field">
         <label for="status">Status</label>
-        <select id="status" required>
+        <select id="status" name="status" required>
           <option value="active">Active</option>
           <option value="inactive">Inactive</option>
           <option value="on_leave">On Leave</option>
         </select>
       </div>
 
+      <div class="field">
+              <label for="courses">
+                 Courses / Subjects
+              </label>
+
+              <select name="courses" id="courses" multiple>
+                  {% for course in courses %}
+                      <option value="{{ course.id }}">
+                          {{ course.code }} - {{ course.name }}
+                      </option>
+                  {% endfor %}
+              </select>
+
+              <small>
+                  Hold Ctrl (Windows) or Command (Mac) to select multiple courses.
+              </small>
+          </div>
+
+
+
       <div class="field span-2">
         <label for="bio">Biography</label>
-        <textarea id="bio" placeholder="Short summary of the teacher's background, interests, and teaching experience…"></textarea>
+        <textarea id="bio" name="bio" placeholder="Short summary of the teacher's background, interests, and teaching experience…"></textarea>
         <span class="field-hint">A sentence or two is enough — this can be shown on the teacher detail page.</span>
       </div>
     </div>
