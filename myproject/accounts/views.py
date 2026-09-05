@@ -15,6 +15,11 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+             # --- ADD THIS PART ---
+            # Look for 'next' in the URL query parameters (e.g., ?next=/teachers/teacher-lists/)
+            next_url = request.GET.get('next')
+            if next_url:
+                return redirect(next_url)
 
             return redirect('home:home_page')
     else:

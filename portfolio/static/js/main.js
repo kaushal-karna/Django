@@ -1,24 +1,40 @@
-/*
-Main JavaScript file
-Project-level JavaScript
-*/
+/* ================================
+   Main Project JavaScript 
+================================ */
 
-// Show a message when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    // Theme Switcher Logic
+    const themeToggleBtn = document.getElementById("themeToggle");
+    const htmlElement = document.documentElement;
 
-console.log("MySite JavaScript loaded successfully.");
+    // Default to dark theme, but respect anything saved previously
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    htmlElement.setAttribute("data-theme", savedTheme);
 
-// Add a simple effect to navigation links
+    if (themeToggleBtn) {
+        // Sync the icon with the theme immediately on load,
+        // instead of only updating after the first click
+        themeToggleBtn.textContent = savedTheme === "dark" ? "💡" : "🌙";
 
-const navLinks = document.querySelectorAll(".nav-menu a");
+        themeToggleBtn.addEventListener("click", () => {
+            const currentTheme = htmlElement.getAttribute("data-theme");
+            const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-navLinks.forEach(function(link) {
+            htmlElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            themeToggleBtn.textContent = newTheme === "dark" ? "💡" : "🌙";
+        });
+    }
 
-```
-link.addEventListener("click", function() {
+    // Mobile Navigation Drawer Toggle
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const navMenu = document.getElementById("navMenu");
 
-    console.log("You clicked:", link.textContent);
-
-});
-```
-
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+        mobileMenuBtn.addEventListener("click", () => {
+            const isOpen = navMenu.classList.toggle("active");
+            mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
 });

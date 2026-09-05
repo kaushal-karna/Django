@@ -72,6 +72,7 @@ def add_teachers(request):
 
 
 @login_required
+# (login_url='accounts:login')
 def teacher_lists(request):
     teachers = Teacher.objects.all().order_by("teacher_id")
     

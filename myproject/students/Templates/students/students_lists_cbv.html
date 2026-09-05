@@ -1,0 +1,35 @@
+<!-- student_list.html -->
+  {% extends 'base.html' %}
+  
+  {% block content %}
+      <h1>Students</h1>
+      
+      <!-- Display students -->
+      {% for student in students %}
+          <div class="student-card">
+              <h3>Full Name:{{ student.full_name }}</h3>
+              <p>Phone: {{ student.phone}}</p>
+              <p>Email: {{ student.email }}</p>
+              <a href="{% url 'students:student_details' student.pk %}">View Details</a>
+          </div>
+      {% empty %}
+          <p>No students found.</p>
+      {% endfor %}
+      
+      <!-- Pagination -->
+      {% if is_paginated %}
+          <div class="pagination">
+              {% if page_obj.has_previous %}
+                  <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+              {% endif %}
+              
+              {% for num in page_obj.paginator.page_range %}
+                  <a href="?page={{ num }}">{{ num }}</a>
+              {% endfor %}
+              
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+              {% endif %}
+          </div>
+      {% endif %}
+  {% endblock %}

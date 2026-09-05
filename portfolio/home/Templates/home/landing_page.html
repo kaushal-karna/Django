@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Home | MySite{% endblock %}
+{% block title %}Kaushal Karn | Portfolio{% endblock %}
 
 {% block extra_css %} 
 <link rel="stylesheet" href="{% static 'home/css/landing_page.css' %}"> 
@@ -9,95 +9,67 @@
 
 {% block content %}
 
-<section class="hero">
-    <h1>Welcome to MySite</h1>
-    <h2>{{ title }} </h2>
-    <p> {{ message }} </p>
+<!-- Hero Section with Glass Profile Card -->
+<section class="glass-panel hero">
+    <div class="hero-copy reveal-in">
+        <h1 class="hero-title">Digital Architect & Full-Stack Developer.</h1>
+        <p>I design futuristic interfaces and robust backend web applications that blend crystal-clear visual aesthetics with elite functionality.</p>
+        <div class="hero-actions">
+            <a href="/about/" class="btn">Explore Profile</a>
+            <a href="/contact/" class="theme-toggle-btn hero-secondary-btn">Let's Talk</a>
+        </div>
+    </div>
 
-    <h2>Hi, I'm Kaushal Karn 👋</h2>
-
-    <p>
-        I am a BSc.CSIT student interested in software development,
-        web development, and building real-world applications.
-    </p>
-
-    <p>
-        Welcome to my website where you can explore my projects,
-        learn more about me, and view student information.
-    </p>
-
-    <a href="/about/" class="btn">Learn More About Me</a>
+    <div class="hero-visual reveal-in hero-visual-delay">
+        <div class="hero-glow"></div>
+        <div class="glass-panel hero-card">
+            <div class="hero-avatar">
+                <img src="https://avatars.githubusercontent.com/u/98377921?v=4" alt="Kaushal Karn">
+            </div>
+            <h3>Kaushal Karn</h3>
+            <span class="hero-role">BSc. CSIT Student</span>
+        </div>
+    </div>
 </section>
 
+<!-- Stats Grid Bar -->
+<section class="stats-grid">
+    <div class="glass-panel stat-card">
+        <h2>3+</h2>
+        <p>Years Learning</p>
+    </div>
+    <div class="glass-panel stat-card">
+        <h2>15+</h2>
+        <p>Projects Built</p>
+    </div>
+    <div class="glass-panel stat-card">
+        <h2>100%</h2>
+        <p>Commitment</p>
+    </div>
+    <div class="glass-panel stat-card">
+        <h2>A+</h2>
+        <p>Academic Grade</p>
+    </div>
+</section>
 
-<section class="features">
-
-    <h2>What You'll Find Here</h2>
-
-    <div class="feature-container">
-
-        <div class="feature-card">
-            <h3>👨‍🎓 Students</h3>
-            <p>
-                Explore student information and learn how
-                student data is managed using Django.
-            </p>
-            <a href="/students/">View Students</a>
+<!-- Quick Navigation Feature Cards -->
+<section class="nav-section">
+    <h2>Platform Navigator</h2>
+    <div class="nav-grid">
+        
+        <div class="glass-panel nav-card">
+            <h3><span class="icon-badge">🚀</span> Professional Experience</h3>
+            <p>Review my internships, Python workflows, and collaborative version control history.</p>
+            <a href="/experience/" class="btn nav-btn">View Experience</a>
         </div>
 
-
-        <div class="feature-card">
-            <h3>💻 Development</h3>
-            <p>
-                Learn about my programming skills and my journey
-                in software and web development.
-            </p>
-            <a href="/about/">About Me</a>
-        </div>
-
-
-        <div class="feature-card">
-            <h3>🚀 Projects</h3>
-            <p>
-                Explore projects built using Python, Django,
-                JavaScript, C/C++, and Machine Learning.
-            </p>
-            <a href="/about/">View Projects</a>
+        <div class="glass-panel nav-card">
+            <h3><span class="icon-badge">📜</span> Certifications</h3>
+            <p>Verify completed technical courses, workshops, and continuous learning milestones.</p>
+            <a href="/certifications/" class="btn nav-btn">View Certificates</a>
         </div>
 
     </div>
-
 </section>
-
-
-<section class="skills">
-
-    <h2>My Skills</h2>
-
-    <ul>
-        <li>Python</li>
-        <li>Django</li>
-        <li>C / C++</li>
-        <li>HTML & CSS</li>
-        <li>JavaScript</li>
-        <li>Git & GitHub</li>
-        <li>MySQL / SQLite</li>
-    </ul>
-
-</section>
-
-
-<section class="goal">
-
-    <h2>My Goal</h2>
-
-    <p>
-        My goal is to become a skilled software developer and build
-        useful real-world applications while continuously improving
-        my programming and problem-solving skills.
-    </p>
-
-</section>
-
 
 {% endblock %}

@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Student
-from courses.models import Course
+from courses.models import Course 
+from django.views.generic import ListView, CreateView
+
 # Create your views here.
 
 @login_required
@@ -141,3 +143,17 @@ def delete_student(request, student_id):
     )
     return redirect("students:student_lists")
 
+
+
+
+class StudentListView(ListView):
+    model = Student
+    template_name = "students/students_lists_cbv.html"
+    context_object_name = 'students'
+    ordering = ['first_name']
+    paginate_by = 10
+    
+    
+class StudentCreateView(CreateView):
+    model = Student
+    fields = ['student_id', 'first_name', 'last_name', 'email', 'phone', 'date_of_birth', 'department', 'program', 'semester', 'status', 'address', 'personal_info']

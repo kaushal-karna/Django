@@ -1,3 +1,14 @@
+/* ================================
+   Blog Page JavaScript
+================================ */
+
+// Card hover motion is now handled entirely in CSS (.blog-card:hover)
+// so it's GPU-accelerated, respects prefers-reduced-motion, and
+// doesn't fight with the glass-panel box-shadow set in style.css.
+// This file is kept as a hook for future blog interactivity
+// (e.g. search/filter by category).
+
+
 // Select all blog cards
 const blogCards = document.querySelectorAll(".blog-card");
 
@@ -15,3 +26,6 @@ blogCards.forEach((card) => {
         card.style.boxShadow = "none";
     });
 });
+
+
+

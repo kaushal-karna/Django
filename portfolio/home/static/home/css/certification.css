@@ -1,43 +1,56 @@
 .certifications {
-max-width: 900px;
-margin: 40px auto;
-padding: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.certifications > h1,
-.certifications > p {
-text-align: center;
+.certifications-header {
+    text-align: center;
 }
 
-.certifications > p {
-max-width: 700px;
-margin: 15px auto 40px;
-line-height: 1.6;
+.certifications-header p {
+    max-width: 700px;
+    margin: 15px auto 0;
+}
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
 }
 
 .certification-card {
-border: 1px solid #ddd;
-border-radius: 8px;
-padding: 25px;
-margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: var(--transition);
+}
+
+.certification-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent-color);
 }
 
 .certification-card h2 {
-margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
 }
 
 .certification-card h3 {
-font-weight: normal;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-top: -4px;
 }
 
-.certification-card p {
-line-height: 1.6;
+.cert-skills {
+    margin-top: 6px;
 }
 
 .certification-note {
-text-align: center;
-border: 1px solid #ddd;
-border-radius: 8px;
-padding: 25px;
-margin-top: 40px;
+    text-align: center;
 }
