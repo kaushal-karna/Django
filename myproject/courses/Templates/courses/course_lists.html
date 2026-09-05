@@ -97,12 +97,10 @@ Mahendra Morang Campus {% endblock %} {% block page %}courses{% endblock %}
                     href="{% url 'courses:edit_course'  course.id %}"
                     >Edit</a
                   >
-                  <a
-                    class="btn btn-danger btn-sm"
-                    href="{% url 'courses:delete_course' course.id %}"
-                    data-delete="{{ course.name }}"
-                    >Delete</a
-                  >
+                  <form method="post" action="{% url 'courses:delete_course' course.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger btn-sm" type="submit" data-delete="{{ course.name }}">Delete</button>
+                  </form>
                 </div>
               </td>
             </tr>

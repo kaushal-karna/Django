@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, request
 from django.contrib.auth.decorators import login_required
-from django.template import context
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from courses.models import Course
 from .models import Teacher
+from .forms import TeacherForm
 
 # Create your views here.
 @login_required
@@ -30,43 +30,15 @@ def index(request):
 def add_teachers(request):
     courses = Course.objects.filter(
         status="active")
-    if request.method == "POST":
-        print("========== POST DATA ==========")
-
-        for key, value in request.POST.items():
-            print(key, "=>", value)
-
-        print("===============================")
-
-
-        teacher = Teacher.objects.create(
-            teacher_id=request.POST.get("teacher_id"),
-            first_name=request.POST.get("first_name"), 
-            last_name=request.POST.get("last_name"),
-            email=request.POST.get("email"), 
-            phone=request.POST.get("phone"), 
-            joining_date=request.POST.get("joining_date"), 
-            department=request.POST.get("department"), 
-            position=request.POST.get("position"),
-            qualification=request.POST.get("qualification"),
-            experience=request.POST.get("experience"),
-            status=request.POST.get("status"),
-            bio=request.POST.get("bio"),         
-        )
-        
-        course_ids = request.POST.getlist("courses")
-
-        Course.objects.filter(
-            id__in=course_ids
-        ).update(
-            instructor=teacher
-        )
-        messages.success(
-            request,
-            f"{teacher.full_name} has been added successfully.")
-        return redirect("teachers:teacher_lists")  
+    form = TeacherForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        teacher = form.save()
+        Course.objects.filter(id__in=request.POST.getlist("courses")).update(instructor=teacher)
+        messages.success(request, f"{teacher.full_name} has been added successfully.")
+        return redirect("teachers:teacher_lists")
     context = {
         "courses": courses,
+        "form": form,
     }
     return render(request, 'teachers/add_teachers.html', context)
 
@@ -93,26 +65,14 @@ def teacher_details(request, pk):
     }   
     return render(request, 'teachers/teacher_details.html', context)
 
-
+@login_required
 def teacher_edit(request, teacher_id):
     courses = Course.objects.filter(
             status="active")
     teacher = get_object_or_404(Teacher, pk=teacher_id)
-    if request.method == "POST":
-        teacher.teacher_id = request.POST.get("teacher_id")
-        teacher.first_name = request.POST.get("first_name")
-        teacher.last_name = request.POST.get("last_name")
-        teacher.email = request.POST.get("email")
-        teacher.phone = request.POST.get("phone")
-        teacher.joining_date = request.POST.get("joining_date")
-        teacher.department = request.POST.get("department")
-        teacher.position = request.POST.get("position")
-        teacher.qualification = request.POST.get("qualification")
-        teacher.experience = request.POST.get("experience")
-        teacher.status = request.POST.get("status")
-        teacher.bio = request.POST.get("bio")
-        
-        teacher.save()
+    form = TeacherForm(request.POST or None, instance=teacher)
+    if request.method == "POST" and form.is_valid():
+        teacher = form.save()
         course_ids = request.POST.getlist("courses")
 
         # Remove courses previously assigned to this teacher
@@ -136,9 +96,13 @@ def teacher_edit(request, teacher_id):
     context = {
         "teacher": teacher,
         "courses": courses,
+        "form": form,
     }
     return render(request, 'teachers/edit_teachers.html', context)
 
+@login_required
+@require_POST
+@login_required
 def delete_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     teacher.delete()

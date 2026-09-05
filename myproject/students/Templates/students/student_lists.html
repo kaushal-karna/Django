@@ -106,9 +106,12 @@ Campus{% endblock %} {% block page %}students{% endblock %} {% block content %}
                 Edit
               </a>
 
-              <a class="btn btn-danger btn-sm" href="{% url 'students:delete_student' student.pk %}">
-                Delete
-              </a>
+              <form method="post" action="{% url 'students:delete_student' student.pk %}">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm" type="submit" data-delete="{{ student.full_name }}">
+                  Delete
+                </button>
+              </form>
             </div>
           </td>
         </tr>

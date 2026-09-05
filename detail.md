@@ -2,7 +2,7 @@
 
 This document explains the development journey and the work completed so far in the MMAMC Django project. The main working application is `myproject/`. The `portfolio/` directory is a separate Django project and should be run independently.
 
-**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Review and Learning](review_and_learning.md) | [Production Settings](track.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
 
 **Recommended Next:** Read [command.md](command.md) after this guide, then use [django_orm_practice.md](django_orm_practice.md) to practise database queries.
 
@@ -221,9 +221,9 @@ The student, teacher, and course apps provide the common CRUD sequence:
 5. Edit an existing record.
 6. Delete a record and redirect back to the list.
 
-The views use `get_object_or_404` for detail and edit operations, so an invalid record ID produces a normal 404 response. Django messages are used in some workflows to show a success message after a record is created, updated, or deleted.
+The views use `get_object_or_404` for detail and edit operations, so an invalid record ID produces a normal 404 response. Django messages are used in some workflows to show a success message after a record is created, updated, or deleted. Delete operations require an authenticated POST request with CSRF protection.
 
-The management views are protected with `@login_required`, so anonymous visitors are redirected to the configured login URL.
+The management views are protected with `@login_required`, so anonymous visitors are redirected to the configured login URL. The custom admin dashboard uses `@staff_member_required`, so it is limited to staff users.
 
 ## 11. Forms and User Input
 
@@ -234,7 +234,7 @@ The `accounts` app uses Django's built-in form classes:
 
 The profile page uses `ProfileForm` to accept profile information and uploaded files. On a POST request, the view validates the form before saving. On a GET request, it displays the existing profile values in the form.
 
-Django forms provide validation and help prevent invalid data from being saved directly. The current CRUD pages also demonstrate direct request data handling, which is useful for learning but can later be refactored into dedicated ModelForms for stronger validation and consistency.
+Django forms provide validation and help prevent invalid data from being saved directly. The student, teacher, and course CRUD pages use dedicated `ModelForm` classes that validate required fields, unique values, dates, numeric values, and model choices before saving.
 
 ## 12. Authentication and Authorization
 
@@ -331,9 +331,9 @@ The project is intended for learning and local development. Before using it as a
 
 - Move the secret key and other environment-specific values out of source code.
 - Replace `DEBUG = True` and `ALLOWED_HOSTS = ["*"]` with production-safe settings.
-- Add comprehensive automated tests for authentication, permissions, CRUD operations, and relationships.
-- Convert direct POST field assignment in CRUD views to validated ModelForms.
-- Add permission checks to destructive actions such as delete operations.
+- Add comprehensive automated tests for all CRUD operations and model relationships.
+- Add authorization rules beyond login, such as per-app staff permissions.
+- Add CI to run checks automatically on every pull request.
 - Register and configure the domain models in Django admin where appropriate.
 - Review CSRF, secure cookies, media storage, email, and deployment settings.
 - Continue the notebook lessons and keep the implementation notes synchronized with new features.

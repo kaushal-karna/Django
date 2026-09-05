@@ -2,7 +2,7 @@
 
 This repository contains the Django work completed during the MMAMC web development lessons. It starts with Python and web development fundamentals and grows into a multi-app Django application for managing students, teachers, courses, and user profiles.
 
-**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Review and Learning](review_and_learning.md) | [Production Settings](track.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
 
 **Daily Use:** Start here when you are unsure what to read. Follow the study order below, then use [command.md](command.md) as the central reference for running, checking, reviewing, committing, and pushing the project.
 
@@ -17,6 +17,8 @@ The main application in `myproject/` currently includes:
 - Static CSS and JavaScript files, image support, and media uploads for profile pictures.
 - Models, relationships, choices, timestamps, admin integration points, and migrations.
 - Authenticated student, teacher, and course pages with add, list, detail, edit, and delete workflows.
+- A staff-only custom admin dashboard with record counts and recent academic records.
+- Validated student, teacher, and course ModelForms, safe redirects, and POST-only delete actions.
 - A protected profile page using a one-to-one relationship with Django's built-in `User` model.
 - Jupyter notebooks covering Python, web development, templates, models, ORM relationships, forms, authentication, and regular expressions.
 
@@ -59,6 +61,7 @@ The root URL configuration includes these app prefixes:
 
 - `/` - Home page
 - `/dashboard/` - Dashboard page
+- `/admin-dashboard/` - Staff-only custom administration dashboard
 - `/accounts/login/` - Log in
 - `/accounts/register/` - Create an account
 - `/accounts/logout/` - Log out
@@ -102,9 +105,11 @@ Follow this path if you are learning Django from the beginning:
 1. Start here: [README.md](README.md) for the project overview and current structure.
 2. Learn the setup: [detail.md](detail.md) for Python, virtual environments, Django, apps, models, migrations, templates, and authentication.
 3. Practise daily commands: [command.md](command.md) for starting the server, checking code, working with migrations, and using Git.
-4. Understand data: [django_orm_practice.md](django_orm_practice.md) for querying and practising the Django ORM.
-5. Understand errors: [statuscodes.md](statuscodes.md) to identify what an HTTP status code means.
-6. Trace the problem: [django_debugging_checklist.md](django_debugging_checklist.md) to locate the responsible URL, view, form, model, template, or asset.
+4. Learn how to review changes: [review_and_learning.md](review_and_learning.md) for the audit method, tests, security fixes, and commit checklist.
+5. Learn production configuration: [track.md](track.md) for environment variables, HTTPS, secure cookies, HSTS, and deployment checks.
+6. Understand data: [django_orm_practice.md](django_orm_practice.md) for querying and practising the Django ORM.
+7. Understand errors: [statuscodes.md](statuscodes.md) to identify what an HTTP status code means.
+8. Trace the problem: [django_debugging_checklist.md](django_debugging_checklist.md) to locate the responsible URL, view, form, model, template, or asset.
 
 After the first pass, use [command.md](command.md) during daily work, [django_debugging_checklist.md](django_debugging_checklist.md) whenever something fails, and [statuscodes.md](statuscodes.md) whenever you see an unfamiliar HTTP response.
 

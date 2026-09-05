@@ -2,7 +2,7 @@
 
 This is a practical command reference for working in this repository on Windows with PowerShell. The main application is in `myproject/`, and its `manage.py` file is inside that directory.
 
-**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
+**Documentation Navigation:** [README](README.md) | [Detailed Guide](detail.md) | [Commands](command.md) | [Review and Learning](review_and_learning.md) | [Production Settings](track.md) | [Debugging Checklist](django_debugging_checklist.md) | [Status Codes](statuscodes.md) | [ORM Practice](django_orm_practice.md)
 
 **Recommended Next:** Use [django_orm_practice.md](django_orm_practice.md) for data practice, then keep [statuscodes.md](statuscodes.md) and [django_debugging_checklist.md](django_debugging_checklist.md) open during daily development.
 
@@ -163,7 +163,7 @@ Run the test suite:
 python manage.py test
 ```
 
-This project currently runs successfully but has no discovered automated tests. `Found 0 test(s)` means the test command worked, not that behavior is fully tested.
+The main project now includes five focused regression tests. The separate `portfolio/` project currently has no discovered tests, so `Found 0 test(s)` there means only that the test runner completed; it is not meaningful behavioral coverage.
 
 Compile project Python files without compiling the virtual environment:
 
@@ -283,6 +283,85 @@ git diff --stat
 ```
 
 These checks catch whitespace problems, show untracked files that might need adding, and provide a compact view of the change size.
+
+### Review New and Staged Files
+
+List every changed path, including untracked files:
+
+```powershell
+git status --short
+git diff --name-only
+```
+
+Read the full tracked diff and inspect new files separately. `git diff` does not show untracked files until they are staged, so review new files directly before adding them.
+
+After staging only intended paths, repeat the checks against the staged snapshot:
+
+```powershell
+git diff --cached --check
+git diff --cached --stat
+git diff --cached
+```
+
+Never use `git add .` without first reviewing every untracked directory. Review `git status --short` before staging so unrelated files are not included.
+
+### Test the Dashboard Permission Boundary
+
+This small script checks anonymous, regular-user, and staff access to the custom dashboard:
+
+```powershell
+cd C:\Users\USER\Desktop\MMAMC\Django\myproject
+@'
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+import django
+django.setup()
+from django.contrib.auth import get_user_model
+from django.test import Client
+
+User = get_user_model()
+User.objects.filter(username__in=['__check_user__', '__check_staff__']).delete()
+user = User.objects.create_user('__check_user__', password='test-password-123')
+staff = User.objects.create_user('__check_staff__', password='test-password-123', is_staff=True)
+client = Client()
+print('anonymous:', client.get('/admin-dashboard/').status_code)
+client.login(username=user.username, password='test-password-123')
+print('regular:', client.get('/admin-dashboard/').status_code)
+client.logout()
+client.login(username=staff.username, password='test-password-123')
+print('staff:', client.get('/admin-dashboard/').status_code)
+User.objects.filter(pk__in=[user.pk, staff.pk]).delete()
+'@ | & ..\venv\Scripts\python.exe -
+```
+
+Expected output is `302` for anonymous and regular users, and `200` for a staff user.
+
+### Production Environment Validation
+
+The settings use environment variables so local development can remain convenient while deployment settings are explicit:
+
+```powershell
+$env:DJANGO_DEBUG='False'
+$env:DJANGO_SECRET_KEY='replace-with-a-long-random-production-secret'
+$env:DJANGO_ALLOWED_HOSTS='example.com,www.example.com'
+$env:DJANGO_SECURE_SSL_REDIRECT='True'
+$env:DJANGO_SESSION_COOKIE_SECURE='True'
+$env:DJANGO_CSRF_COOKIE_SECURE='True'
+$env:DJANGO_SECURE_HSTS_SECONDS='31536000'
+$env:DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS='True'
+$env:DJANGO_SECURE_HSTS_PRELOAD='True'
+python manage.py check --deploy
+```
+
+Do not commit real secrets. Remove temporary environment variables from the current PowerShell session when finished:
+
+```powershell
+Remove-Item Env:DJANGO_DEBUG,Env:DJANGO_SECRET_KEY,Env:DJANGO_ALLOWED_HOSTS,Env:DJANGO_SECURE_SSL_REDIRECT,Env:DJANGO_SESSION_COOKIE_SECURE,Env:DJANGO_CSRF_COOKIE_SECURE,Env:DJANGO_SECURE_HSTS_SECONDS,Env:DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS,Env:DJANGO_SECURE_HSTS_PRELOAD -ErrorAction SilentlyContinue
+```
+
+### Review and Learning Guide
+
+Read [review_and_learning.md](review_and_learning.md) for the complete explanation of the audit, dashboard, security fixes, tests, green-signal checklist, and safe commit workflow.
 
 ## 7. Database and Migration Workflow
 

@@ -69,6 +69,13 @@
         Dashboard
       </a>
 
+      {% if user.is_staff %}
+      <a href="{% url 'home:admin_dashboard' %}"
+         data-tab="admin-dashboard">
+        Admin Dashboard
+      </a>
+      {% endif %}
+
       <a href="{% url 'teachers:teacher_lists' %}"
          data-tab="teachers">
         Teacher List

@@ -4,6 +4,9 @@ from django.contrib import messages
 from .models import Student
 from courses.models import Course 
 from django.views.generic import ListView, CreateView
+from django.views.decorators.http import require_POST
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import StudentForm
 
 # Create your views here.
 
@@ -31,36 +34,17 @@ def index(request):
 @login_required
 def add_students(request):
     courses = Course.objects.filter(status="active")
+    form = StudentForm(request.POST or None)
     if request.method == "POST":
-        print(request.POST)
-        student = Student.objects.create(
-           student_id=request.POST.get("student_id"), 
-           first_name=request.POST.get("first_name"), 
-           last_name=request.POST.get("last_name"),
-           email=request.POST.get("email"), 
-           phone=request.POST.get("phone"), 
-           date_of_birth=request.POST.get("date_of_birth"), 
-           department=request.POST.get("department"), 
-           program=request.POST.get("program"), 
-           semester=request.POST.get("semester"), 
-           status=request.POST.get("status"),
-           address=request.POST.get("address"),
-           personal_info=request.POST.get("personal_info")
-        )
-        
-        # Get selected course IDs
-        course_ids = request.POST.getlist("courses")
-        
-        # Add courses to student
-        student.enrolled_courses.set(course_ids)
-        
-                
-        messages.success( request, f"{student.full_name} has been added successfully." )
-        
-        return redirect("students:student_lists")
+        if form.is_valid():
+            student = form.save()
+            student.enrolled_courses.set(request.POST.getlist("courses"))
+            messages.success(request, f"{student.full_name} has been added successfully.")
+            return redirect("students:student_lists")
     
     context = {
-        "courses":courses
+        "courses": courses,
+        "form": form,
     }
     return render(request, 'students/add_students.html', context)
 
@@ -98,27 +82,10 @@ def student_edit(request, student_id):
         )
     courses = Course.objects.filter(status="active")
     
-    if request.method == "POST":
-        student.student_id = request.POST.get("student_id")
-        student.first_name = request.POST.get("first_name")
-        student.last_name = request.POST.get("last_name")
-        student.email = request.POST.get("email")
-        student.phone = request.POST.get("phone")
-        student.date_of_birth = request.POST.get("date_of_birth")
-        student.department = request.POST.get("department")
-        student.program = request.POST.get("program")
-        student.semester = request.POST.get("semester")
-        student.status = request.POST.get("status")
-        student.address = request.POST.get("address")
-        student.personal_info = request.POST.get("personal_info")
-        student.enrolled_course = request.POST.get("enrollment_year")
-
-        student.save()
-
-        # Update student's courses
-        course_ids = request.POST.getlist("courses")
-        student.enrolled_courses.set(course_ids)
-        
+    form = StudentForm(request.POST or None, instance=student)
+    if request.method == "POST" and form.is_valid():
+        student = form.save()
+        student.enrolled_courses.set(request.POST.getlist("courses"))
         messages.success(
             request,
             f"{student.full_name} has been updated successfully."
@@ -129,11 +96,14 @@ def student_edit(request, student_id):
     context = {
         "student": student,
         "courses":courses,
+        "form": form,
     }
 
     return render(request, "students/edit_students.html", context)
 
 
+@require_POST
+@login_required
 def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     student.delete()
@@ -154,6 +124,6 @@ class StudentListView(ListView):
     paginate_by = 10
     
     
-class StudentCreateView(CreateView):
+class StudentCreateView(LoginRequiredMixin, CreateView):
     model = Student
     fields = ['student_id', 'first_name', 'last_name', 'email', 'phone', 'date_of_birth', 'department', 'program', 'semester', 'status', 'address', 'personal_info']

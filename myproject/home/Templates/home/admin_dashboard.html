@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard · MMAMC{% endblock %}
+
+{% block content %}
+<main class="admin-dashboard">
+  <header class="admin-dashboard-header">
+    <div>
+      <p class="eyebrow">Registrar's office</p>
+      <h1>Admin Dashboard</h1>
+      <p>Monitor the core academic records and jump directly into the management areas.</p>
+    </div>
+    <a class="admin-dashboard-action" href="{% url 'admin:index' %}">Open Django Admin</a>
+  </header>
+
+  <section class="admin-stat-grid" aria-label="System totals">
+    <article class="admin-stat-card">
+      <p class="admin-stat-label">Students</p>
+      <p class="admin-stat-value">{{ student_count }}</p>
+      <p class="admin-stat-note">{{ active_student_count }} active</p>
+    </article>
+    <article class="admin-stat-card">
+      <p class="admin-stat-label">Teachers</p>
+      <p class="admin-stat-value">{{ teacher_count }}</p>
+      <p class="admin-stat-note">{{ active_teacher_count }} active</p>
+    </article>
+    <article class="admin-stat-card">
+      <p class="admin-stat-label">Courses</p>
+      <p class="admin-stat-value">{{ course_count }}</p>
+      <p class="admin-stat-note">{{ active_course_count }} active</p>
+    </article>
+  </section>
+
+  <section class="admin-record-grid" aria-label="Recently added records">
+    <article class="admin-record-panel">
+      <h2>Recent students</h2>
+      {% if recent_students %}
+      <ul class="admin-record-list">
+        {% for student in recent_students %}
+        <li>
+          <a href="{% url 'students:student_details' student.pk %}">{{ student.full_name }}</a>
+          <span class="admin-record-meta">{{ student.student_id }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="admin-empty-state">No student records yet.</p>
+      {% endif %}
+    </article>
+
+    <article class="admin-record-panel">
+      <h2>Recent teachers</h2>
+      {% if recent_teachers %}
+      <ul class="admin-record-list">
+        {% for teacher in recent_teachers %}
+        <li>
+          <a href="{% url 'teachers:teacher_details' teacher.pk %}">{{ teacher.full_name }}</a>
+          <span class="admin-record-meta">{{ teacher.department }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="admin-empty-state">No teacher records yet.</p>
+      {% endif %}
+    </article>
+
+    <article class="admin-record-panel">
+      <h2>Recent courses</h2>
+      {% if recent_courses %}
+      <ul class="admin-record-list">
+        {% for course in recent_courses %}
+        <li>
+          <a href="{% url 'courses:course_details' course.pk %}">{{ course.code }}</a>
+          <span class="admin-record-meta">{{ course.name }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p class="admin-empty-state">No course records yet.</p>
+      {% endif %}
+    </article>
+  </section>
+</main>
+{% endblock %}

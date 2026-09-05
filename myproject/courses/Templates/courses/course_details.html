@@ -38,8 +38,11 @@
       </div>
 
       <div class="form-actions">
-        <a href="{% url 'courses:add_courses' %}" class="btn btn-primary">Edit Course</a>
-        <button class="btn btn-danger" data-delete="{{ course.name }}">Delete Course</button>
+        <a href="{% url 'courses:edit_course' course.pk %}" class="btn btn-primary">Edit Course</a>
+        <form method="post" action="{% url 'courses:delete_course' course.pk %}">
+          {% csrf_token %}
+          <button class="btn btn-danger" type="submit" data-delete="{{ course.name }}">Delete Course</button>
+        </form>
         <a href="{% url 'courses:course_lists' %}" class="btn btn-ghost">Back to List</a>
       </div>
     </div>

@@ -147,11 +147,12 @@
         Edit Student
       </a>
 
-      <button
-        class="btn btn-danger"
-        data-delete="{{ student.first_name }} {{ student.last_name }}">
-        Delete Student
-      </button>
+      <form method="post" action="{% url 'students:delete_student' student.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit" data-delete="{{ student.full_name }}">
+          Delete Student
+        </button>
+      </form>
 
       <a href="{% url 'students:student_lists' %}" class="btn btn-ghost">
         Back to List

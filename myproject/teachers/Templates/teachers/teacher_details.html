@@ -153,15 +153,16 @@
     <!-- ===== Actions ===== -->
     <div class="form-actions">
 
-      <a href="{% url 'teachers:add_teachers' %}" class="btn btn-primary">
+      <a href="{% url 'teachers:teacher_edit' teacher.pk %}" class="btn btn-primary">
         Edit Teacher
       </a>
 
-      <button
-        class="btn btn-danger"
-        data-delete="Dr. Alan Whitfield">
-        Delete Teacher
-      </button>
+      <form method="post" action="{% url 'teachers:delete_teacher' teacher.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit" data-delete="{{ teacher.full_name }}">
+          Delete Teacher
+        </button>
+      </form>
 
       <a href="{% url 'teachers:teacher_lists' %}" class="btn btn-ghost">
         Back to List

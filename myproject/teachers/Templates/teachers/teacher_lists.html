@@ -166,12 +166,12 @@
                 Edit
               </a>
 
-              <button
-                class="btn btn-danger btn-sm"
-                data-delete="Dr. Alan Whitfield"
-              >
-                Delete
-              </button>
+              <form method="post" action="{% url 'teachers:delete_teacher' teacher.pk %}">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm" type="submit" data-delete="{{ teacher.full_name }}">
+                  Delete
+                </button>
+              </form>
 
             </div>
 
