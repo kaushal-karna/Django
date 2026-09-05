@@ -12,11 +12,13 @@ class Student(models.Model):
     ]
 
     SEMESTER_CHOICES = [
-        ("Spring 2026", "Spring 2026"),
-        ("Fall 2026", "Fall 2026"),
-        ("Spring 2027", "Spring 2027"),
-        ("Fall 2027", "Fall 2027"),
-    ]
+       ("Spring 2025", "Spring 2025"),
+       ("Fall 2025", "Fall 2025"),
+       ("Spring 2026", "Spring 2026"),
+       ("Fall 2026", "Fall 2026"),
+       ("Spring 2027", "Spring 2027"),
+       ("Fall 2027", "Fall 2027"),
+   ]
 
     student_id = models.CharField(max_length=30, unique=True)
     first_name = models.CharField(max_length=100)

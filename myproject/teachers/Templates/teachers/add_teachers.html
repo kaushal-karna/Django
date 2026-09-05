@@ -68,24 +68,34 @@
         </select>
       </div>
 
-      <div class="field">
-              <label for="courses">
-                 Courses / Subjects
-              </label>
+      <div class="field span-2">
 
-              <select name="courses" id="courses" multiple>
-                  {% for course in courses %}
-                      <option value="{{ course.id }}">
-                          {{ course.code }} - {{ course.name }}
-                      </option>
-                  {% endfor %}
-              </select>
+        <label for="courses">
+            Courses / Subjects
+        </label>
 
-              <small>
-                  Hold Ctrl (Windows) or Command (Mac) to select multiple courses.
-              </small>
-          </div>
+        <select
+            name="courses"
+            id="courses"
+            multiple
+        >
 
+        {% for course in courses %}
+
+            <option
+                value="{{ course.id }}"
+                {% if course.instructor_id == teacher.id %}
+                    selected
+                {% endif %}
+            >
+                {{ course.code }} - {{ course.name }}
+            </option>
+
+        {% endfor %}
+
+        </select>
+
+      </div>
 
 
       <div class="field span-2">

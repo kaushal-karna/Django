@@ -28,9 +28,9 @@ def index(request):
 
 @login_required
 def add_teachers(request):
-    if request.method == "POST":
-        courses = Course.objects.filter(
+    courses = Course.objects.filter(
         status="active")
+    if request.method == "POST":
         print("========== POST DATA ==========")
 
         for key, value in request.POST.items():
@@ -65,7 +65,10 @@ def add_teachers(request):
             request,
             f"{teacher.full_name} has been added successfully.")
         return redirect("teachers:teacher_lists")  
-    return render(request, 'teachers/add_teachers.html')
+    context = {
+        "courses": courses,
+    }
+    return render(request, 'teachers/add_teachers.html', context)
 
 
 @login_required
@@ -91,6 +94,8 @@ def teacher_details(request, pk):
 
 
 def teacher_edit(request, teacher_id):
+    courses = Course.objects.filter(
+            status="active")
     teacher = get_object_or_404(Teacher, pk=teacher_id)
     if request.method == "POST":
         teacher.teacher_id = request.POST.get("teacher_id")
@@ -129,6 +134,7 @@ def teacher_edit(request, teacher_id):
     
     context = {
         "teacher": teacher,
+        "courses": courses,
     }
     return render(request, 'teachers/edit_teachers.html', context)
 

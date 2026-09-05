@@ -188,38 +188,35 @@
       >
     </div>
 
+    <!-- Course / Subjects -->
+   <div class="field span-2">
 
-    <!-- Subject / Course -->
-    <div class="field">
-      <label for="subject">
-        Subject / Course
-      </label>
+    <label for="courses">
+        Courses / Subjects
+    </label>
 
-      <select
-        id="subject"
-        name="subject"
-        required
-      >
-
-        <option value="">
-          Select course
-        </option>
+    <select
+        name="courses"
+        id="courses"
+        multiple
+    >
 
         {% for course in courses %}
 
-          <option
-            value="{{ course.id }}"
-            {% if teacher.subject_id == course.id %}
-              selected
-            {% endif %}
-          >
-            {{ course.name }}
-          </option>
+            <option
+                value="{{ course.id }}"
+                {% if course.instructor_id == teacher.id %}
+                    selected
+                {% endif %}
+            >
+                {{ course.code }} - {{ course.name }}
+            </option>
 
         {% endfor %}
 
-      </select>
-    </div>
+    </select>
+
+</div>
 
 
     <!-- Status -->
