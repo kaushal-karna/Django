@@ -20,6 +20,16 @@
         </p>
     </div>
 
+    {% if messages %}
+    <div class="contact-messages">
+        {% for msg in messages %}
+        <div class="alert alert-{{ msg.tags }}">
+            {{ msg }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="contact-layout">
 
         <div class="glass-panel contact-info">
@@ -43,10 +53,9 @@
         <div class="glass-panel contact-form-wrap">
             <h2>Send Me a Message</h2>
 
-            <form method="POST" class="contact-form">
+            <form method="POST" action={% url "contact" %} class="contact-form">
 
                 {% csrf_token %}
-
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" name="name" required>

@@ -113,3 +113,50 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================
+   Flash Message Alerts
+========================= */
+
+.contact-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.alert {
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.93rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: alertSlideIn 0.35s ease;
+}
+
+@keyframes alertSlideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Success */
+.alert-success {
+    background: rgba(52, 211, 153, 0.12);
+    border-color: rgba(52, 211, 153, 0.35);
+    color: #34d399;
+}
+
+/* Warning */
+.alert-warning {
+    background: rgba(251, 191, 36, 0.12);
+    border-color: rgba(251, 191, 36, 0.35);
+    color: #fbbf24;
+}
+
+/* Error */
+.alert-error {
+    background: rgba(248, 113, 113, 0.12);
+    border-color: rgba(248, 113, 113, 0.35);
+    color: #f87171;
+}
