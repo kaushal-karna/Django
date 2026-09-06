@@ -19,7 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from drf_spectacular.views import(
+    SpectacularAPIView,
+    SpectacularSwaggerView,
+    SpectacularRedocView,
+)
 
+# django restframework routers
+from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +35,31 @@ urlpatterns = [
     path('students/', include('students.urls')),
     path('teachers/', include('teachers.urls')),
     path('courses/', include('courses.urls')),
+    
+    # DRF AUTHENTICATION VIEWS
+    path('api-auth/', include('rest_framework.urls')),
+    
+    # Your  API URLS
+    path('api/', include('students.api_urls')),
+    
+    # DRF SPECTACULAR
+    
+    # OpenAPI schema
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    
+    # Swagger UI
+    path(
+        "api/docs",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui"
+    ),
+    
+    # ReDoc
+    path(
+        "api/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc"
+    ),
 ]
 
 

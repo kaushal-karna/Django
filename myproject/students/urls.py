@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .serializers import StudentSerializer
 
 from .views import StudentListView
 
@@ -16,6 +17,5 @@ urlpatterns = [
     
     # Class Based Views
     path('students-lists-views/', StudentListView.as_view(), name='student_view'),
-
-
+    
 ]

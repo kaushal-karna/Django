@@ -7,6 +7,12 @@ from django.views.generic import ListView, CreateView
 from django.views.decorators.http import require_POST
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import StudentForm
+from .serializers import StudentSerializer
+
+# api views imports
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 # Create your views here.
 
@@ -134,3 +140,23 @@ class StudentListView(LoginRequiredMixin, ListView):
 class StudentCreateView(LoginRequiredMixin, CreateView):
     model = Student
     fields = ['student_id', 'first_name', 'last_name', 'email', 'phone', 'date_of_birth', 'department', 'program', 'semester', 'status', 'address', 'personal_info']
+    
+    
+    
+    
+    
+    
+# api views
+@api_view(['GET', 'POST'])
+def student_list(request):
+    if request.method == 'GET':
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
