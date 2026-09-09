@@ -41,6 +41,7 @@ urlpatterns = [
     
     # Your  API URLS
     path('api/', include('students.api_urls')),
+    path('api/', include('tasks.urls')),
     
     # DRF SPECTACULAR
     

@@ -55,12 +55,14 @@ INSTALLED_APPS = [
     'accounts',
     'students',
     'teachers',
-    'courses',  
+    'courses', 
+    'tasks', 
     
     #DRF
     'rest_framework',
     'rest_framework.authtoken', # Token authentication
-    'drf_spectacular'
+    'drf_spectacular',
+    'corsheaders',
     
     
 ]
@@ -68,8 +70,12 @@ INSTALLED_APPS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    # additionally added
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
+    
+    #inbuilt
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -194,7 +200,7 @@ REST_FRAMEWORK = {
         ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',  # Change for production
+        'rest_framework.permissions.IsAuthenticated',  # Change for production
         ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
@@ -204,3 +210,12 @@ REST_FRAMEWORK = {
         ]
 }
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000"
+]
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'My API',
+    'DESCRIPTION': 'My Django REST framework API',
+    'VERSION': '1.0.0'
+}
